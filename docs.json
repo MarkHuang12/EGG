@@ -47,9 +47,11 @@
         "tab": "Fragmetric Protocol",
         "groups": [
           {
-            "group": "Architecture",
+            "group": "About Fragmetric",
             "pages": [
-              "protocol/key-objectives"
+              "protocol/key-objectives",
+              "protocol/fragmetric-protocol",
+              "protocol/Process"
             ]
           }
         ]
