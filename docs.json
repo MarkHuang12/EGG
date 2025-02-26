@@ -44,10 +44,10 @@
         ]
       },
       {
-        "tab": "Protocol Architecture",
+        "tab": "Fragmetric Protocol",
         "groups": [
           {
-            "group": "Key Objectives",
+            "group": "Architecture",
             "pages": [
               "protocol/key-objectives"
             ]
@@ -67,7 +67,8 @@
           {
             "group": "Wrapped fragAsset",
             "pages": [
-              "Assets/fragSOL"
+              "Assets/wfragSOL",
+              "Assets/wfragJTO"
             ]
           }
         ]
