@@ -11,13 +11,13 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Video Guides",
+        "tab": "Guides",
         "groups": [
           {
             "group": "Get Started",
             "pages": [
               "introduction",
-              "quickstart",
+              "restake",
               "development"
             ]
           },
