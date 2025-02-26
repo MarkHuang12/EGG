@@ -58,9 +58,15 @@
         "tab": "Assets",
         "groups": [
           {
-            "group": "fragmetric Asset",
+            "group": "fragAsset",
             "pages": [
-              "protocol/key-objectives"
+              "Assets/fragSOL"
+            ]
+          },
+          {
+            "group": "Wrapped fragAsset",
+            "pages": [
+              "Assets/fragSOL"
             ]
           }
         ]
