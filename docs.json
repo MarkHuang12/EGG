@@ -22,7 +22,8 @@
           {
             "group": "Security",
             "pages": [
-
+              "Documentation/Security/Overview",
+              "Documentation/Security/Audits"
             ]
           },
           {
@@ -30,7 +31,13 @@
             "pages": [
               "Documentation/Resources/FAQ",
               "Documentation/Resources/Brand-Kit",
+                        {
+                            "group": "Security",
+                            "pages": [
+              "Documentation/Resources/Privacy-Policy",
               "Documentation/Resources/Terms-of-Service"
+                                    ]
+                        }
             ]
           }
         ]
