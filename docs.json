@@ -89,8 +89,8 @@
     }
   },
   "logo": {
-    "light": "/logo/Fragmetric_text_logo_main.webp",
-    "dark": "/logo/Fragmetric_text_logo_main.webp"
+    "light": "/logo/Fragmetric_text_logo_main.svg",
+    "dark": "/logo/Fragmetric_text_logo_main.svg"
   },
   "navbar": {
     "links": [
