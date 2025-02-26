@@ -18,6 +18,20 @@
             "pages": [
               "Documentation/Get-Started/Fragmetric-Overview"
             ]
+          },
+          {
+            "group": "Security",
+            "pages": [
+
+            ]
+          },
+          {
+            "group": "Resources",
+            "pages": [
+              "Documentation/Resources/FAQ",
+              "Documentation/Resources/Brand-Kit",
+              "Documentation/Resources/Terms-of-Service"
+            ]
           }
         ]
       },
@@ -50,17 +64,6 @@
             "group": "API Documentation",
             "pages": [
               "api-reference/introduction"
-            ]
-          }
-        ]
-      }, 
-      {
-        "tab": "Security & Audits",
-        "groups": [
-          {
-            "group": "Security",
-            "pages": [
-              "audit"
             ]
           }
         ]
