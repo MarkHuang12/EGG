@@ -11,7 +11,7 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "VIDEO GUIDES",
         "groups": [
           {
             "group": "Get Started",
@@ -58,7 +58,7 @@
       "anchors": [
         {
           "anchor": "Website",
-          "href": "https://app.fragmetric.xyz",
+          "href": "https://fragmetric.xyz/",
           "icon": "globe"
         },
         {
