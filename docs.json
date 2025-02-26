@@ -54,7 +54,7 @@
         ]
       },
       {
-        "tab": "Security & Audits",
+        "tab": "Developer",
         "groups": [
           {
             "group": "API Documentation",
@@ -73,7 +73,7 @@
         ]
       }, 
       {
-        "tab": "Developer",
+        "tab": "Security & Audits",
         "groups": [
           {
             "group": "API Documentation",
