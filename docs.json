@@ -49,13 +49,9 @@
           {
             "group": "About Fragmetric",
             "pages": [
-                        {
-                            "group" : "protocol/key-objectives",
-                            "pages" : [
-                                    "protocol/fragmetric-protocol",
-                                    "protocol/Process"
-                            ]
-              }
+              "protocol/key-objectives",
+              "protocol/fragmetric-protocol",
+              "protocol/Process"
             ]
           }
         ]
