@@ -16,21 +16,7 @@
           {
             "group": "Get Started",
             "pages": [
-              "introduction",
-              "restake",
-              "development",
-              "audit"
-            ]
-          },
-          {
-            "group": "Essentials",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
+              "guides/introduction"
             ]
           }
         ]
@@ -39,17 +25,9 @@
         "tab": "Documentation",
         "groups": [
           {
-            "group": "API Documentation",
+            "group": "Key Objectives",
             "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Endpoint Examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete"
+              "protocol/key-objectives"
             ]
           }
         ]
@@ -77,18 +55,9 @@
         "tab": "Security & Audits",
         "groups": [
           {
-            "group": "API Documentation",
+            "group": "Security",
             "pages": [
-              "api-reference/introduction",
               "audit"
-            ]
-          },
-          {
-            "group": "Endpoint Examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete"
             ]
           }
         ]
