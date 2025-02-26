@@ -18,7 +18,7 @@ title: 'Fragmetric’s Process'
   <img src="images/fragmetric_protocol_4.png" />
 </Frame>
 
-* **Underlying Yields -** $fragmetric Asset inherits the yield from any deposited asset that naturally accrues rewards—such as LSTs (Liquid Staking Tokens) that generate staking and MEV returns. When a user unstakes, they can receive more SOL (or other underlying tokens) than initially deposited, reflecting the average APR of all yield-bearing assets in the basket. Conversely, if a deposited asset does not produce any yield on its own, that portion of the deposit will not generate yield for the corresponding $fragmetric Asset tokens.
+* **Underlying Yields -** fragAsset inherits the yield from any deposited asset that naturally accrues rewards—such as LSTs (Liquid Staking Tokens) that generate staking and MEV returns. When a user unstakes, they can receive more SOL (or other underlying tokens) than initially deposited, reflecting the average APR of all yield-bearing assets in the basket. Conversely, if a deposited asset does not produce any yield on its own, that portion of the deposit will not generate yield for the corresponding fragAsset tokens.
 
 * **NCN/AVS Rewards -** Besides standard yields, NCN/AVS protocols can distribute rewards in SOL, native tokens, or other assets. Fragmetric leverages transfer hook functionality (unique to Solana) to accurately track and allocate these additional rewards. Each $fragmetric Asset transfer updates the user’s eligibility for NCN/AVS revenue, which can be claimed anytime.
 
