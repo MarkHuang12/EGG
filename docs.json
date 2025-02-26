@@ -33,10 +33,10 @@
               "Documentation/Resources/Brand-Kit",
               "Documentation/Resources/Deployed-Programs",
                         {
-                            "group": "Disclaimer & Terms",
+                            "group": "Legal",
                             "pages": [
-                    "Documentation/Resources/Disclaimer & Terms/Terms-of-Use",
-                    "Documentation/Resources/Disclaimer & Terms/Privacy-Policy"
+                    "Documentation/Resources/Legal/Terms-of-Use",
+                    "Documentation/Resources/Legal/Privacy-Policy"
                                      ]
                         }
             ]
