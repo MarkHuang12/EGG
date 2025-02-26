@@ -129,7 +129,9 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/fragmetric"
+      "x": "https://x.com/fragmetric",
+      "discord": "https://discord.gg/fragmetric",
+      "github": "https://github.com/fragmetric-labs"
     }
   }
 }
