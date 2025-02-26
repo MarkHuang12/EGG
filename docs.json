@@ -31,12 +31,13 @@
             "pages": [
               "Documentation/Resources/FAQ",
               "Documentation/Resources/Brand-Kit",
+              "Documentation/Resources/Deployed-Programs",
                         {
-                            "group": "Security",
+                            "group": "Disclaimer & Terms",
                             "pages": [
-              "Documentation/Resources/Privacy-Policy",
-              "Documentation/Resources/Terms-of-Service"
-                                    ]
+                    "Documentation/Resources/Disclaimer-Terms/Privacy-Policy",
+                    "Documentation/Resources/Disclaimer-Terms/Terms-of-Service"
+                                     ]
                         }
             ]
           }
