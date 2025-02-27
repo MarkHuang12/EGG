@@ -16,6 +16,7 @@
           {
             "group": "Get Started",
             "pages": [
+              "Documentation/Get-Started/Welcome",
               "Documentation/Get-Started/SANG"
             ]
           },
