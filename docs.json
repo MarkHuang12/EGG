@@ -1,100 +1,33 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Fragmetric Docs",
+  "name": "Fragmetric",
   "colors": {
-    "primary": "#0BD5BC",
-    "light": "#0BD5BC",
-    "dark": "#0BD5BC"
+    "primary": "#16A34A",
+    "light": "#07C983",
+    "dark": "#15803D"
   },
   "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
       {
-        "tab": "Documentation",
-        "groups": [
-          {
-            "group": "Get Started",
-            "pages": [
-              "Documentation/Get-Started/Fragmetric-Overview",
-              "Documentation/Get-Started/SANG"
-            ]
-          },
-          {
-            "group": "Security",
-            "pages": [
-              "Documentation/Security/Overview",
-              "Documentation/Security/Audits"
-            ]
-          },
-          {
-            "group": "Resources",
-            "pages": [
-              "Documentation/Resources/FAQ",
-              "Documentation/Resources/Brand-Kit",
-              "Documentation/Resources/Deployed-Programs",
-              "Documentation/Resources/Contracts",
-              "Documentation/Resources/Key-Terms",
-                        {
-                            "group": "Legal",
-                            "pages": [
-                    "Documentation/Resources/Legal/Terms-of-Use",
-                    "Documentation/Resources/Legal/Privacy-Policy"
-                                     ]
-                        }
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Fragmetric Protocol",
+        "tab": "Fragmetric",
         "groups": [
           {
             "group": "About Fragmetric",
             "pages": [
-              "protocol/Overview",
-              "protocol/Restaking-LRT",
-              "protocol/Process"
+              
             ]
           },
           {
-            "group": "Protocol Architecture",
+            "group": "Essentials",
             "pages": [
-              "protocol/Protocol-Architecture/Fund",
-              "protocol/Protocol-Architecture/Operator",
-              "protocol/Protocol-Architecture/Reward",
-              "protocol/Protocol-Architecture/Normalized-Token-Pool",
-              "protocol/Protocol-Architecture/Wrap-Unwrap"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Assets",
-        "groups": [
-          {
-            "group": "fragAsset",
-            "pages": [
-              "Assets/fragSOL",
-              "Assets/fragJTO"
-            ]
-          },
-          {
-            "group": "Wrapped fragAsset",
-            "pages": [
-              "Assets/wfragSOL",
-              "Assets/wfragJTO"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Developers",
-        "groups": [
-          {
-            "group": "API Documentation",
-            "pages": [
-              "api-reference/introduction"
+              "essentials/markdown",
+              "essentials/code",
+              "essentials/images",
+              "essentials/settings",
+              "essentials/navigation",
+              "essentials/reusable-snippets"
             ]
           }
         ]
@@ -103,31 +36,26 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Website",
-          "href": "https://fragmetric.xyz/",
-          "icon": "globe"
+          "anchor": "Documentation",
+          "href": "https://mintlify.com/docs",
+          "icon": "book-open-cover"
         },
         {
           "anchor": "Community",
-          "href": "https://discord.gg/fragmetric",
-          "icon": "discord"
-        },
-        {
-          "anchor": "Twitter",
-          "href": "https://x.com/fragmetric",
-          "icon": "x-twitter"
+          "href": "https://mintlify.com/community",
+          "icon": "slack"
         },
         {
           "anchor": "Blog",
-          "href": "https://blog.fragmetric.xyz/",
+          "href": "https://mintlify.com/blog",
           "icon": "newspaper"
         }
       ]
     }
   },
   "logo": {
-    "light": "/logo/Fragmetric_text_logo_main111.svg",
-    "dark": "/logo/Fragmetric_text_logo_main111.svg"
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
   },
   "navbar": {
     "links": [
@@ -144,8 +72,7 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/fragmetric",
-      "discord": "https://discord.gg/fragmetric",
-      "github": "https://github.com/fragmetric-labs"
+      "x": "https://x.com/fragmetric"
     }
   }
+}
