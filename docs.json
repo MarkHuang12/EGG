@@ -16,28 +16,18 @@
           {
             "group": "Get Started",
             "pages": [
-              "Documentation/Get-Started/Fragmetric-Overview",
+              "Documentation/Get-Started/Welcome",
               "Documentation/Get-Started/SANG"
             ]
           },
           {
             "group": "Guides",
             "pages": [
-              "Documentation/Guides/Restake",
+              "Documentation/Guides/Restake-Unstake",
               "Documentation/Guides/Wrap-Unwrap",
               "Documentation/Guides/Buy-Sell",
-              "Documentation/Guides/Unstake",
-                        {
-                            "group": "Using in DeFi",
-                            "pages": [
-                    "Documentation/Guides/Using/Overview",
-                    "Documentation/Guides/Using/Orca",
-                    "Documentation/Guides/Using/Kamino",
-                    "Documentation/Guides/Using/Exponent",
-                    "Documentation/Guides/Using/RateX"
-                                     ]
-                        }
-            ]
+              "Documentation/Guides/Using-in-DeFi"
+                      ]
           },
           {
             "group": "Security",
