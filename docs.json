@@ -58,9 +58,10 @@
                                         "Documentation/Community/Phase2"
                                             ]
                                     }
+                            ]
                         }
-            ]
-          }
+                      ]
+            }
         ]
       },
       {
@@ -74,7 +75,7 @@
               "protocol/Process"
             ]
           },
-{
+          {
             "group": "Protocol Architecture",
             "pages": [
               "protocol/Protocol-Architecture/Fund",
