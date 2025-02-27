@@ -1,4 +1,59 @@
 ---
 title: "FAQ"
-description: "Description of your new file."
 ---
+
+## What is Fragmetric?
+
+Fragmetric is the first Solana-native Liquid Restaking Protocol, allowing users to (re)stake SOL and LSTs (such as JitoSOL, BNSOL, bbSOL etc.), and SPL tokens to earn restaking rewards on top of their usual staking and MEV yields. When you deposit these assets into Fragmetric, the protocol strategically allocates them across restaking platforms like Jito (Re)staking, guided by automated on-chain processes that optimize returns in real time.
+
+This setup delivers industry-leading yields with minimized risk, ensuring that even assets without inherent staking or MEV rewards still benefit from NCN/AVS distributions. In return, stakers receive an LRT (Liquid Restaking Token) that represents their share of the protocol, which can be freely used in DeFi for collateral, liquidity, or trading, while continuously accruing NCN/AVS rewards. Fragmetric’s modular architecture comprises a dedicated Fund for safeguarding deposits and an Operator to manage restaking, leveraging Solana’s transfer hook to precisely track and distribute specialized rewards.
+
+## What is Fragmetric's Mission?
+
+As hardware accelerates, Solana will become faster over time, eliminating the need for vertical scaling. However, services like oracles, bridges, Keeper networks, and others requiring off-chain consensus will continue to operate off-chain while sustaining on-chain activities on Solana. Solana will remain the primary global state machine, with app-specific chains serving as complementary add-ons to support the network.
+
+The challenge is that the consensus mechanisms of these app-specific chains are not aligned with Solana's consensus. Restaking offers a new solution: instead of app-specific chains using their own tokens for consensus, they can utilize Liquid Staking Tokens (LSTs), ensuring network security. By staking SOL, users secure the Solana network, and by staking LSTs, they secure the off-chain consensus chains. However, this introduces a risk management problem for retail users.
+
+This is where Fragmetric comes in. We aggregate retail deposits and restake them on behalf of users, securing both off-chain consensus and protecting users' funds. We are building the liquidity layer for the restaking era. Starting with SOL and LSTs, any token can be restaked to secure the network. Fragmetric persistently aggregates liquidity from Solana and delegates it to off-chain consensus platforms, supporting economic security ecosystem of Solana and maximizing yield for retail users.
+
+## Why should I care?
+
+Securing both the Solana network and additional networks might seem unrelated to why you would use Fragmetric. To put it simply, Fragmetric helps activate and sustain numerous off-chain consensus networks, which in turn provide you with additional yield on your SOL. By staking your SOL with Fragmetric and leaving it to work, you will continuously earn rewards for as long as the Solana network exists (which is effectively forever).
+
+## What’s fragSOL?
+
+fragSOL is a Liquid Restaking Token that serves as a representation of one's position in the Jito (Re)staking process of the Fragmetric protocol. In the same way that JitoSOL, BNSOL, bbSOL are Liquid Staking Tokens that offer users their staking position, fragSOL offers them their restaking position. You are able to claim your rewards coming from restaking protocols if you have fragSOL and use it inside DeFi apps at the same time.
+
+## How do I receive my rewards?
+
+$fragmetric Asset automatically compounds staking and MEV rewards if the underlying deposit produces them (e.g., SOL or other LSTs), causing its value to grow over time. If the deposited asset does not generate staking or MEV rewards, you will only receive NCN/AVS rewards through the protocol.
+
+These NCN/AVS rewards accumulate in a dedicated reserve account, and any holder with at least one slot of $fragmetric Asset can claim them. The amount of rewards you receive is proportional to both your holding period and the quantity of $fragmetric Assets you own. For instance, fragSOL is one type of $fragmetric Asset that combines automatic compounding from SOL-based yields with NCN/AVS rewards.
+
+## Where are my tokens stored?
+
+When you deposit tokens, they are transferred to the Fragmetric fund account, which securely holds user assets. For $fragmetric Assets that require normalization (e.g., those representing multiple token types), nTOKEN (normalized Token) is minted in proportion to the deposited amount. The resulting nTOKEN is then restaked and delegated across various NCN and AVS platforms.
+
+In cases where normalization is not necessary, the deposited tokens are directly restaked without needing to convert them into nTOKEN. This flexible approach ensures efficient handling of different asset types within the Fragmetric ecosystem.
+
+## How do I get F points?
+
+F Point is the first reward provided by Fragmetric through its protocol’s reward module. To participate, simply hold your $fragmetric Asset in your wallet and verify that the reward system is activated using your wallet address.
+
+## Has Fragmetric been audited?
+
+Yes. Fragmetric has undergone audits by the following firms:
+
+* **QuantStamp**: [View the audit report](https://docs.fragmetric.xyz/content/files/2024/11/QuantStamp---Fragmetric-Phase1-Final-Report.pdf)
+
+* **Certora**: [View the audit report](https://docs.fragmetric.xyz/content/files/2024/10/Certora---Fragmetric-Phase1-Final-Report.pdf)
+
+## What are Fragmetric’s Socials?
+
+You can find our community and updates on the following platforms:
+
+* **Discord:** [https://discord.gg/fragmetric](https://discord.gg/fragmetric?ref=docs.fragmetric.xyz)
+
+* **Twitter (X):** [https://x.com/fragmetric](https://x.com/fragmetric?ref=docs.fragmetric.xyz)
+
+* **Blog:** [https://blog.fragmetric.xyz](https://blog.fragmetric.xyz/?ref=docs.fragmetric.xyz)
