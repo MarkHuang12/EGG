@@ -44,14 +44,13 @@
                         }
             ]
           },
-{
+          {
             "group": "Community",
             "pages": [
                         {
                             "group": "LF(ra)G Campaign",
                             "pages": [
-                    "Documentation/Community/Overview"
-                                     ],
+                              "Documentation/Community/Overview",
                                     {
                                   "group": "Season 1",
                                   "pages": [
