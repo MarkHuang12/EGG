@@ -16,7 +16,8 @@
           {
             "group": "Get Started",
             "pages": [
-              "Documentation/Get-Started/Fragmetric-Overview"
+              "Documentation/Get-Started/Fragmetric-Overview",
+              "Documentation/Get-Started/SANG"
             ]
           },
           {
