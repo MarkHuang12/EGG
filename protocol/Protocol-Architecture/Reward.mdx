@@ -1,0 +1,67 @@
+---
+title: "Reward"
+---
+
+The Reward Module is the core system of Fragmetric, designed to accurately distribute various rewards earned through restaking. By leveraging Solana's Token Program 2022 - transfer hook, the program detects changes in the amount of fragSOL in user wallets, allowing the system’s internal logic to function seamlessly on-chain. Since all reward-related data is stored on-chain, users can easily predict the rewards they are entitled to receive. In traditional restaking systems, especially when using LRT, user’s restaking reward tend to be diluted within the pool, making accurate participation calculations difficult. Fragmetric has overcome this issue by utilizing a Only Possible On Solana solution that ensures precise calculation of user’s reward and equitable reward distribution.
+
+<Frame>
+  <img src="/images/reward_1.png" />
+</Frame>
+
+### **Contribution**
+
+**Contribution** refers to a quantifiable measure of a user's participation in the restaking. It is calculated based on the amount of **fragSOL** tokens a user holds over time. Contributions accumulate continuously as users hold fragSOL.
+
+The accumulated contributions determine each user's share of rewards. The more fragSOL a user holds and the longer they hold it, the higher their contribution and, consequently, the greater their share of the rewards distributed by the system.
+
+<Frame>
+  <img src="/images/reward_2.png" />
+</Frame>
+
+* **Movement of fragSOL:** Users deposit assets like SOL or Liquid Staking Tokens to mint fragSOL.
+
+* **Activating the Reward System**: Users who either mint or receive fragSOL tokens can activate the reward system within their wallets, provided they hold fragSOL.
+
+* **Starting Point for Contribution**: Once the user’s reward account is created, the user's contribution begins accumulating from the activation slot. From this point onward, the wallet starts earning contributions in each active reward pool.
+
+* **Real-Time Contribution Adjustments**: Contributions are updated in real-time based on on-chain events like changes in fragSOL holdings or reward claims. These adjustments are made according to the slot difference between the latest transaction and the last contribution update.
+
+* **Contribution Growth**: Contributions grow linearly based on two factors:
+
+  1. **Amount of fragSOL held**: The more fragSOL tokens a user holds, the greater their contribution.
+
+  2. **Duration held**: Contributions also increase based on the length of time the user has held fragSOL, starting from activation
+
+<Frame>
+  <img src="/images/reward_3.png" />
+</Frame>
+
+* **Custom Contribution Accrual Rates (Optional)** : Certain Rewards offer custom accrual rates, allowing deposits to accumulate contributions faster. This provides higher rewards and incentivizes participation in specific pools.
+
+### **Reward Pool**
+
+Reward Pool is responsible for holding rewards from restaking protocol and tracking the information necessary for their distribution. Various types of rewards are transferred from restaking protocol to the Reward Pool's reserve account. Each time rewards are received, the Reward Pool settles the information into a block through a process called settlement. Each reward has its own settlement block within the Reward Pool, and the distribution of rewards operates independently for each reward.
+
+<Frame>
+  <img src="/images/reward_4.png" />
+</Frame>
+
+* **Settlement Blocks:** Settlement Blocks are timeframes during which fragSOL holders' contributions are accumulated for reward distribution. A new Settlement Block is created whenever a reward is ready to be distributed, starting from the end of the previous block and ending at the current time. This process ensures the continuous accumulation of contributions over time.
+
+* **Reward Addition:** As rewards are added to the reward pool through restaking, new settlement block for reward is created for distributions.
+
+### **Reward Distribution**
+
+To distribute a reward, the system creates a new Settlement Block within the relevant Reward Settlement, covering the period from the end of the previous block to the current slot. This ensures all contributions are accurately accounted for and rewards are distributed fairly.
+
+<Frame>
+  <img src="/images/reward_5.png" />
+</Frame>
+
+* **Reward Share Calculation**: The rewards a user can claim are determined by their contribution relative to the total accumulated contributions in a specific reward settlement block. The system calculates the user’s share proportionally to their contribution within that block.
+
+<Frame>
+  <img src="/images/reward_6.png" />
+</Frame>
+
+* **Distributing Rewards**: Rewards are allocated to users' reward accounts, and they can be claimed at any time once distributed. For efficiency, rewards are calculated on-demand when a user chooses to claim them.

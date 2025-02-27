@@ -1,0 +1,47 @@
+---
+title: "Normalized Token Pool"
+---
+
+The Normalized Token Pool is in charge of accurately minting and burning fragSOL and nSOL tokens. By normalizing the price of the deposited token, Fragmetric can delegate or slash only one token at the restaking protocols, giving us a significant advantage in abstracting the problem of how many tokens should be delegated or slashed for each LST. The supply of nSOL and fragSOL is identical, and users of the Fragmetric Protocol only receive fragSOL, while nSOL is restaked and delegated to NCN nodes. When a slashing event occurs, slashers receive nSOL for detecting malicious behavior on NCN nodes. Slasher can then claim Sol and LSTs from the Normalized Token Pool by transferring and burning nSOL.
+
+<Frame>
+  <img src="/images/tokenpool_1.png" />
+</Frame>
+
+### **Calculating the Price (using fragSOL as example)**
+
+The price of fragSOL is dynamic, reflecting the price movements of its underlying assets. The relationship can be expressed as:
+
+<Frame>
+  <img src="/images/tokenpool_2.png" />
+</Frame>
+
+The amount of fragSOL & nSOL minted when deposit a specific LST can be calculated as:
+
+<Frame>
+  <img src="/images/tokenpool_3.png" />
+</Frame>
+
+The pricing of fragSOL relies primarily on the direct on-chain data from the stake pools associated with the underlying LSTs. For certain LSTs, such as JitoSOL, mSOL, BNSOL, and bbSOL, the program directly accesses the state data from their respective stake pools on-chain. This approach provides the most accurate and up-to-date pricing information since it reflects the actual state and performance of the stake pools in real-time.
+
+### **Stake Pool-Based Pricing**
+
+<Frame>
+  <img src="/images/tokenpool_4.png" />
+</Frame>
+
+For LSTs like mSOL, bSOL, and JitoSOL, the pricing mechanism directly taps into the on-chain state data of their respective stake pools. This data includes the current value of the staked assets, the total amount of tokens issued by the stake pool, and any performance metrics or rewards distributed. By using this data, the system can accurately determine the price of these LSTs and, consequently, the corresponding value of fragSOL.
+
+This direct access to stake pool data ensures that the price of fragSOL is closely aligned with the actual performance of the stake pools, providing users with a reliable and transparent pricing mechanism.
+
+### **Oracle-Based Pricing as a Fallback**
+
+<Frame>
+  <img src="/images/tokenpool_5.png" />
+</Frame>
+
+For other LSTs, where it is not feasible to directly retrieve pricing information from stake pool data, the system employs an oracle-based approach. In such cases, trusted oracle systems like Pyth Network and Switchboard are used to obtain the real-time market prices of these tokens.
+
+The oracles provide price feeds that reflect the broader market conditions for these LSTs, which are then used to determine their contribution to the Total Value Locked (TVL) and the price of fragSOL. While the oracle-based pricing may not be as precise as direct stake pool data, it serves as a reliable fallback to ensure that fragSOL remains accurately priced.
+
+By prioritizing stake pool data for LSTs where it is available and falling back on oracle-based pricing for others, the system ensures a balance of accuracy and reliability in the pricing of fragSOL.
