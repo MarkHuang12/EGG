@@ -2,12 +2,90 @@
 title: "Overview"
 ---
 
-dsdsdsdsdsd
+<Tabs>
+  <Tab title="Season 1">
+    ## Phases
 
-## Phases
+    <CardGroup cols="2">
+      <Card title="Phase 1" />
 
-<CardGroup cols="2">
-  <Card title="Phase 1" />
+      <Card title="Phase 2" />
+    </CardGroup>
 
-  <Card title="Phase 2" />
-</CardGroup>
+    ##
+  </Tab>
+
+  <Tab title="Base F Point Rule">
+    ## **Base F Point Rule**
+
+    ## Key rules of F Point
+
+    <Accordion title="Wrapping" defaultOpen={false}>
+      * When wrapping, all boost except for the referral boost are removed.
+
+      * Simply holding wfragAsset does not earn F Points.
+
+      * If deposited into DeFi protocol, the corresponding boost for that pool applies.
+    </Accordion>
+
+    <Accordion title="Unwrapping" defaultOpen={false}>
+      * When unwrapping, if a referral is already registered, the referral boost will apply, but all other boosts will not be reapplied.
+
+      * To reactivate the Backpack boost, unstake first and then restake again using your Backpack wallet.
+    </Accordion>
+
+    <Accordion title="Unstaking" defaultOpen={false}>
+      * If you stake multiple times, the same asset may have different boost levels.
+
+      * In this case, when you unstake, the asset with the lowest boost will be unstaked first.
+    </Accordion>
+
+    ## fragSOL & fragJTO
+
+    When holding $fragmetric Asset, F Points are credited in real-time without the need for additional procedures. The number of F Points awarded follows the formula:
+
+    <Frame>
+      <img src="/images/point_1.png" />
+    </Frame>
+
+    <Frame>
+      ![](/images/point_2.png)
+    </Frame>
+
+    ### Example Calculation
+
+    Assume you have deposited 1 fragSOL. After one full day (86,400 seconds), the increase in F Points is calculated using fragSOL’s accrual rate of 0.001. Specifically, multiply the deposit amount (1 fragSOL), the accrual rate (0.001), and the elapsed time (86,400 seconds) to determine the additional F Points accrued.
+
+    <Frame>
+      ![](/images/point_3.png)
+    </Frame>
+
+    Therefore, after 24 hours, the F Points would increase by 86.4 for every 1 fragSOL staked.
+
+    ## wfragSOL & wfragJTO
+
+    F point accumulation occurs only when used in a DeFi protocol after wrapping. Simply holding wrapped fragSOL or wrapped fragJTO does not accumulate F points.
+
+    <Frame>
+      ![](/images/point_4.png)
+    </Frame>
+
+    ## Accrual rate per Asset
+
+    The accrual rate for a $fragmetric Asset is determined by the deposit asset’s value at the time of the $fragmetric Asset’s launch, ensuring fairness across different types of deposit assets.
+
+    **Accural rate list**
+
+    * fragSOL : 0.001
+
+    * fragJTO : 0.00002
+  </Tab>
+
+  <Tab title="F Points Boost">
+    ### **Calculation of Point Boosting**
+
+    * The additional F Points are calculated by multiplying the base F Points by the boost multiplier.
+
+    * The formula used to calculate the boosted F Points is as follows:
+  </Tab>
+</Tabs>
