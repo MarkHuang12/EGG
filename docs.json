@@ -17,7 +17,37 @@
                   "group": "Get Started",
                   "pages": [
                       "Documentation/Get-Started/Fragmetric-Overview",
-                      "Documentation/Get-Started/SANG"
+                      "Documentation/Get-Started/SANG",
+                                  {
+                            "group": "(Re)stake Sol for fragAsset",
+                            "pages": [
+                                "Documentation/Resources/Legal/Terms-of-Use",
+                                "Documentation/Resources/Legal/Privacy-Policy"
+                                     ]
+                                  },
+                                    {
+                            "group": "Buying or Selling fragAsset",
+                            "pages": [
+                                "Documentation/Resources/Legal/Terms-of-Use",
+                                "Documentation/Resources/Legal/Privacy-Policy"
+                                     ]
+                                  },
+                                    {
+                            "group": "Unstaking fragAsset",
+                            "pages": [
+                                "Documentation/Resources/Legal/Terms-of-Use",
+                                "Documentation/Resources/Legal/Privacy-Policy"
+                                     ]
+                                  },
+                                    {
+                            "group": "Using fragAsset",
+                            "pages": [
+                                "Documentation/Get-Started/Using/Orca",
+                                "Documentation/Get-Started/Using/Kamino",
+                                "Documentation/Get-Started/Using/Exponent",
+                                "Documentation/Get-Started/Using/RateX"
+                                     ]
+                                  }
                            ]
                         },
                         {
@@ -105,7 +135,7 @@
                       "Assets/wfragSOL",
                       "Assets/wfragJTO"
                            ]
-                        }
+                        },
                       ]
                   },
                   {
