@@ -23,17 +23,18 @@
           {
             "group": "Guides",
             "pages": [
-              "Documentation/Get-Started/Restake",
-              "Documentation/Get-Started/Wrap-Unwrap",
-              "Documentation/Get-Started/Buy-Sell",
-              "Documentation/Get-Started/Unstake",
+              "Documentation/Guides/Restake",
+              "Documentation/Guides/Wrap-Unwrap",
+              "Documentation/Guides/Buy-Sell",
+              "Documentation/Guides/Unstake",
                         {
                             "group": "Using in DeFi",
                             "pages": [
-                    "Documentation/Get-Started/Using/Orca",
-                    "Documentation/Get-Started/Using/Kamino",
-                    "Documentation/Get-Started/Using/Exponent",
-                    "Documentation/Get-Started/Using/RateX"
+                    "Documentation/Guides/Using/Overview",
+                    "Documentation/Guides/Using/Orca",
+                    "Documentation/Guides/Using/Kamino",
+                    "Documentation/Guides/Using/Exponent",
+                    "Documentation/Guides/Using/RateX"
                                      ]
                         }
             ]
