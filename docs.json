@@ -60,9 +60,9 @@
                                       {
                                     "group": "Season 1",
                                     "pages": [
-                                    "Documentation/Community/Overview",
-                                    "Documentation/Community/Phase1",
-                                    "Documentation/Community/Phase2"
+                                    "Documentation/Community/Season1/Overview",
+                                    "Documentation/Community/Season1/Phase1",
+                                    "Documentation/Community/Season1/Phase2"
                                               ]
           }
                                     ]
