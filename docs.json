@@ -122,11 +122,6 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Website",
-          "href": "https://fragmetric.xyz",
-          "icon": "globe"
-        },
-        {
           "anchor": "Community",
           "href": "https://discord.gg/fragmetric",
           "icon": "discord"

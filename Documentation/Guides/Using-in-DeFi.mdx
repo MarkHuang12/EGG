@@ -1,4 +1,61 @@
 ---
 title: "Using in DeFi"
-description: "Description of your new file."
 ---
+
+## Whitelisting protocols
+
+<Tabs>
+  <Tab title="Overview">
+    | Number | Topic         | Feature          | Whitelisting Protocol | Link                                                                                      | F Points Boost |
+    | ------ | ------------- | ---------------- | --------------------- | ----------------------------------------------------------------------------------------- | -------------- |
+    | 1      | Liquidity     | wfragSOL-JitoSOL | Orca                  | [Link](https://www.orca.so/pools?tokens=WFRGSWjaz8tbAxsJitmbfRuFV2mSNwy7BMWcCwaA28U)      | 2              |
+    | 2      | Liquidity     | wfragJTO-JTO     | Orca                  | [Link](https://www.orca.so/pools?tokens=WFRGJnQt5pK8Dv4cDAbrSsgPcmboysrmX3RYhmRRyTR)      | 2              |
+    | 4      | Liquidity     | wfragSOL-JitoSOL | Kamino                | [Link](https://app.kamino.finance/liquidity/8sKf4C6iQ2wfCAp9oXf2NJZNjfDdN16aeYpkew6vsfbi) | 2              |
+    | 5      | Liquidity     | wfragJTO-JTO     | Kamino                | [Link](https://app.kamino.finance/liquidity/DRikEqmQ6K8PKa2kQ58UWPfKuRBP1t6zGVXt2CfaEq2M) | 2              |
+    | 6      | Yield Trading | fragSOL-PT       | Rate X                | [Link](https://app.rate-x.io/earn/fixed-yield)                                            | 0              |
+    | 7      | Yield Trading | fragSOL-YT       | Rate X                | [Link](https://app.rate-x.io/trade/fragSOL-2508)                                          | 4              |
+    | 8      | Yield Trading | fragSOL-LP       | Rate X                | [Link](https://app.rate-x.io/liquidity/slp?symbol=fragSOL-2508\&tab=Detail)               | 4              |
+    | 9      | Yield Trading | fragJTO-PT       | Rate X                | [Link](https://app.rate-x.io/earn/fixed-yield)                                            | 0              |
+    | 10     | Yield Trading | fragJTO-YT       | Rate X                | [Link](https://app.rate-x.io/trade/fragJTO-2508)                                          | 4              |
+    | 11     | Yield Trading | fragJTO-LP       | Rate X                | [Link](https://app.rate-x.io/liquidity/slp?symbol=fragJTO-2508\&tab=Detail)               | 4              |
+    | 12     | Yield Trading | fragSOL-PT       | Exponent              | [Link](https://www.exponent.finance/income/fragsol-10Jul25?preserveScroll=true)           | 0              |
+    | 13     | Yield Trading | fragSOL-YT       | Exponent              | [Link](https://www.exponent.finance/farm/fragsol-10Jul25)                                 | 4              |
+    | 14     | Yield Trading | fragSOL-LP       | Exponent              | [Link](https://www.exponent.finance/liquidity/fragsol-10Jul25)                            | 4              |
+
+    Creating pools and vaults in DeFi is permissionless, but Fragmetric's initial whitelist includes only Orca and Kamino, with F Points rewards exclusive to these platforms. As liquidity deepens and stabilizes, the whitelist will expand.
+  </Tab>
+
+  <Tab title="Orca">
+    ### Liquidity Provision on Orca
+
+    Orca leverages a Concentrated Liquidity Automated Market Maker (CLAMM) to maximize capital efficiency and boost returns for liquidity providers. This model enables liquidity to be allocated within specific price ranges, allowing providers to earn more yield compared to traditional AMMs.
+
+    By providing liquidity to Orca pools, liquidity providers collect fees from token swaps within those pools. For example, depositing wfragSOL and JitoSOL or wfragJTO and JTO into respective pools ensures that every trade between these assets generates fees, which are proportionally distributed among liquidity providers.
+  </Tab>
+
+  <Tab title="Kamino">
+    ### Automated Liquidity Vaults on Kamino
+
+    Kamino's liquidity vaults are an automated liquidity solution that allows users to earn yield on their crypto assets by providing liquidity to concentrated liquidity market makers (CLMMs).
+
+    The vault deploys liquidity into the wfragSOL-JitoSOL, wfragJTO-JTO pools on Orca. When you deposit wfragSOL or wfragJTO, you'll continue to earn the fragAsset based yield while also earning fees from trading volume.
+  </Tab>
+
+  <Tab title="Exponent">
+    ### Yield Trading on Exponent
+
+    Exponent is a yield exchange protocol on Solana for fixed-rate and leveraged yield farming. Users can exchange their productive yield assets (e.g. Jito’s VRTs, lending positions, yield-bearing tokens) for a fixed return or amplified exposure to their yield.
+
+    For High Risk High Return users, swapping into YT-fragAsset maximizes F Point exposure by taking a long position on yield. Alternatively, providing liquidity to the fragAsset pool earns (re)staking rewards, swap fees, PT-fragAsset fixed yield, F Point, and special points boosts.
+  </Tab>
+
+  <Tab title="Rate X">
+    ### Yield Trading on RateX
+
+    RateX Protocol is a decentralized exchange (DEX) built on Solana, specializing in leveraged yield trading. On RateX, users can trade synthetic Yield Tokens (YT) of various yield-bearing assets (YBA) with leverage, benefiting from yield movements in a capital-efficient way. Besides leveraged yield trading, RateX provides two integrated features, Earn Fixed Yield and Yield Liquidity Farming, to meet various user needs.
+
+    For High Risk High Return users, swapping into YT-fragAsset maximizes F Point exposure by taking a long position on yield. Alternatively, providing liquidity to the fragAsset pool earns (re)staking rewards, swap fees, PT-fragAsset fixed yield, F Point, and special points boosts.
+
+
+  </Tab>
+</Tabs>
