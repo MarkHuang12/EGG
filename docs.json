@@ -66,7 +66,7 @@
               "protocol/Process"
             ]
           },
-{
+          {
             "group": "Protocol Architecture",
             "pages": [
               "protocol/Protocol-Architecture/Fund",
@@ -74,6 +74,12 @@
               "protocol/Protocol-Architecture/Reward",
               "protocol/Protocol-Architecture/Normalized-Token-Pool",
               "protocol/Protocol-Architecture/Wrap-Unwrap"
+            ]
+          },
+{
+            "group": "Resources",
+            "pages": [
+              "protocol/Resources/Deployed-Programs"
             ]
           }
         ]
@@ -94,6 +100,12 @@
               "Assets/wfragSOL",
               "Assets/wfragJTO"
             ]
+          },
+          {
+            "group": "Resources",
+            "pages": [
+              "Assets/Contracts"
+            ]
           }
         ]
       },
@@ -111,11 +123,6 @@
     ],
     "global": {
       "anchors": [
-        {
-          "anchor": "Website",
-          "href": "https://fragmetric.xyz/",
-          "icon": "globe"
-        },
         {
           "anchor": "Community",
           "href": "https://discord.gg/fragmetric",
