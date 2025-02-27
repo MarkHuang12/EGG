@@ -50,6 +50,24 @@
                                      ]
                         }
             ]
+          },
+          {
+            "group": "Community",
+            "pages": [
+                        {
+                          "group": "LF(ra)G Campaign",
+                          "pages": [
+                                      {
+                                    "group": "Season 1",
+                                    "pages": [
+                                    "Documentation/Community/Overview",
+                                    "Documentation/Community/Phase1",
+                                    "Documentation/Community/Phase2"
+                                              ]
+          }
+                                    ]
+          }
+            ]
           }
         ]
       },
@@ -74,7 +92,7 @@
               "protocol/Protocol-Architecture/Wrap-Unwrap"
             ]
           },
-{
+          {
             "group": "Resources",
             "pages": [
               "protocol/Resources/Deployed-Programs"
@@ -121,6 +139,11 @@
     ],
     "global": {
       "anchors": [
+        {
+          "anchor": "Website",
+          "href": "https://fragmetric.xyz",
+          "icon": "globe"
+        },
         {
           "anchor": "Community",
           "href": "https://discord.gg/fragmetric",
