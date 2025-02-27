@@ -3,162 +3,103 @@
   "theme": "mint",
   "name": "Fragmetric Docs",
   "colors": {
-        "primary": "#0BD5BC",
-        "light": "#0BD5BC",
-        "dark": "#0BD5BC"
-            },
+    "primary": "#0BD5BC",
+    "light": "#0BD5BC",
+    "dark": "#0BD5BC"
+  },
   "favicon": "/favicon.svg",
   "navigation": {
-        "tabs": [
-                  {
-            "tab": "Documentation",
-            "groups": [
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "Documentation/Get-Started/Fragmetric-Overview",
+              "Documentation/Get-Started/SANG"
+            ]
+          },
+          {
+            "group": "Security",
+            "pages": [
+              "Documentation/Security/Overview",
+              "Documentation/Security/Audits"
+            ]
+          },
+          {
+            "group": "Resources",
+            "pages": [
+              "Documentation/Resources/FAQ",
+              "Documentation/Resources/Brand-Kit",
+              "Documentation/Resources/Deployed-Programs",
+              "Documentation/Resources/Contracts",
+              "Documentation/Resources/Key-Terms",
                         {
-                  "group": "Get Started",
-                  "pages": [
-                      "Documentation/Get-Started/Fragmetric-Overview",
-                      "Documentation/Get-Started/SANG",
-                                  {
-                            "group": "(Re)stake Sol for fragAsset",
-                            "pages": [
-                                "Documentation/Resources/Legal/Terms-of-Use",
-                                "Documentation/Resources/Legal/Privacy-Policy"
-                                     ]
-                                  },
-                                  {
-                            "group": "Buying or Selling fragAsset",
-                            "pages": [
-                                "Documentation/Resources/Legal/Terms-of-Use",
-                                "Documentation/Resources/Legal/Privacy-Policy"
-                                     ]
-                                  },
-                                  {
-                            "group": "Unstaking fragAsset",
-                            "pages": [
-                                "Documentation/Resources/Legal/Terms-of-Use",
-                                "Documentation/Resources/Legal/Privacy-Policy"
-                                     ]
-                                  },
-                                  {
-                            "group": "Using fragAsset",
-                            "pages": [
-                                "Documentation/Get-Started/Using/Orca",
-                                "Documentation/Get-Started/Using/Kamino",
-                                "Documentation/Get-Started/Using/Exponent",
-                                "Documentation/Get-Started/Using/RateX"
-                                     ]
-                                  }
-                           ]
-                        },
-                        {
-                  "group": "Security",
-                  "pages": [
-                      "Documentation/Security/Overview",
-                      "Documentation/Security/Audits"
-                           ]
-                        },
-                        {
-                  "group": "Resources",
-                  "pages": [
-                      "Documentation/Resources/FAQ",
-                      "Documentation/Resources/Brand-Kit",
-                      "Documentation/Resources/Deployed-Programs",
-                      "Documentation/Resources/Contracts",
-                      "Documentation/Resources/Key-Terms",
-                                  {
                             "group": "Legal",
                             "pages": [
-                                "Documentation/Resources/Legal/Terms-of-Use",
-                                "Documentation/Resources/Legal/Privacy-Policy"
+                    "Documentation/Resources/Legal/Terms-of-Use",
+                    "Documentation/Resources/Legal/Privacy-Policy"
                                      ]
-                                  }
-                            ]
-                         },
-                         {
-                  "group": "Community",
-                  "pages": [
-                              {
-                        "group": "LF(ra)G Campaign",
-                        "pages": [
-                                    {
-                              "group": "Season 1",
-                              "pages": [
-                                  "Documentation/Community/Season1/Overview",
-                                  "Documentation/Community/Season1/Phase1",
-                                  "Documentation/Community/Season1/Phase2",
-                                  "Documentation/Community/Season1/Base-F-Point",
-                                  "Documentation/Community/Season1/F-Points-Boost"
-                                        ]
-                                    }
-                                 ]
-                              }
-                           ] 
-                         }
-                      ]
-                  },
-                  {
-            "tab": "Fragmetric Protocol",
-            "groups": [
-                        {
-                  "group": "About Fragmetric",
-                  "pages": [
-                      "protocol/Overview",
-                      "protocol/Restaking-LRT",
-                      "protocol/Process"
-                           ]
-                        },
-                        {
-                  "group": "Protocol Architecture",
-                  "pages": [
-                      "protocol/Protocol-Architecture/Fund",
-                      "protocol/Protocol-Architecture/Operator",
-                      "protocol/Protocol-Architecture/Reward",
-                      "protocol/Protocol-Architecture/Normalized-Token-Pool",
-                      "protocol/Protocol-Architecture/Wrap-Unwrap"
-                           ]
                         }
-                      ]
-                  },
-                  {
-            "tab": "Assets",
-            "groups": [
-                        {
-                  "group": "fragAsset",
-                  "pages": [
-                      "Assets/fragSOL",
-                      "Assets/fragJTO"
-                           ]
-                        },
-                        {
-                  "group": "Wrapped fragAsset",
-                  "pages": [
-                      "Assets/wfragSOL",
-                      "Assets/wfragJTO"
-                           ]
-                        },
-                      ]
-                  },
-                  {
-            "tab": "Developers",
-            "groups": [
-                        {
-                  "group": "API Documentation",
-                  "pages": [
-                      "api-reference/introduction"
-                           ]
-                        }
-                      ]
-                  }
-                ]
-                },
-
-
-
-
-
-
-
-    
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Fragmetric Protocol",
+        "groups": [
+          {
+            "group": "About Fragmetric",
+            "pages": [
+              "protocol/Overview",
+              "protocol/Restaking-LRT",
+              "protocol/Process"
+            ]
+          },
+{
+            "group": "Protocol Architecture",
+            "pages": [
+              "protocol/Protocol-Architecture/Fund",
+              "protocol/Protocol-Architecture/Operator",
+              "protocol/Protocol-Architecture/Reward",
+              "protocol/Protocol-Architecture/Normalized-Token-Pool",
+              "protocol/Protocol-Architecture/Wrap-Unwrap"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Assets",
+        "groups": [
+          {
+            "group": "fragAsset",
+            "pages": [
+              "Assets/fragSOL",
+              "Assets/fragJTO"
+            ]
+          },
+          {
+            "group": "Wrapped fragAsset",
+            "pages": [
+              "Assets/wfragSOL",
+              "Assets/wfragJTO"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Developers",
+        "groups": [
+          {
+            "group": "API Documentation",
+            "pages": [
+              "api-reference/introduction"
+            ]
+          }
+        ]
+      }
+    ],
     "global": {
       "anchors": [
         {
@@ -208,4 +149,3 @@
       "github": "https://github.com/fragmetric-labs"
     }
   }
-}
