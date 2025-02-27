@@ -56,16 +56,6 @@
               "protocol/Restaking-LRT",
               "protocol/Process"
             ]
-          },
-{
-            "group": "Protocol Architecture",
-            "pages": [
-              "protocol/Protocol-Architecture/Fund",
-              "protocol/Protocol-Architecture/Operator",
-              "protocol/Protocol-Architecture/Reward",
-              "protocol/Protocol-Architecture/Normalized-Token-Pool",
-              "protocol/Protocol-Architecture/Wrap-Unwrap"
-            ]
           }
         ]
       },
