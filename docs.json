@@ -43,6 +43,24 @@
                                      ]
                         }
             ]
+          },
+{
+            "group": "Community",
+            "pages": [
+                        {
+                            "group": "LF(ra)G Campaign",
+                            "pages": [
+                    "Documentation/Community/Overview"
+                                     ],
+                                    {
+                                  "group": "Season 1",
+                                  "pages": [
+                                        "Documentation/Community/Phase1",
+                                        "Documentation/Community/Phase2"
+                                            ]
+                                    }
+                        }
+            ]
           }
         ]
       },
