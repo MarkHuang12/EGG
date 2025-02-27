@@ -17,7 +17,19 @@
             "group": "Get Started",
             "pages": [
               "Documentation/Get-Started/Fragmetric-Overview",
-              "Documentation/Get-Started/SANG"
+              "Documentation/Get-Started/SANG",
+              "Documentation/Get-Started/Restake",
+              "Documentation/Get-Started/Buy-Sell",
+              "Documentation/Get-Started/Unstake",
+                        {
+                            "group": "Using in DeFi",
+                            "pages": [
+                    "Documentation/Get-Started/Using/Orca",
+                    "Documentation/Get-Started/Using/Kamino",
+                    "Documentation/Get-Started/Using/Exponent",
+                    "Documentation/Get-Started/Using/RateX"
+                                     ]
+                        }
             ]
           },
           {
