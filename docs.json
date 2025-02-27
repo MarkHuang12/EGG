@@ -16,8 +16,7 @@
           {
             "group": "Get Started",
             "pages": [
-              "Documentation/Get-Started/Fragmetric-Overview",
-              "Documentation/Get-Started/SANG"
+              "Documentation/Get-Started/Fragmetric-Overview"
             ]
           },
           {
@@ -33,8 +32,6 @@
               "Documentation/Resources/FAQ",
               "Documentation/Resources/Brand-Kit",
               "Documentation/Resources/Deployed-Programs",
-              "Documentation/Resources/Contracts",
-              "Documentation/Resources/Key-Terms",
                         {
                             "group": "Legal",
                             "pages": [
@@ -52,8 +49,8 @@
           {
             "group": "About Fragmetric",
             "pages": [
-              "protocol/Overview",
-              "protocol/Restaking-LRT",
+              "protocol/key-objectives",
+              "protocol/fragmetric-protocol",
               "protocol/Process"
             ]
           }
