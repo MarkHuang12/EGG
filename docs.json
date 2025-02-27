@@ -16,7 +16,8 @@
           {
             "group": "Get Started",
             "pages": [
-              "Documentation/Get-Started/Fragmetric-Overview"
+              "Documentation/Get-Started/Fragmetric-Overview",
+              "Documentation/Get-Started/SANG"
             ]
           },
           {
@@ -32,6 +33,8 @@
               "Documentation/Resources/FAQ",
               "Documentation/Resources/Brand-Kit",
               "Documentation/Resources/Deployed-Programs",
+              "Documentation/Resources/Contracts",
+              "Documentation/Resources/Key-Terms",
                         {
                             "group": "Legal",
                             "pages": [
@@ -44,12 +47,24 @@
         ]
       },
       {
-        "tab": "Protocol Architecture",
+        "tab": "Fragmetric Protocol",
         "groups": [
           {
-            "group": "Key Objectives",
+            "group": "About Fragmetric",
             "pages": [
-              "protocol/key-objectives"
+              "protocol/Overview",
+              "protocol/Restaking-LRT",
+              "protocol/Process"
+            ]
+          },
+          {
+            "group": "Protocol Architecture",
+            "pages": [
+              "protocol/Protocol-Architecture/Fund",
+              "protocol/Protocol-Architecture/Operator",
+              "protocol/Protocol-Architecture/Reward",
+              "protocol/Protocol-Architecture/Normalized-Token-Pool",
+              "protocol/Protocol-Architecture/Wrap-Unwrap"
             ]
           }
         ]
@@ -58,9 +73,17 @@
         "tab": "Assets",
         "groups": [
           {
-            "group": "fragmetric Asset",
+            "group": "fragAsset",
             "pages": [
-              "protocol/key-objectives"
+              "Assets/fragSOL",
+              "Assets/fragJTO"
+            ]
+          },
+          {
+            "group": "Wrapped fragAsset",
+            "pages": [
+              "Assets/wfragSOL",
+              "Assets/wfragJTO"
             ]
           }
         ]
@@ -121,6 +144,8 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/fragmetric"
+      "x": "https://x.com/fragmetric",
+      "discord": "https://discord.gg/fragmetric",
+      "github": "https://github.com/fragmetric-labs"
     }
   }
