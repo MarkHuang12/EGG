@@ -7,6 +7,14 @@
     "light": "#0BD5BC",
     "dark": "#0BD5BC"
   },
+  "font": {
+    "headings": {
+      "family": "Roboto"
+    },
+    "body": {
+      "family": "Oswald"
+    }
+  },
   "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
