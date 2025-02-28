@@ -100,12 +100,6 @@
               "protocol/Protocol-Architecture/Normalized-Token-Pool",
               "protocol/Protocol-Architecture/Wrap-Unwrap"
             ]
-          },
-          {
-            "group": "Resources",
-            "pages": [
-              "protocol/Resources/Deployed-Programs"
-            ]
           }
         ]
       },
