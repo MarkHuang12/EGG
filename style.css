@@ -1,0 +1,9 @@
+#footer a[href*="mintlify.com"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+.topbar-cta-button {
+  border-radius: 8px !important;
+}
