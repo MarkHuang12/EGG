@@ -41,6 +41,7 @@
             "group": "Security",
             "pages": [
               "Documentation/Security/Overview",
+              "Documentation/Security/Deployed-Programs",
               "Documentation/Security/Audits"
             ]
           },
