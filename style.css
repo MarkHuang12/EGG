@@ -1,12 +1,12 @@
 @font-face {
     font-family: "PP Mori SemiBold";
     src: url("https://db.onlinewebfonts.com/t/7e39d05fff188430a1cb860db9b38881.woff2") format("woff2");
-    font-weight: 100:
+    font-weight: 600:
 }
 
 /* Apply SemiBold only to headings */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'PPMori-SemiBold', sans-serif;
+  font-family: 'PP Mori SemiBold', sans-serif;
   font-weight: 600;
 }
 
