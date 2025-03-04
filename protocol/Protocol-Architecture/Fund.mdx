@@ -2,7 +2,7 @@
 title: "Fund"
 ---
 
-The **Fund** is the primary module responsible for managing user assets within the Fragmetric ecosystem. It accepts deposits of SOL, LSTs, and other supported assets, and mints the corresponding Fragmetric Asset. The minting process leverages pricing data from the **Normalized Token Pool** (covered in the next section). In addition, the Fund manages withdrawal requests by reserving adequate liquidity and executing these requests periodically, allowing users to claim their assets in a timely manner.
+The Fund is the primary module responsible for managing user assets within the Fragmetric ecosystem. It accepts deposits of SOL, LSTs, and other supported assets, and mints the corresponding fragAsset. The minting process leverages pricing data from the Normalized Token Pool (covered in the next section). In addition, the Fund manages withdrawal requests by reserving adequate liquidity and executing these requests periodically, allowing users to claim their assets in a timely manner.
 
 ### **Deposit & Withdrawal of the Fund**
 
@@ -12,10 +12,10 @@ The following diagram demonstrates the interaction between users, the fragSOL Fu
   <img src="/images/fund_1.png" />
 </Frame>
 
-1. **Deposits**: Users deposit **SOL** or supported LSTs into the Fund.
+1. **Deposits**: Users deposit SOL or supported LSTs into the Fund.
 
-2. **Minting fragSOL**: Upon receiving a deposit, the Fund mints **fragSOL** for the user. The number of tokens minted is determined by the current price data, reflecting the combined value of the underlying assets.
+2. **Minting fragSOL**: Upon receiving a deposit, the Fund mints fragSOL for the user. The number of tokens minted is determined by the current price data, reflecting the combined value of the underlying assets.
 
-3. **Withdrawals**: Users may request withdrawals, prompting the Fund to burn the corresponding fragSOL and reserve the equivalent amount of **SOL** for them to claim. These withdrawal requests are processed on a periodic schedule.
+3. **Withdrawals**: Users may request withdrawals, prompting the Fund to burn the corresponding fragSOL and reserve the equivalent amount of SOL for them to claim. These withdrawal requests are processed on a periodic schedule.
 
-4. **Pricing fragSOL:** The price of **fragSOL** is dynamically calculated based on the overall value of the LSTs managed by the Fund, ensuring that the tokens accurately represent each user’s share of the pooled assets.
+4. **Pricing fragSOL**: The price of fragSOL is dynamically calculated based on the overall value of the LSTs managed by the Fund, ensuring that the tokens accurately represent each user’s share of the pooled assets.
