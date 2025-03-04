@@ -2,11 +2,17 @@
 title: "Wrap & Unwrap (DeFi Mode)"
 ---
 
-wfragSOL & wfragJTO are wrapped versions of fragSOL & fragJTO, designed for broader DeFi compatibility. Some DeFi protocols do not support Token Extension (also known as Token-2022), an advanced token program on the Solana blockchain. To address this, we created wfragSOL and wfragJTO as DeFi-compatible versions of fragSOL and fragJTO, with the wrapped tokens pegged to their respective tokens.
+## wfragSOL & wfragJTO
 
-When wrapping fragSOL to wfragSOL, the desired amount of fragSOL is locked in the wfragSOL program-owned token account, and wfragSOL is minted at a 1:1 peg.
+fragSOL and fragJTO utilize the Transfer Hook of Token Extension (also known as Token-2022), an advanced token program on the Solana blockchain. While Token-2022 is becoming increasingly common in DeFi recently, many dApps still do not support it. To integrate with such dApps, there's another form of Fragmetric Restaked Tokens called wfragSOL (Wrapped Fragmetric Restaked SOL), wfragJTO (Wrapped Fragmetric Restaked JTO).
 
-When unwrapping, wfragSOL gets burnt and the corresponding amount of fragSOL gets unlocked.
+## What are wfragSol & wfragJTO
+
+wfragSOL and wfragJTO are standard SPL tokens that represent an account's share of the total supply of fragSOL and fragJTO, respectively. They serve as the wrapped versions of fragSOL and fragJTO, designed to maximize DeFi compatibility.&#x20;
+
+For example, when converting fragSOL to wfragSOL, the corresponding amount of fragSOL is locked in the wfragSOL program's token account, and an equal amount of wfragSOL is minted. Conversely, when unwrapping wfragSOL, it is burned, and the equivalent amount of fragSOL is unlocked. wfragSOL holders can always convert wfragSOL to fragSOL at a 1:1 ratio, and vice versa.
+
+## How to wrap and unwrap
 
 <Card title="Step to Wrap & Unwrap" icon="bolt" horizontal={1} href="https://fragmetriclabs.mintlify.app/Documentation/Guides/Wrap-Unwrap">
   Maximize the DeFi utility of your fragAsset via wrapping

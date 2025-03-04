@@ -8,7 +8,7 @@ The Normalized Token Pool is in charge of accurately minting and burning fragSOL
   <img src="/images/tokenpool_1.png" />
 </Frame>
 
-### **Calculating the Price (using fragSOL as example)**
+## **Calculating the Price (using fragSOL as example)**
 
 The price of fragSOL is dynamic, reflecting the price movements of its underlying assets. The relationship can be expressed as:
 
@@ -24,7 +24,7 @@ The amount of fragSOL & nSOL minted when deposit a specific LST can be calculate
 
 The pricing of fragSOL relies primarily on the direct on-chain data from the stake pools associated with the underlying LSTs. For certain LSTs, such as JitoSOL, mSOL, BNSOL, and bbSOL, the program directly accesses the state data from their respective stake pools on-chain. This approach provides the most accurate and up-to-date pricing information since it reflects the actual state and performance of the stake pools in real-time.
 
-### **Stake Pool-Based Pricing**
+## **Stake Pool-Based Pricing**
 
 <Frame>
   <img src="/images/tokenpool_4.png" />
@@ -34,7 +34,7 @@ For LSTs the pricing mechanism directly taps into the on-chain state data of the
 
 This direct access to stake pool data ensures that the price of fragSOL is closely aligned with the actual performance of the stake pools, providing users with a reliable and transparent pricing mechanism.
 
-### **Oracle-Based Pricing as a Fallback**
+## **Oracle-Based Pricing as a Fallback**
 
 <Frame>
   <img src="/images/tokenpool_5.png" />

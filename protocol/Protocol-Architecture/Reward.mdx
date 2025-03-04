@@ -8,7 +8,7 @@ The Reward Module is the core system of Fragmetric, designed to accurately distr
   <img src="/images/reward_1.png" />
 </Frame>
 
-### **Contribution**
+## **Contribution**
 
 Contribution refers to a quantifiable measure of a user's participation in the restaking. It is calculated based on the amount of fragSOL tokens a user holds over time. Contributions accumulate continuously as users hold fragSOL.
 
@@ -38,7 +38,7 @@ The accumulated contributions determine each user's share of rewards. The more f
 
 * **Custom Contribution Accrual Rates (Optional)** : Certain Rewards offer custom accrual rates, allowing deposits to accumulate contributions faster. This provides higher rewards and incentivizes participation in specific pools.
 
-### **Reward Pool**
+## **Reward Pool**
 
 Reward Pool is responsible for holding rewards from restaking protocol and tracking the information necessary for their distribution. Various types of rewards are transferred from restaking protocol to the Reward Pool's reserve account. Each time rewards are received, the Reward Pool settles the information into a block through a process called settlement. Each reward has its own settlement block within the Reward Pool, and the distribution of rewards operates independently for each reward.
 
@@ -50,7 +50,7 @@ Reward Pool is responsible for holding rewards from restaking protocol and track
 
 * **Reward Addition:** As rewards are added to the reward pool through restaking, new settlement block for reward is created for distributions.
 
-### **Reward Distribution**
+## **Reward Distribution**
 
 To distribute a reward, the system creates a new Settlement Block within the relevant Reward Settlement, covering the period from the end of the previous block to the current slot. This ensures all contributions are accurately accounted for and rewards are distributed fairly.
 
