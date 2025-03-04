@@ -6,11 +6,11 @@ title: 'Fragmetric’s Process'
   <img src="/images/fragmetric_protocol_3.png" />
 </Frame>
 
-* **Deposits -** When a user deposits SOL, LSTs, or other SPL Tokens into Fragmetric, they receive an equivalent amount of $fragmetric Asset (e.g., fragSOL).
+* **Deposits -** When a user deposits SOL, LSTs, or other SPL Tokens into Fragmetric, they receive an equivalent amount of fragAsset (e.g., fragSOL).
 
-* **Normalized Token Program -** Developed by Fragmetric, this program maintains precise conversion ratios between deposited assets and minted **$fragmetric Asset**. Users’ combined deposits (SOL, LSTs, and other tokens) form a unified basket that Fragmetric allocates across various restaking protocols and NCN/AVS.
+* **Normalized Token Program -** Developed by Fragmetric, this program maintains precise conversion ratios between deposited assets and minted fragAsset. Users’ combined deposits (SOL, LSTs, and other tokens) form a unified basket that Fragmetric allocates across various restaking protocols and NCN/AVS.
 
-* **Rewards Distribution -**  Assets are delegated to partner validators who secure NCN/AVS networks. The earnings from these delegations are distributed to **$fragmetric Asset** holders. Fragmetric serves as both a portfolio manager and a liquidity layer between users and restaking protocols.
+* **Rewards Distribution -**  Assets are delegated to partner validators who secure NCN/AVS networks. The earnings from these delegations are distributed to fragAsset holders. Fragmetric serves as both a portfolio manager and a liquidity layer between users and restaking protocols.
 
 # How Are $fragmetric Asset Holders Rewarded?
 
@@ -20,8 +20,8 @@ title: 'Fragmetric’s Process'
 
 * **Underlying Yields -** fragAsset inherits the yield from any deposited asset that naturally accrues rewards—such as LSTs (Liquid Staking Tokens) that generate staking and MEV returns. When a user unstakes, they can receive more SOL (or other underlying tokens) than initially deposited, reflecting the average APR of all yield-bearing assets in the basket. Conversely, if a deposited asset does not produce any yield on its own, that portion of the deposit will not generate yield for the corresponding fragAsset tokens.
 
-* **NCN/AVS Rewards -** Besides standard yields, NCN/AVS protocols can distribute rewards in SOL, native tokens, or other assets. Fragmetric leverages transfer hook functionality (unique to Solana) to accurately track and allocate these additional rewards. Each $fragmetric Asset transfer updates the user’s eligibility for NCN/AVS revenue, which can be claimed anytime.
+* **NCN/AVS Rewards -** Besides standard yields, NCN/AVS protocols can distribute rewards in SOL, native tokens, or other assets. Fragmetric leverages transfer hook functionality (unique to Solana) to accurately track and allocate these additional rewards. Each fragAsset transfer updates the user’s eligibility for NCN/AVS revenue, which can be claimed anytime.
 
 <Info>
-  $fragmetric Asset is an OPOS (Only Possible on Solana) LRT; its advanced reward distribution mechanism relies on Solana-specific capabilities not available on Ethereum.
+  fragAsset is an OPOS (Only Possible on Solana) LRT; its advanced reward distribution mechanism relies on Solana-specific capabilities not available on Ethereum.
 </Info>
