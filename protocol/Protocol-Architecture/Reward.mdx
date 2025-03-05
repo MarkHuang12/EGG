@@ -32,8 +32,6 @@ The accumulated contributions determine each user's share of rewards. The more f
 
   2. **Duration held**: Contributions also increase based on the length of time the user has held fragSOL, starting from activation.
 
-$$\text\{User's Contribution} =\int\_\{t\_\{\text\{start}}}^\{t\_\{\text\{end}}} \text\{Amount of } \\$\text\{fragSOL held at time } t \\, dt$$
-
 <Frame>
   <img src="/images/reward_3.png" />
 </Frame>
@@ -62,8 +60,24 @@ To distribute a reward, the system creates a new Settlement Block within the rel
 
 * **Reward Share Calculation**: The rewards a user can claim are determined by their contribution relative to the total accumulated contributions in a specific reward settlement block. The system calculates the user's share proportionally to their contribution within that block.
 
+\\\[
+
+\text\{User's Reward During Block} =
+
+\text\{Total Reward Amount During Block} \times
+
+\left(
+
+\frac\{\text\{User's Contribution During Block}}\{\text\{Total Pool Contribution During Block}}
+
+\right)
+
+\\]
+
+
+
 <Frame>
-  <img src="/images/reward_6.png" />
+  ![](/images/reward_6.png)
 </Frame>
 
 * **Distributing Rewards**: Rewards are allocated to users' reward accounts, and they can be claimed at any time once distributed. For efficiency, rewards are calculated on-demand when a user chooses to claim them.
