@@ -166,8 +166,8 @@
     }
   },
   "logo": {
-    "light": "/logo/Fragmetric_text_logo_main111.svg",
-    "dark": "/logo/Fragmetric_text_logo_main111.svg"
+    "light": "/logo/docs_title_light.svg",
+    "dark": "/logo/docs_title_dark.svg"
   },
   "navbar": {
     "links": [
