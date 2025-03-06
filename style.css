@@ -21,6 +21,10 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 8px !important;
 }
 
-.logo {
-  hieght: 40px !important;
+img[src*="docs_title_light_2.svg"] {
+    height: 40px !important;
+}
+
+img[src*="docs_title_dark_2.svg"] {
+    height: 40px !important;
 }
