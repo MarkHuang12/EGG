@@ -166,8 +166,8 @@
     }
   },
   "logo": {
-    "light": "/logo/docs_title_light.svg",
-    "dark": "/logo/docs_title_dark.svg"
+    "light": "/logo/docs_title_light_2.svg",
+    "dark": "/logo/docs_title_dark_2.svg"
   },
   "navbar": {
     "links": [
