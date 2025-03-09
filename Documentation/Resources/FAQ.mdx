@@ -4,7 +4,7 @@ title: "FAQ"
 
 ## What is Fragmetric?
 
-Fragmetric is the first Solana-native Liquid Restaking Protocol, allowing users to (re)stake SOL and LSTs (such as JitoSOL, BNSOL, bbSOL etc.), and SPL tokens to earn restaking rewards on top of their usual staking and MEV yields. When you deposit these assets into Fragmetric, the protocol strategically allocates them across restaking platforms like Jito (Re)staking, guided by automated on-chain processes that optimize returns in real time.
+Fragmetric is the first Solana-native Liquid Restaking Protocol, allowing users to (re)stake SOL, LSTs and SPL tokens to earn restaking rewards on top of their usual staking and MEV yields. When you deposit these assets into Fragmetric, the protocol strategically allocates them across restaking platforms like Jito (Re)staking, guided by automated on-chain processes that optimize returns in real time.
 
 This setup delivers industry-leading yields with minimized risk, ensuring that even assets without inherent staking or MEV rewards still benefit from NCN/AVS distributions. In return, stakers receive an LRT (Liquid Restaking Token) that represents their share of the protocol, which can be freely used in DeFi for collateral, liquidity, or trading, while continuously accruing NCN/AVS rewards. Fragmetric’s modular architecture comprises a dedicated Fund for safeguarding deposits and an Operator to manage restaking, leveraging Solana’s transfer hook to precisely track and distribute specialized rewards.
 
@@ -26,27 +26,19 @@ fragSOL is a Liquid Restaking Token that serves as a representation of one's pos
 
 ## How do I receive my rewards?
 
-$fragmetric Asset automatically compounds staking and MEV rewards if the underlying deposit produces them (e.g., SOL or other LSTs), causing its value to grow over time. If the deposited asset does not generate staking or MEV rewards, you will only receive NCN/AVS rewards through the protocol.
+fragAsset automatically compounds staking and MEV rewards if the underlying deposit produces them (e.g., SOL or other LSTs), causing its value to grow over time. If the deposited asset does not generate staking or MEV rewards, you will only receive NCN/AVS rewards through the protocol.
 
-These NCN/AVS rewards accumulate in a dedicated reserve account, and any holder with at least one slot of fragmetric Asset can claim them. The amount of rewards you receive is proportional to both your holding period and the quantity of fragmetric Assets you own. For instance, fragSOL is one type of fragmetric Asset that combines automatic compounding from SOL-based yields with NCN/AVS rewards.
+These NCN/AVS rewards accumulate in a dedicated reserve account, and any holder with at least one slot of fragAsset can claim them. The amount of rewards you receive is proportional to both your holding period and the quantity of fragAsset you own. For instance, fragSOL is one type of fragAsset that combines automatic compounding from SOL-based yields with NCN/AVS rewards.
 
 ## Where are my tokens stored?
 
-When you deposit tokens, they are transferred to the Fragmetric fund account, which securely holds user assets. For $fragmetric Assets that require normalization (e.g., those representing multiple token types), nTOKEN (normalized Token) is minted in proportion to the deposited amount. The resulting nTOKEN is then restaked and delegated across various NCN and AVS platforms.
+When you deposit tokens, they are transferred to the Fragmetric fund account, which securely holds user assets. For fragAsset that require normalization (e.g., those representing multiple token types), nTOKEN (normalized Token) is minted in proportion to the deposited amount. The resulting nTOKEN is then restaked and delegated across various NCN and AVS platforms.
 
 In cases where normalization is not necessary, the deposited tokens are directly restaked without needing to convert them into nTOKEN. This flexible approach ensures efficient handling of different asset types within the Fragmetric ecosystem.
 
 ## How do I get F points?
 
-F Point is the first reward provided by Fragmetric through its protocol’s reward module. To participate, simply hold your $fragmetric Asset in your wallet and verify that the reward system is activated using your wallet address.
-
-## Has Fragmetric been audited?
-
-Yes. Fragmetric has undergone audits by the following firms:
-
-* **QuantStamp**: [View the audit report](https://docs.fragmetric.xyz/content/files/2024/11/QuantStamp---Fragmetric-Phase1-Final-Report.pdf)
-
-* **Certora**: [View the audit report](https://docs.fragmetric.xyz/content/files/2024/10/Certora---Fragmetric-Phase1-Final-Report.pdf)
+F Point is the first reward provided by Fragmetric through its protocol’s reward module. To participate, simply hold your fragAsset in your wallet and verify that the reward system is activated using your wallet address.
 
 ## What are Fragmetric’s Socials?
 
