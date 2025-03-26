@@ -38,7 +38,7 @@
                       ]
           },
           {
-            "group": "security",
+            "group": "Security",
             "pages": [
               "/docs/security/overview",
               "/docs/security/deployed-programs",
@@ -48,11 +48,11 @@
           {
             "group": "Resources",
             "pages": [
-              "/docs/Resources/FAQ",
-              "/docs/Resources/Brand-Kit",
-              "/docs/Resources/Key-Terms",
+              "/docs/resources/faq",
+              "/docs/resources/brand-kit",
+              "/docs/resources/key-terms",
                         {
-                            "group": "legal",
+                            "group": "Legal",
                             "pages": [
                     "/docs/resources/legal/terms-of-use",
                     "/docs/resources/legal/privacy-policy"
@@ -132,10 +132,41 @@
         "tab": "Developers",
         "groups": [
           {
-            "group": "API Documentation",
+            "group": "Developers",
             "pages": [
               "/dev/introduction",
-              "/dev/endpoint"
+              "/dev/release-notes"
+            ]
+          },
+          {
+            "group": "References",
+            "pages": [
+              {
+                "group": "Normalized Token",
+                "pages": [
+                  "/dev/references/ntp/overview",
+                  "/dev/references/ntp/status"
+                ]
+              },
+              {
+                "group": "DeFi Integration",
+                "pages": [
+                  "/dev/references/defi/overview",
+                  "/dev/references/defi/reward-distribution",
+                  "/dev/references/defi/snapshot",
+                  "/dev/references/defi/metadata",
+                  "/dev/references/defi/status"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Tools",
+            "pages": [
+              "/dev/tools/sdk/offchain/quickstart",
+              "/dev/tools/sdk/onchain",
+              "/dev/tools/cli",
+              "/dev/tools/api"
             ]
           }
         ]
