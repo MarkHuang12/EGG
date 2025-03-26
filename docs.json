@@ -24,38 +24,38 @@
           {
             "group": "Get Started",
             "pages": [
-              "Documentation/Get-Started/Welcome",
-              "Documentation/Get-Started/SANG"
+              "/docs/get-started/welcome",
+              "/docs/get-started/sang"
             ]
           },
           {
             "group": "Guides",
             "pages": [
-              "Documentation/Guides/Restake-Unstake",
-              "Documentation/Guides/Wrap-Unwrap",
-              "Documentation/Guides/Buy-Sell",
-              "Documentation/Guides/Using-in-DeFi"
+              "/docs/guides/restake-unstake",
+              "/docs/guides/wrap-unwrap",
+              "/docs/guides/buy-sell",
+              "/docs/guides/using-in-defi"
                       ]
           },
           {
             "group": "Security",
             "pages": [
-              "Documentation/Security/Overview",
-              "Documentation/Security/Deployed-Programs",
-              "Documentation/Security/Audits"
+              "/docs/Security/Overview",
+              "/docs/Security/Deployed-Programs",
+              "/docs/Security/Audits"
             ]
           },
           {
             "group": "Resources",
             "pages": [
-              "Documentation/Resources/FAQ",
-              "Documentation/Resources/Brand-Kit",
-              "Documentation/Resources/Key-Terms",
+              "/docs/Resources/FAQ",
+              "/docs/Resources/Brand-Kit",
+              "/docs/Resources/Key-Terms",
                         {
-                            "group": "Legal",
+                            "group": "legal",
                             "pages": [
-                    "Documentation/Resources/Legal/Terms-of-Use",
-                    "Documentation/Resources/Legal/Privacy-Policy"
+                    "/docs/resources/legal/terms-of-use",
+                    "/docs/resources/legal/privacy-policy"
                                      ]
                         }
             ]
@@ -69,9 +69,9 @@
                                       {
                                     "group": "Season 1",
                                     "pages": [
-                                    "Documentation/Community/Season1/Overview",
-                                    "Documentation/Community/Season1/Phase1",
-                                    "Documentation/Community/Season1/Phase2"
+                                    "/docs/community/season1/overview",
+                                    "/docs/community/season1/phase1",
+                                    "/docs/community/season1/phase2"
                                               ]
           }
                                     ]
@@ -86,19 +86,19 @@
           {
             "group": "About Fragmetric",
             "pages": [
-              "protocol/Overview",
-              "protocol/Restaking-LRT",
-              "protocol/Process"
+              "/protocol/overview",
+              "/protocol/restaking-lrt",
+              "/protocol/fragmetric"
             ]
           },
           {
             "group": "Protocol Architecture",
             "pages": [
-              "protocol/Protocol-Architecture/Fund",
-              "protocol/Protocol-Architecture/Operator",
-              "protocol/Protocol-Architecture/Reward",
-              "protocol/Protocol-Architecture/Normalized-Token-Pool",
-              "protocol/Protocol-Architecture/Wrap-Unwrap"
+              "/protocol/module/fund",
+              "/protocol/module/operator",
+              "/protocol/module/reward",
+              "/protocol/module/normalized-token-pool",
+              "/protocol/module/wrap-unwrap"
             ]
           }
         ]
@@ -109,21 +109,21 @@
           {
             "group": "fragAsset",
             "pages": [
-              "Assets/fragSOL",
-              "Assets/fragJTO"
+              "/assets/fragsol",
+              "/assets/fragjto"
             ]
           },
           {
             "group": "Wrapped fragAsset",
             "pages": [
-              "Assets/wfragSOL",
-              "Assets/wfragJTO"
+              "/assets/wfragsol",
+              "/assets/wfragjto"
             ]
           },
           {
             "group": "Resources",
             "pages": [
-              "Assets/Contracts"
+              "/assets/contracts"
             ]
           }
         ]
@@ -134,7 +134,7 @@
           {
             "group": "API Documentation",
             "pages": [
-              "api-reference/introduction"
+              "/dev/introduction"
             ]
           }
         ]
