@@ -38,11 +38,11 @@
                       ]
           },
           {
-            "group": "Security",
+            "group": "security",
             "pages": [
-              "/docs/Security/Overview",
-              "/docs/Security/Deployed-Programs",
-              "/docs/Security/Audits"
+              "/docs/security/overview",
+              "/docs/security/deployed-programs",
+              "/docs/security/audits"
             ]
           },
           {
@@ -134,7 +134,8 @@
           {
             "group": "API Documentation",
             "pages": [
-              "/dev/introduction"
+              "/dev/introduction",
+              "/dev/endpoint"
             ]
           }
         ]
