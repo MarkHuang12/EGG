@@ -1,33 +1,643 @@
 ---
-title: 'Fragmetric SDK (offchain)'
-description: 'TODO'
+title: 'Quickstart'
+description: 'Fragmetric SDK for Node.js and Browser'
 ---
 
-<Note>
-    If you're not looking to build API reference documentation, you can delete
-    this section by removing the api-reference folder.
-</Note>
+Fragmetric SDK is the official TypeScript/JavaScript client for interacting with Fragmetric Solana programs.
+It supports both browser apps and Node.js environments, and includes a CLI for operational workflows and hardware wallet support.
 
-## Welcome
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+## Installation
 
-<Card
-    title="Plant Store Endpoints"
-    icon="leaf"
-    href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-    View the OpenAPI specification file
-</Card>
+Use your package manager to install the [@fragmetric-labs/sdk](https://www.npmjs.com/package/@fragmetric-labs/sdk) package. It is available in both ESM (for browsers) and CJS (for Node.js), with all type definitions included.
 
-## Authentication
-
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
-
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+```sh
+npm i @fragmetric-labs/sdk@latest
 ```
+
+<Info>
+    `@fragmetric-labs/sdk@dev` is intended to test early features on devnet and may not work with programs deployed on mainnet.
+</Info>
+
+## RestakingProgram
+
+The `RestakingProgram` is the main entry point for interacting with the Fragmetric Liquid Restaking Program.
+It manages RPC configuration, transaction signing, and more. Let's start with the default configuration.
+
+The `RestakingProgram` context is the root node of the entire program's account and transaction template hierarchy.
+Each node in this graph is called a context, and the SDK interface is provided through this context graph.
+
+```ts
+import { RestakingProgram } from '@fragmetric-labs/sdk';
+```
+
+
+### 1. Query fragSOL data
+
+<CodeGroup>
+    ```ts NodeJS (1)
+    import { RestakingProgram } from '@fragmetric-labs/sdk';
+
+    const restaking = RestakingProgram.devnet();
+
+    restaking.fragSOL.resolve().then(console.log);
+    ```
+    ```js Output (1)
+    // The 'metadata' field in the result above comes from Fragmetric's public API,
+    // which provides off-chain calculated data like APY.
+    {
+        receiptTokenMint: 'FRAGSEthVFL7fdqM8hxfxkfCZzUvmg21cqPJVvC1qdbo',
+        wrappedTokenMint: 'WFRGSWjaz8tbAxsJitmbfRuFV2mSNwy7BMWcCwaA28U',
+        metadata: {
+            address: 'FRAGSEthVFL7fdqM8hxfxkfCZzUvmg21cqPJVvC1qdbo',
+            mockAddress: null,
+            type: 'FRAGMETRIC_RESTAKED_TOKEN',
+            symbol: 'fragSOL',
+            displayName: 'Fragmetric Restaked SOL',
+            data: {
+                apy: 0.084422,
+                decimals: 9,
+                mintAddress: 'FRAGSEthVFL7fdqM8hxfxkfCZzUvmg21cqPJVvC1qdbo',
+                oneTokenAsSOL: 1057475925,
+                oneTokenAsUSD: 147.29582,
+                programAddress: 'TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb',
+                tvlAsSOL: 49170770432,
+                tvlAsUSD: 6848,
+                wrappedTokenDecimals: 9,
+                wrappedTokenMintAddress: 'WFRGSWjaz8tbAxsJitmbfRuFV2mSNwy7BMWcCwaA28U',
+                wrappedTokenProgramAddress: 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA'
+            },
+            updatedAt: '2025-03-27T04:49:25.380737Z',
+            updateIntervalSeconds: 30
+        },
+        supportedAssets: [
+            {
+                mint: null,
+                program: null,
+                decimals: 9,
+                oneTokenAsSol: 1000000000n,
+                oneTokenAsReceiptToken: 945648006n,
+                depositable: true,
+                withdrawable: true,
+                withdrawalLastBatchProcessedAt: 2025-03-26T08:59:12.000Z
+            },
+            {
+                mint: 'bSo13r4TkiE4KumL71LsHTPpL2euBYLFx6h9HP3piy1',
+                program: 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA',
+                decimals: 9,
+                oneTokenAsSol: 1030629804n,
+                oneTokenAsReceiptToken: 974613018n,
+                depositable: true,
+                withdrawable: true,
+                withdrawalLastBatchProcessedAt: 1970-01-01T00:00:00.000Z
+            },
+            {
+                mint: 'mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So',
+                program: 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA',
+                decimals: 9,
+                oneTokenAsSol: 1001351062n,
+                oneTokenAsReceiptToken: 946925634n,
+                depositable: true,
+                withdrawable: true,
+                withdrawalLastBatchProcessedAt: 2025-01-22T05:13:08.000Z
+            },
+            {
+                mint: 'J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn',
+                program: 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA',
+                decimals: 9,
+                oneTokenAsSol: 1000000000n,
+                oneTokenAsReceiptToken: 945648005n,
+                depositable: true,
+                withdrawable: true,
+                withdrawalLastBatchProcessedAt: 1970-01-01T00:00:00.000Z
+            }
+        ],
+        depositableAssets: [Getter],
+        withdrawableAssets: [Getter]
+    }
+    ```
+</CodeGroup>
+
+`restaking.fragSOL` can `resolve()` on-chain and off-chain aggregated data, as shown above, which includes:
+- Token metadata such as APY, price, and more.
+- A list of supported assets for deposit and withdrawal.
+
+
+### 2. Query fragSOL user data
+<CodeGroup>
+    ```ts NodeJS (2)
+    import { RestakingProgram } from '@fragmetric-labs/sdk';
+
+    const restaking = RestakingProgram.devnet();
+    restaking.fragSOL
+        .user('91zBeWL8kHBaMtaVrHwWsck1UacDKvje82QQ3HE2k8mJ')
+        .resolve()
+        .then(console.log);
+    ```
+    ```js Output (2)
+    {
+        user: '91zBeWL8kHBaMtaVrHwWsck1UacDKvje82QQ3HE2k8mJ',
+        lamports: 12112686618n,
+        receiptTokenMint: 'FRAGSEthVFL7fdqM8hxfxkfCZzUvmg21cqPJVvC1qdbo',
+        receiptTokenAmount: 9270455254n,
+        wrappedTokenMint: 'WFRGSWjaz8tbAxsJitmbfRuFV2mSNwy7BMWcCwaA28U',
+        wrappedTokenAmount: 3783800100n,
+        supportedAssets: [
+            {
+                mint: null,
+                program: null,
+                decimals: 9,
+                amount: 12112686618n,
+                depositable: true,
+                withdrawable: true
+            },
+            {
+                mint: 'bSo13r4TkiE4KumL71LsHTPpL2euBYLFx6h9HP3piy1',
+                program: 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA',
+                decimals: 9,
+                amount: 2537445665n,
+                depositable: true,
+                withdrawable: true
+            },
+            {
+                mint: 'mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So',
+                program: 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA',
+                decimals: 9,
+                amount: 2790543129n,
+                depositable: true,
+                withdrawable: true
+            },
+            {
+                mint: 'J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn',
+                program: 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA',
+                decimals: 9,
+                amount: 5455269803n,
+                depositable: true,
+                withdrawable: true
+            }
+        ],
+        depositableAssets: [Getter],
+        withdrawableAssets: [Getter],
+        withdrawalRequests: [
+            {
+                requestId: 121n,
+                batchId: 15n,
+                receiptTokenAmount: 1000000000n,
+                supportedAssetMint: null,
+                createdAt: 2025-03-20T05:44:42.000Z,
+                state: 'processing'
+            },
+            {
+                requestId: 122n,
+                batchId: 16n,
+                receiptTokenAmount: 1000000n,
+                supportedAssetMint: null,
+                createdAt: 2025-03-23T14:50:14.000Z,
+                state: 'processing'
+            }
+        ],
+        maxWithdrawalRequests: 4
+    }
+    ```
+</CodeGroup>
+
+`restaking.fragSOL.user(...)` instantiates a new user instance using a public key.
+The `user` can then call `resolve()` to fetch its on-chain account data, including:
+- fragSOL and wrapped fragSOL amounts.
+- SOL balance and token balances for supported assets.
+- Ongoing withdrawal requests.
+- It will return `null` if the user is new.
+
+
+### 3. Deposit Transaction
+<CodeGroup>
+    ```ts NodeJS (3)
+    import { RestakingProgram } from '@fragmetric-labs/sdk';
+    import { createKeyPairSignerFromBytes } from '@solana/kit';
+    import fs from 'fs';
+
+    const keypair = Uint8Array.from(JSON.parse(fs.readFileSync('my_wallet.json').toString()));
+    const signerPromise = createKeyPairSignerFromBytes(keypair)
+
+    const restaking = RestakingProgram.devnet();
+
+    // this interface accepts: null | string | kit.Address | kit.TransactionSigner | () => Promise<null | kit.Address | TransactionSigner>
+    // so we can resolve user address in lazy way.
+    const user = restaking.fragSOL.user(() => signerPromise);
+
+    // deposits 1_000_000 lamports
+    user.depositTransaction
+        .execute({
+            assetMint: null, // null means SOL
+            assetAmount: 1_000_000n,
+            metadata: null,
+            applyPresetComputeUnitLimit: true,
+        }, {
+            signers: [
+                // this interface accepts: kit.TransactionSigner | () => Promise<kit.TransactionSigner>
+                () => signerPromise,
+            ],
+        })
+            .then(result => console.log(result.toJSON()));
+    ```
+    ```js Output (3)
+    {
+        symbol: 'TransactionResultContext',
+        signature: '2EsLXSh5xrvV4VuRi5jwqVQevyM3jZs6CvCueFiZqAtWvSk6osfubzKddzMNEAt5nk6XRkxsNSeamVgocQvHbKX1',
+        succeeded: true,
+        events: {
+            UNKNOWN: [],
+            userDepositedToFund: {
+                discriminator: [Uint8Array],
+                receiptTokenMint: 'FRAGSEthVFL7fdqM8hxfxkfCZzUvmg21cqPJVvC1qdbo',
+                fundAccount: '4YHmpuyY54Bsj61qNxYGgtQy8xhacfnhdZ6W92rqB64w',
+                supportedTokenMint: [Object],
+                updatedUserRewardAccounts: [Array],
+                user: '91zBeWL8kHBaMtaVrHwWsck1UacDKvje82QQ3HE2k8mJ',
+                userReceiptTokenAccount: 'BQ2F6kmvoabdahJJKnwsDY91E8d6AskC7vEszeCfaVTG',
+                userFundAccount: '3jrmHNGtqncqvfKq5o1SDrYywrVPqoUJJ5NDPGeu1uE6',
+                userSupportedTokenAccount: [Object],
+                walletProvider: [Object],
+                contributionAccrualRate: [Object],
+                depositedAmount: 1000000n,
+                mintedReceiptTokenAmount: 945648n
+            }
+        },
+        result: {
+            blockTime: 1743058070n,
+            meta: {
+                computeUnitsConsumed: 336765n,
+                err: null,
+                fee: 5000n,
+                innerInstructions: [Array],
+                loadedAddresses: [Object],
+                logMessages: [Array],
+                postBalances: [Array],
+                postTokenBalances: [Array],
+                preBalances: [Array],
+                preTokenBalances: [Array],
+                rewards: [],
+                status: [Object]
+            },
+            slot: 370130903n,
+            version: 0n,
+            transaction: {
+                instructions: [Array],
+                version: 0,
+                feePayer: [Object],
+                lifetimeConstraint: [Object]
+            }
+        }
+    }
+    ```
+</CodeGroup>
+
+This SDK uses [@solana/kit](https://github.com/anza-xyz/kit) (aka. `@solana/web3.js@2`),
+so transaction-related interfaces are compatible with `@solana/kit`.
+
+Transaction templates like `user.depositTransaction` provide the following pipeline:
+<Steps>
+    <Step title="assemble">
+        Assembles the full transaction message using instructions, fee payer, and lifetime strategy.
+        This method does not perform signing, but returns a fully prepared transaction blueprint.
+    </Step>
+    <Step title="serialize">
+        Serializes the message of the transaction blueprint into raw bytes (`Uint8Array`).
+        Applies configured signers.
+    </Step>
+    <Step title="serializeToBase64">
+        Serializes the entire transaction blueprint into a base64-encoded string.
+        Applies signing before serialization.
+
+        For backward `@solana/web3.js` compatibility, can utilize this like:
+        ```js
+        const serializedTx = txTemplateContext.serializeToBase64(...);
+        const legacyTx = web3.VersionedTransaction.deserialize(Buffer.from(serializedTx, 'base64'));
+        ```
+    </Step>
+    <Step title="simulate">
+        Simulates the transaction. Returns the simulation result including logs, compute units, errors, etc.
+    </Step>
+    <Step title="send">
+        Sends the serialized transaction to the network. Does not wait for confirmation or fetch any results.
+        If any [TransactionSendingSigner](https://github.com/anza-xyz/kit/blob/4028dd17fe9750328d2639dd3d5d4be477c40203/packages/signers/src/transaction-sending-signer.ts#L61) is configured, this method is only way to invoke the transaction.
+    </Step>
+    <Step title="sendAndConfirm">
+        Sends the transaction and waits for confirmation. Does not parse logs or results.
+        This method will return a signature instead of throwing an error when a skip-preflight request fails.
+    </Step>
+    <Step title="parse">
+        Parses transaction result and events.
+        Use this after confirming a transaction manually, if needed.
+    </Step>
+    <Step title="execute">
+        Executes the full pipeline: assemble transaction, send and confirm, then **fetch and parse the result including events**.
+    </Step>
+</Steps>
+
+
+### 4. Request Withdrawal Transaction
+
+<CodeGroup>
+    ```ts NodeJS (4)
+    import { RestakingProgram, createLedgerSignerResolver } from '@fragmetric-labs/sdk';
+
+    const signerResolver = createLedgerSignerResolver();
+
+    const restaking = RestakingProgram.devnet(null, {
+        transaction: {
+            // can set signers to program instance for all transactions
+            signers: [
+                signerResolver
+            ],
+            executionHooks: {
+                // onSignature: console.log,
+                // onError: console.error,
+                // onResult: console.log,
+            }
+        }
+    });
+
+    restaking.fragSOL
+        .user(signerResolver)
+        .requestWithdrawalTransaction
+        .execute({
+            // transaction template arguments
+            assetMint: null, // null means withdrawal of fragSOL to SOL
+            receiptTokenAmount: 100_000n,
+        }, {
+            // transaction config overrides like:
+            // feePayer
+            // signers
+            // prependedInstructions
+            // appendedInstructions
+            // recentBlockhash
+            // durableNonce
+            // addressLookupTables
+            // executionHooks
+        }, {
+            // sending options overrides like:
+            // minContextSlot
+            // maxRetries
+            // commitment
+            skipPreflight: true,
+        })
+        .then(result => console.log(result.toJSON());
+    ```
+    ```js Output (4)
+    {
+        symbol: 'TransactionResultContext',
+        signature: 'r8jDeBuxbDBZg14MAEdTvGxaQ5GTdX7kSPyX1ynzpcdK43jtekJXLAyJGrgtPuFJv4HViSMepEsS8pvhypZF3my',
+        succeeded: true,
+        events: {
+            UNKNOWN: [],
+            userRequestedWithdrawalFromFund: {
+                discriminator: [Uint8Array],
+                receiptTokenMint: 'FRAGSEthVFL7fdqM8hxfxkfCZzUvmg21cqPJVvC1qdbo',
+                fundAccount: '4YHmpuyY54Bsj61qNxYGgtQy8xhacfnhdZ6W92rqB64w',
+                supportedTokenMint: [Object],
+                updatedUserRewardAccounts: [Array],
+                user: '79AHDsvEiM4MNrv8GPysgiGPj1ZPmxviF3dw29akYC84',
+                userReceiptTokenAccount: 'CHDnuEHUWGwR15prhPdywcSbpiRxeV5DUoQBrFnG9Hz2',
+                userFundAccount: 'F2DM273YXjuWMAWKhzhb5sntQU8rrMyQw9gq32zAK8iz',
+                batchId: 17n,
+                requestId: 148n,
+                requestedReceiptTokenAmount: 100000n
+            }
+        },
+        result: {
+            blockTime: 1743065523n,
+            meta: {
+                computeUnitsConsumed: 216317n,
+                err: null,
+                fee: 5000n,
+                innerInstructions: [Array],
+                loadedAddresses: [Object],
+                logMessages: [Array],
+                postBalances: [Array],
+                postTokenBalances: [Array],
+                preBalances: [Array],
+                preTokenBalances: [Array],
+                rewards: [],
+                status: [Object]
+            },
+            slot: 370150154n,
+            version: 0n,
+            transaction: {
+                instructions: [Array],
+                version: 0,
+                feePayer: [Object],
+                lifetimeConstraint: [Object]
+            }
+        }
+    }
+    ```
+</CodeGroup>
+
+Withdrawal requests can have one of the following states:
+- `cancellable`: can be canceled by the user
+- `processing`: being processed by the protocol
+- `claimable`: ready for final withdrawal
+
+<Warning>
+    There is a **MAX** limit (4) for the number of ongoing withdrawal requests per user.
+    Trying to create more than max active withdrawal requests may result in a **program error** or **simulation failure**.
+</Warning>
+
+### 5. Cancel Request Withdrawal Transaction
+
+<CodeGroup>
+    ```ts NodeJS (5)
+    import { RestakingProgram, createLedgerSignerResolver } from '@fragmetric-labs/sdk';
+
+    const signerResolver = createLedgerSignerResolver()
+
+    const restaking = RestakingProgram.devnet('https://api.devnet.solana.com', {
+        rpc: {
+            // configure or disable underlying RPC optimization.
+            accountDeduplicationIntervalSeconds: 0,
+            accountCacheTTLSeconds: 0,
+            accountBatchIntervalMilliseconds: 0,
+            accountBatchMaxSize: 0,
+            blockhashCacheTTLMilliseconds: 0,
+            blockhashBatchIntervalMilliseconds: 0,
+            blockhashBatchMaxSize: 0,
+        },
+    });
+
+    restaking.fragSOL
+        .user(signerResolver)
+        .cancelWithdrawalRequestTransaction
+        .execute({
+            // transaction template arguments
+            assetMint: null,
+            requestId: 148n, // get or verify request ids from resolving user data
+        }, {
+            signers: [signerResolver],
+            // feePayer: ...
+            // if `feePayer` is not explicitly provided in the method call, the program determines the feePayer in the following order:
+            // (1) method-level override passed to the template call
+            // (2) global program-level feePayer configuration
+            // (3) template’s preset feePayer configuration
+            // (4) account of parent context (e.g., the user account in this example)
+        })
+            .then(result => console.log(result.toJSON()));
+    ```
+    ```js Output (5)
+    {
+        symbol: 'TransactionResultContext',
+        signature: '85FQqm9HGQSyPUk7Rjo5f6xthiRqMxCNUQYGbPri9cfhMLxw7koRg7T9xXm8T5fhKkyimBJuDXvWQWTPxS5FpxZ',
+        succeeded: true,
+        events: {
+            UNKNOWN: [],
+            userCanceledWithdrawalRequestFromFund: {
+                discriminator: [Uint8Array],
+                receiptTokenMint: 'FRAGSEthVFL7fdqM8hxfxkfCZzUvmg21cqPJVvC1qdbo',
+                fundAccount: '4YHmpuyY54Bsj61qNxYGgtQy8xhacfnhdZ6W92rqB64w',
+                supportedTokenMint: [Object],
+                updatedUserRewardAccounts: [Array],
+                user: '79AHDsvEiM4MNrv8GPysgiGPj1ZPmxviF3dw29akYC84',
+                userReceiptTokenAccount: 'CHDnuEHUWGwR15prhPdywcSbpiRxeV5DUoQBrFnG9Hz2',
+                userFundAccount: 'F2DM273YXjuWMAWKhzhb5sntQU8rrMyQw9gq32zAK8iz',
+                batchId: 17n,
+                requestId: 148n,
+                requestedReceiptTokenAmount: 100000n
+            }
+        },
+        result: {
+            blockTime: 1743067580n,
+            meta: {
+                computeUnitsConsumed: 222333n,
+                err: null,
+                fee: 5000n,
+                innerInstructions: [Array],
+                loadedAddresses: [Object],
+                logMessages: [Array],
+                postBalances: [Array],
+                postTokenBalances: [Array],
+                preBalances: [Array],
+                preTokenBalances: [Array],
+                rewards: [],
+                status: [Object]
+            },
+            slot: 370155464n,
+            version: 0n,
+            transaction: {
+                instructions: [Array],
+                version: 0,
+                feePayer: [Object],
+                lifetimeConstraint: [Object]
+            }
+        }
+    }
+    ```
+</CodeGroup>
+
+Users can cancel **cancellable** withdrawal requests like above.
+
+### 6. Withdraw Transaction
+
+<CodeGroup>
+    ```ts NodeJS (6)
+    import { RestakingProgram, createLedgerSignerResolver } from '@fragmetric-labs/sdk';
+    import {createSolanaRpc, createSolanaRpcSubscriptions} from "@solana/kit";
+
+    const signerResolver = createLedgerSignerResolver();
+
+    // below is the way to create a fully customized program instance
+    const restaking = RestakingProgram.connect({
+        type: 'solana',
+        cluster: 'mainnet',
+        rpc: createSolanaRpc('https://api.mainnet-beta.solana.com'),
+        rpcSubscriptions: createSolanaRpcSubscriptions('wss://api.mainnet-beta.solana.com'),
+    }, {
+        rpc: {
+            accountDeduplicationIntervalSeconds: 0,
+            accountCacheTTLSeconds: 0,
+            accountBatchIntervalMilliseconds: 0,
+            accountBatchMaxSize: 0,
+            blockhashCacheTTLMilliseconds: 0,
+            blockhashBatchIntervalMilliseconds: 0,
+            blockhashBatchMaxSize: 0
+        },
+        transaction: {
+            signers: [
+                signerResolver,
+            ],
+            feePayer: signerResolver,
+            executionHooks: {
+                onSignature: console.log,
+                onError: console.error,
+                onResult: console.log,
+            },
+            confirmationCommitment: 'confirmed'
+        },
+        debug: false,
+    });
+
+    // fragJTO has same interface
+    restaking.fragJTO
+        .user(signerResolver)
+        .withdrawTransaction
+        .execute({
+            assetMint: 'jtojtomepa8beP8AuQc6eXt5FriJwfFMwQx2v2f9mCL',
+            requestId: 232n,
+        })
+        .then(result => console.log(result.toJSON()));
+    ```
+    ```js Output (6)
+    {
+        symbol: 'TransactionResultContext',
+        signature: '4NGS7JSBzMiquqskvHHKmWi86j8QoFwcpN6h7KinWkQ1SQPNgAYS2adasHoj5KCiU7N2WDTGmYqHSXunaG3HaVsb',
+        succeeded: true,
+        events: {
+            UNKNOWN: [],
+            userWithdrewFromFund: {
+                discriminator: [Uint8Array],
+                receiptTokenMint: 'FRAGJ157KSDfGvBJtCSrsTWUqFnZhrw4aC8N8LqHuoos',
+                fundAccount: 'ETbNmGejjPc1dswSZTdLDe8eUBeWvWokYPcFNgzYX9jj',
+                supportedTokenMint: [Object],
+                user: 'D5zDEBSiA497dge26i4vwHsLk75exUghMoFDc8mBeJDu',
+                userReceiptTokenAccount: '66xLEE5m2Mw8GT6iGCtzcKPJri4X82XxjsZZEU7Tux3X',
+                userFundAccount: '2oQZ2KFnqDbdn3EPw22ciAoJbnp6y2KCBJTbPC3VMAyE',
+                userSupportedTokenAccount: [Object],
+                fundWithdrawalBatchAccount: 'GSwBqbi1EJjQq99LKS7Hj14Zy3AHpwTK44XCNqNhkMr9',
+                batchId: 11n,
+                requestId: 232n,
+                burntReceiptTokenAmount: 1000000n,
+                returnedReceiptTokenAmount: 0n,
+                withdrawnAmount: 1003561n,
+                deductedFeeAmount: 1004n
+            }
+        },
+        result: {
+            blockTime: 1743070661n,
+            meta: {
+                computeUnitsConsumed: 98975n,
+                err: null,
+                fee: 5000n,
+                innerInstructions: [Array],
+                loadedAddresses: [Object],
+                logMessages: [Array],
+                postBalances: [Array],
+                postTokenBalances: [Array],
+                preBalances: [Array],
+                preTokenBalances: [Array],
+                rewards: [],
+                status: [Object]
+            },
+            slot: 329495752n,
+            version: 0n,
+            transaction: {
+                instructions: [Array],
+                version: 0,
+                feePayer: [Object],
+                lifetimeConstraint: [Object]
+            }
+        }
+    }
+    ```
+</CodeGroup>
+
+Users can withdraw **claimable** withdrawal requests like above.
+

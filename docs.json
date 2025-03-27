@@ -41,7 +41,6 @@
             "group": "Security",
             "pages": [
               "/home/security/overview",
-              "/home/security/deployed-programs",
               "/home/security/audits"
             ]
           },
@@ -135,6 +134,7 @@
             "group": "Developers",
             "pages": [
               "/dev/introduction",
+              "/dev/deployed-programs",
               "/dev/release-notes"
             ]
           },
@@ -163,8 +163,18 @@
           {
             "group": "Tools",
             "pages": [
-              "/dev/tools/sdk/offchain/quickstart",
-              "/dev/tools/sdk/onchain",
+              {
+                "group": "Fragmetric SDK (offchain)",
+                "pages": [
+                  "/dev/tools/sdk/offchain/quickstart"
+                ]
+              },
+              {
+                "group": "Fragmetric SDK (onchain)",
+                "pages": [
+                  "/dev/tools/sdk/onchain/quickstart"
+                ]
+              },
               "/dev/tools/cli",
               "/dev/tools/api"
             ]
