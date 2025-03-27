@@ -24,38 +24,38 @@
           {
             "group": "Get Started",
             "pages": [
-              "/docs/get-started/welcome",
-              "/docs/get-started/sang"
+              "/home/get-started/welcome",
+              "/home/get-started/sang"
             ]
           },
           {
             "group": "Guides",
             "pages": [
-              "/docs/guides/restake-unstake",
-              "/docs/guides/wrap-unwrap",
-              "/docs/guides/buy-sell",
-              "/docs/guides/using-in-defi"
+              "/home/guides/restake-unstake",
+              "/home/guides/wrap-unwrap",
+              "/home/guides/buy-sell",
+              "/home/guides/using-in-defi"
                       ]
           },
           {
             "group": "Security",
             "pages": [
-              "/docs/security/overview",
-              "/docs/security/deployed-programs",
-              "/docs/security/audits"
+              "/home/security/overview",
+              "/home/security/deployed-programs",
+              "/home/security/audits"
             ]
           },
           {
             "group": "Resources",
             "pages": [
-              "/docs/resources/faq",
-              "/docs/resources/brand-kit",
-              "/docs/resources/key-terms",
+              "/home/resources/faq",
+              "/home/resources/brand-kit",
+              "/home/resources/key-terms",
                         {
                             "group": "Legal",
                             "pages": [
-                    "/docs/resources/legal/terms-of-use",
-                    "/docs/resources/legal/privacy-policy"
+                    "/home/resources/legal/terms-of-use",
+                    "/home/resources/legal/privacy-policy"
                                      ]
                         }
             ]
@@ -69,9 +69,9 @@
                                       {
                                     "group": "Season 1",
                                     "pages": [
-                                    "/docs/community/season1/overview",
-                                    "/docs/community/season1/phase1",
-                                    "/docs/community/season1/phase2"
+                                    "/home/community/season1/overview",
+                                    "/home/community/season1/phase1",
+                                    "/home/community/season1/phase2"
                                               ]
           }
                                     ]
