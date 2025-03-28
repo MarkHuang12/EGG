@@ -19,13 +19,14 @@ npm i @fragmetric-labs/sdk@latest
     `@fragmetric-labs/sdk@dev` is intended to test early features on devnet and may not work with programs deployed on mainnet.
 </Info>
 
-## RestakingProgram
+## Restaking Program
 
 The `RestakingProgram` is the main entry point for interacting with the Fragmetric Liquid Restaking Program.
-It manages RPC configuration, transaction signing, and more. Let's start with the default configuration.
+It manages RPC configuration, global transaction settings, and more.
 
-The `RestakingProgram` context is the root node of the entire program's account and transaction template hierarchy.
-Each node in this graph is called a context, and the SDK interface is provided through this context graph.
+It also serves as the root of a hierarchical structure called the context graph,
+where each node—called a context—represents a specific part of the program and provides structured access to accounts and transaction templates.
+The entire SDK interface is exposed through this context graph.
 
 ```ts
 import { RestakingProgram } from '@fragmetric-labs/sdk';
@@ -40,7 +41,9 @@ import { RestakingProgram } from '@fragmetric-labs/sdk';
 
     const restaking = RestakingProgram.devnet();
 
-    restaking.fragSOL.resolve().then(console.log);
+    restaking.fragSOL
+        .resolve()
+        .then(console.log);
     ```
     ```js Output (1)
     // The 'metadata' field in the result above comes from Fragmetric's public API,
@@ -129,6 +132,7 @@ import { RestakingProgram } from '@fragmetric-labs/sdk';
     import { RestakingProgram } from '@fragmetric-labs/sdk';
 
     const restaking = RestakingProgram.devnet();
+
     restaking.fragSOL
         .user('91zBeWL8kHBaMtaVrHwWsck1UacDKvje82QQ3HE2k8mJ')
         .resolve()
@@ -216,14 +220,14 @@ The `user` can then call `resolve()` to fetch its on-chain account data, includi
     import { createKeyPairSignerFromBytes } from '@solana/kit';
     import fs from 'fs';
 
-    const keypair = Uint8Array.from(JSON.parse(fs.readFileSync('my_wallet.json').toString()));
-    const signerPromise = createKeyPairSignerFromBytes(keypair)
+    const userKeypair = Uint8Array.from(JSON.parse(fs.readFileSync('my_wallet.json').toString()));
+    const signerResolver = () => createKeyPairSignerFromBytes(userKeypair);
 
     const restaking = RestakingProgram.devnet();
 
-    // this interface accepts: null | string | kit.Address | kit.TransactionSigner | () => Promise<null | kit.Address | TransactionSigner>
+    // user constructor accepts: null | string | Address | TransactionSigner | () => Promise<null | string | Address | TransactionSigner>
     // so we can resolve user address in lazy way.
-    const user = restaking.fragSOL.user(() => signerPromise);
+    const user = restaking.fragSOL.user(signerResolver);
 
     // deposits 1_000_000 lamports
     user.depositTransaction
@@ -234,8 +238,8 @@ The `user` can then call `resolve()` to fetch its on-chain account data, includi
             applyPresetComputeUnitLimit: true,
         }, {
             signers: [
-                // this interface accepts: kit.TransactionSigner | () => Promise<kit.TransactionSigner>
-                () => signerPromise,
+                // signers config accepts: TransactionSigner | () => Promise<TransactionSigner>
+                signerResolver,
             ],
         })
             .then(result => console.log(result.toJSON()));
@@ -309,10 +313,10 @@ Transaction templates like `user.depositTransaction` provide the following pipel
         Serializes the entire transaction blueprint into a base64-encoded string.
         Applies signing before serialization.
 
-        For backward `@solana/web3.js` compatibility, can utilize this like:
+        For compatibility with `@solana/web3.js@1`, you can use it like this:
         ```js
-        const serializedTx = txTemplateContext.serializeToBase64(...);
-        const legacyTx = web3.VersionedTransaction.deserialize(Buffer.from(serializedTx, 'base64'));
+        const serializedTx = txTemplate.serializeToBase64(...);
+        const versionedTx = web3.VersionedTransaction.deserialize(Buffer.from(serializedTx, 'base64'));
         ```
     </Step>
     <Step title="simulate">
@@ -344,7 +348,7 @@ Transaction templates like `user.depositTransaction` provide the following pipel
 
     const signerResolver = createLedgerSignerResolver();
 
-    const restaking = RestakingProgram.devnet(null, {
+    const restaking = RestakingProgram.devnet(null, { // null gives default RPC URL
         transaction: {
             // can set signers to program instance for all transactions
             signers: [
@@ -441,7 +445,7 @@ Withdrawal requests can have one of the following states:
 
 <Warning>
     There is a **MAX** limit (4) for the number of ongoing withdrawal requests per user.
-    Trying to create more than max active withdrawal requests may result in a **program error** or **simulation failure**.
+    Trying to create more than max active withdrawal requests will result in a **program error** or **simulation failure**.
 </Warning>
 
 ### 5. Cancel Request Withdrawal Transaction
@@ -575,7 +579,7 @@ Users can cancel **cancellable** withdrawal requests like above.
         debug: false,
     });
 
-    // fragJTO has same interface
+    // fragJTO has the same interface
     restaking.fragJTO
         .user(signerResolver)
         .withdrawTransaction

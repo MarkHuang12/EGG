@@ -1,5 +1,93 @@
 ---
 title: 'Release Notes'
-description: 'TODO'
+
+[//]: # (mode: wide)
 ---
 
+<Update label="sdk@2.0.3" tags={["JavaScript"]} description="March 28, 2025">
+    ## Offchain TypeScript/JavaScript SDK & CLI Released
+    Fragmetric SDK is the official TypeScript/JavaScript client for interacting with Fragmetric Solana programs.
+    It supports both browser apps and Node.js environments, and includes a CLI for operational workflows and hardware wallet support.
+
+    ### References
+    - https://www.npmjs.com/package/@fragmetric-labs/sdk
+</Update>
+
+<Update label="snapshot@1.2.12" tags={["JavaScript"]} description="March 12, 2025">
+    ## Snapshot Package Released
+    The Fragmetric Snapshot package enables transparent tracking of DeFi participants' shares.
+    Fragmetric’s internal scheduler uses this package to regularly capture the current status of users' DeFi participation.
+
+    ### References
+    - https://github.com/fragmetric-labs/fragmetric-snapshot
+    - https://www.npmjs.com/package/@fragmetric-labs/snapshot
+</Update>
+
+<Update label="restaking@0.5.0" tags={["Solana Mainnet"]} description="February 17, 2025">
+    ## Liquid Restaking Program v0.5.0 Released
+
+    ### Restaking Protocol Integration
+    - Jito Restaking Vault Program.
+
+    ## Staking Protocol Integration
+    - SPL Stake Pool Program.
+    - Marinade Stake Pool Program.
+    - Sanctum Single Validator SPL Stake Pool Program.
+
+    ### Fund Implementation
+    - Fund Operator:
+        - A finite state machine which fully circulates underlying assets with different types of assets, such as SOL, LSTs, nSOL and VRT based on the fund strategy and withdrawal requests.
+        - A single type of instruction can be called repeatedly to cycle through entire asset flows, regardless of each state.
+        - Anyone can call this operator to execute asset flows, though authorization is required to configure the fund strategy.
+    - Restaking Rewards Compounding:
+        - The first restaking rewards, JitoSOL, from TipRouter is being compounded into each funds (fragSOL, fragJTO).
+    - De-Fi Integration Support:
+        - Wrap & Unwrap instructions have been released.
+        - LRT (SPL Token 2022) can be wrapped into legacy SPL Token to facilitate De-Fi protocol integration.
+        - Wrapped token can be utilized in various De-Fi protocols.
+        - Still, restaking rewards shall be distributed with transparency.
+
+    ### Fund Configuration
+        - fragSOL
+            - Withdrawal and transfer enabled.
+        - fragJTO
+            - A new fund accepting JTO released.
+            - Withdrawal and transfer enabled.
+
+    ### Audit Reports
+    - [QuantStamp](https://fragmetric-assets.s3.ap-northeast-2.amazonaws.com/audit-25-02-quantstamp.pdf)
+</Update>
+
+<Update label="restaking@0.2.3" tags={["Solana Mainnet"]} description="October 18, 2024">
+    ## Liquid Restaking Program v0.2.3 Released
+
+    ### Fund Implementation
+    - Deposit & Mint:
+        - Native SOL deposits to the Fund and mint LRT.
+        - LST deposits to the Fund and mint LRT. - Deposits using liquid staking tokens (LSTs), including mSOL, bSOL, and jitoSOL.
+    - LST Pricing:
+        - Pricing based on stake pools ensures accurate valuation of deposits using LSTs, reflecting real-time stake pool data for tokens like mSOL, bSOL, and jitoSOL.
+    - Withdrawal & Burn:
+        - Native SOL withdrawal from the LRT Fund and burn LRT. Withdrawal and burn ratio is based on LRT pricing at withdrawal.
+    - Fund Operator Implementation:
+        - Operator Instructions:
+            - Withdrawal batch process invocation.
+            - Reward pool update to calculate contribution.
+    - Reward System Implementation:
+        - Implementation of reward accrual, tracking, and settlement covering various reward types, including arbitrary tokens, points, and SOL.
+        - Tracking every LRT transfer across the entire Solana network and calculating contributions for rewards using the Token Extension (Token2022 program) - Transfer Hook.
+
+    ### Fund Configuration
+        - Currently supports SOL, mSOL, and jitoSOL deposits, depending on their respective capacities.
+        - Withdrawal and transfer will be enabled with upcoming update on the Mainnet.
+
+    ### Reward System Configuration
+        - Base Pool (POOL_ID: 0) : Reward pool for future AVS/NCN rewards.
+        - Bonus Pool (POOL_ID: 1) : Reward pool for Fragmetric's own rewards including fPoint, etc.
+        - F Point (REWARD_ID: 0): Points for Fragmetric's future token airdrops.
+        - Customized Accrual Rate: A contribution boost is applied only to the Bonus Pool and is effective only for fPoint rewards. It is effective when deposits are made using the Backpack wallet.
+
+    ### Audit Reports
+    - [QuantStamp](https://fragmetric-assets.s3.ap-northeast-2.amazonaws.com/audit-24-10-quantstamp.pdf)
+    - [Certora](https://fragmetric-assets.s3.ap-northeast-2.amazonaws.com/audit-24-10-certora.pdf)
+</Update>
