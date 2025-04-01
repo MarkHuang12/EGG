@@ -163,13 +163,13 @@
           {
             "group": "Tools",
             "pages": [
+              "/dev/tools/cli",
               {
                 "group": "Fragmetric SDK (offchain)",
                 "pages": [
                   "/dev/tools/sdk/offchain/quickstart",
                   "/dev/tools/sdk/offchain/configuration",
-                  "/dev/tools/sdk/offchain/contribution",
-                  "/dev/tools/sdk/offchain/cli"
+                  "/dev/tools/sdk/offchain/contribution"
                 ]
               },
               {

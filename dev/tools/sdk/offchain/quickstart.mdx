@@ -315,7 +315,7 @@ Transaction templates like `user.depositTransaction` provide the following pipel
 
         For compatibility with `@solana/web3.js@1`, you can use it like this:
         ```js
-        const serializedTx = txTemplate.serializeToBase64(...);
+        const serializedTx = await txTemplate.serializeToBase64(...);
         const versionedTx = web3.VersionedTransaction.deserialize(Buffer.from(serializedTx, 'base64'));
         ```
     </Step>
@@ -336,6 +336,11 @@ Transaction templates like `user.depositTransaction` provide the following pipel
     </Step>
     <Step title="execute">
         Executes the full pipeline: assemble transaction, send and confirm, then **fetch and parse the result including events**.
+    </Step>
+    <Step title="executeChained">
+        Executes the full pipeline for the initial transaction, then automatically executes any chained transactions in sequence.
+        Execution stops if any transaction in the chain fails.
+        This method is designed for operational workflows that require multiple successive transactions.
     </Step>
 </Steps>
 
