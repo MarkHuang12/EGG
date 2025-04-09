@@ -213,7 +213,7 @@ The `user` can then call `resolve()` to fetch its on-chain account data, includi
 - It will return `null` if the user is new.
 
 
-### 3. Deposit Transaction
+### 3. Deposit
 <CodeGroup>
     ```ts NodeJS (3)
     import { RestakingProgram } from '@fragmetric-labs/sdk';
@@ -230,7 +230,7 @@ The `user` can then call `resolve()` to fetch its on-chain account data, includi
     const user = restaking.fragSOL.user(signerResolver);
 
     // deposits 1_000_000 lamports
-    user.depositTransaction
+    user.deposit
         .execute({
             assetMint: null, // null means SOL
             assetAmount: 1_000_000n,
@@ -299,7 +299,7 @@ The `user` can then call `resolve()` to fetch its on-chain account data, includi
 This SDK uses [@solana/kit](https://github.com/anza-xyz/kit) (aka. `@solana/web3.js@2`),
 so transaction-related interfaces are compatible with `@solana/kit`.
 
-Transaction templates like `user.depositTransaction` provide the following pipeline:
+Transaction templates like `user.deposit` provide the following pipeline:
 <Steps>
     <Step title="assemble">
         Assembles the full transaction message using instructions, fee payer, and lifetime strategy.
@@ -345,7 +345,7 @@ Transaction templates like `user.depositTransaction` provide the following pipel
 </Steps>
 
 
-### 4. Request Withdrawal Transaction
+### 4. Request Withdrawal
 
 <CodeGroup>
     ```ts NodeJS (4)
@@ -369,7 +369,7 @@ Transaction templates like `user.depositTransaction` provide the following pipel
 
     restaking.fragSOL
         .user(signerResolver)
-        .requestWithdrawalTransaction
+        .requestWithdrawal
         .execute({
             // transaction template arguments
             assetMint: null, // null means withdrawal of fragSOL to SOL
@@ -453,7 +453,7 @@ Withdrawal requests can have one of the following states:
     Trying to create more than max active withdrawal requests will result in a **program error** or **simulation failure**.
 </Warning>
 
-### 5. Cancel Request Withdrawal Transaction
+### 5. Cancel Request Withdrawal
 
 <CodeGroup>
     ```ts NodeJS (5)
@@ -476,7 +476,7 @@ Withdrawal requests can have one of the following states:
 
     restaking.fragSOL
         .user(signerResolver)
-        .cancelWithdrawalRequestTransaction
+        .cancelWithdrawalRequest
         .execute({
             // transaction template arguments
             assetMint: null,
@@ -544,7 +544,7 @@ Withdrawal requests can have one of the following states:
 
 Users can cancel **cancellable** withdrawal requests like above.
 
-### 6. Withdraw Transaction
+### 6. Withdraw
 
 <CodeGroup>
     ```ts NodeJS (6)
@@ -587,7 +587,7 @@ Users can cancel **cancellable** withdrawal requests like above.
     // fragJTO has the same interface
     restaking.fragJTO
         .user(signerResolver)
-        .withdrawTransaction
+        .withdraw
         .execute({
             assetMint: 'jtojtomepa8beP8AuQc6eXt5FriJwfFMwQx2v2f9mCL',
             requestId: 232n,
@@ -650,3 +650,6 @@ Users can cancel **cancellable** withdrawal requests like above.
 
 Users can withdraw **claimable** withdrawal requests like above.
 
+### 7. Others
+
+In addition, users can `wrap`, `unwrap` and `transfer`.
