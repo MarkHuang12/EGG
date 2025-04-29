@@ -83,7 +83,7 @@
         "tab": "Fragmetric Protocol",
         "groups": [
           {
-            "group": "About Fragmetric",
+            "group": "FRAG-22",
             "pages": [
               "/protocol/overview",
               "/protocol/restaking-lrt",
