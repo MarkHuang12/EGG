@@ -27,7 +27,7 @@ Each Yield Source Adapter must implement the following standardized functions ac
 
 ### **Adapter Structure and Operation Flow**
 
-<Mermaid>
+```mermaid
 flowchart TD
     ReserveAccount[FRAG-22 Reserve Account]
     Adapter[Yield Source Adapter]
@@ -41,7 +41,7 @@ flowchart TD
     Adapter -->|Deposit Yield| RewardReserve
     ExternalYieldSource -->|Withdraw Assets| Adapter
     Adapter -->|Return Assets| ReserveAccount
-</Mermaid>
+```
 
 ### **Existing Implementations (by Fragmetric)**
 
@@ -62,7 +62,7 @@ Operators hold exclusive permissions to manage the activation status and asset a
 
 **Allocation Management Flow:**
 
-<Mermaid>
+```mermaid
 flowchart TD
     Operator[Operator]
     Adapter[Yield Source Adapter]
@@ -70,6 +70,6 @@ flowchart TD
 
     Operator -->|Set Allocation Limits| Adapter
     Adapter -->|Execute Allocation| ExternalYieldSource
-</Mermaid>
+```
 
 The FRAG-22 Yield Source Adapter framework provides a standardized, transparent, and secure approach to extending and integrating various external yield-generation strategies, empowering a scalable and adaptable asset management ecosystem.
