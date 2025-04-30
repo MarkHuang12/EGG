@@ -4,7 +4,7 @@ title: "Reward Pool"
 
 ## **Reward Pool Management**
 
-The **Reward Pool** section describes the core structure and processes within the Reward Module of FRAG-22. This section explains how rewards are accumulated, tracked, managed, and ultimately distributed to both individual users and wrapped token holders (DeFi protocols). The reward pool logic ensures accurate, transparent, and fair distribution aligned with each user’s and DeFi protocol’s respective asset holdings.
+The **Reward Pool** section describes the core structure and processes within the Reward Module of FRAG-22. This section explains how rewards are accumulated, tracked, managed, and ultimately distributed to both individual users. The reward pool logic ensures accurate, transparent, and fair distribution aligned with each user’s and DeFi protocol’s respective asset holdings.
 
 ## **Reward Pool Structure**
 
@@ -15,21 +15,21 @@ subgraph Reward Module
 
   subgraph Reward_Pool_A ["Reward Pool - Token A"]
     RewardTokenA["Reward Token Mint A"]
-    RewardReserveA["Reserve Account A"]
+    RewardReserveA["Reward Reserve Account A"]
     GlobalContributionA["Global Contribution A"]
     RewardSettlementA["Settlement Record A"]
   end
   
   subgraph Reward_Pool_B ["Reward Pool - Token B"]
     RewardTokenB["Reward Token Mint B"]
-    RewardReserveB["Reserve Account B"]
+    RewardReserveB["Reward Reserve Account B"]
     GlobalContributionB["Global Contribution B"]
     RewardSettlementB["Settlement Record B"]
   end
 
   subgraph Reward_Pool_N ["Reward Pool - Token N"]
     RewardTokenN["Reward Token Mint N"]
-    RewardReserveN["Reserve Account N"]
+    RewardReserveN["Reward Reserve Account N"]
     GlobalContributionN["Global Contribution N"]
     RewardSettlementN["Settlement Record N"]
   end
@@ -38,9 +38,7 @@ subgraph Reward Module
     UserRewardAccount["User Reward Account<br>- Contributions per Token<br>- Claimable per Token"]
   end
 
-  subgraph Wrapped_Holder_Accounts ["Wrapped Holder Accounts"]
-    WrappedHolderAccount["Wrapped Holder Account<br>- Contributions per Token<br>- Claimable per Token"]
-  end
+  FundReserveAccount["Fund Reserve Account<br>(Source of Reward Settlements)"]
 
 end
 
@@ -48,13 +46,13 @@ classDef poolA fill:#4682B4,color:#fff
 classDef poolB fill:#6A5ACD,color:#fff
 classDef poolN fill:#8A2BE2,color:#fff
 classDef user fill:#34A853,color:#fff
-classDef wrapped fill:#F7941D,color:#fff
+classDef fundReserve fill:#F7941D,color:#fff
 
 class RewardTokenA,RewardReserveA,GlobalContributionA,RewardSettlementA poolA
 class RewardTokenB,RewardReserveB,GlobalContributionB,RewardSettlementB poolB
 class RewardTokenN,RewardReserveN,GlobalContributionN,RewardSettlementN poolN
 class UserRewardAccount user
-class WrappedHolderAccount wrapped
+class FundReserveAccount fundReserve
 ```
 
 The Reward Module is built upon two primary reward pool accounts:
@@ -64,7 +62,7 @@ The Reward Module is built upon two primary reward pool accounts:
 
 These pools maintain accurate and real-time reward state information, enabling precise distribution of rewards across different participants in the FRAG-22 ecosystem.
 
-### **1. Fund Reward Account**
+### **Fund Reward Account**
 
 The **Fund Reward Account** acts as the central repository for tracking and managing all rewards accrued at the fund-wide level.
 
@@ -73,9 +71,9 @@ The **Fund Reward Account** acts as the central repository for tracking and mana
 - Total accumulated rewards per reward token.
 - Global reward state, tracking the overall distribution status across the Fund.
 
-The Fund Reward Account accumulates rewards from various yield sources and periodically updates its state through a mechanism called **Reward Settlement**, ensuring accurate allocation of rewards based on each user’s and wrapped token holder’s relative contributions.
+The Fund Reward Account accumulates rewards from various yield sources and periodically updates its state through a mechanism called **Reward Settlement**, ensuring accurate allocation of rewards based on each user’s relative contributions.
 
-### **2. User Reward Account**
+### **User Reward Account**
 
 Each user possesses an individual **User Reward Account**, precisely tracking user-specific reward balances and contributions. The user account is updated whenever there is a change in the user’s holdings of receipt tokens (e.g., through deposits, withdrawals, or transfers).
 
@@ -103,7 +101,7 @@ Reward pools are systematically updated at two distinct moments:
 
 The following step-by-step procedures detail reward management within the Reward Module, clearly outlining the logic for reward accumulation, tracking, updating, and distribution:
 
-### **Step 1: Contribution Tracking**
+### **Contribution Tracking**
 
 **Trigger**: Any change in user holdings of receipt tokens.
 
@@ -117,27 +115,27 @@ The following step-by-step procedures detail reward management within the Reward
 
 - Both user-specific and global contribution states remain current, ensuring accurate reward calculations in subsequent settlements.
 
-### **Step 2: Reward Settlement (Fund-Level)**
+### **Reward Settlement (Fund-Level)**
 
 **Trigger**: Periodically (e.g., daily, weekly, or upon manual operator invocation).
 
 **Action**:
 
 - The Fund Reward Account aggregates all newly accumulated rewards since the previous settlement.
-- It then calculates proportional rewards for each user and wrapped token holder based on recorded contributions during this interval.
-- Allocated rewards are then recorded in respective User Reward Accounts and Wrapped Token Holder Reward Accounts, updating claimable balances.
+- It then calculates proportional rewards for each user based on recorded contributions during this interval.
+- Allocated rewards are then recorded in respective User Reward Accounts, updating claimable balances.
 
 **Outcome**:
 
 - Accurate distribution of rewards proportional to each entity’s contribution, ready to be claimed.
 
-### **Step 3: Reward Claiming (User & DeFi Protocols)**
+### **Reward Claiming (User & DeFi Protocols)**
 
 **Trigger**: User or DeFi protocol initiates reward claiming via the Reward Claim Process.
 
 **Action**:
 
-- Checks the User Reward Account or Wrapped Token Holder Reward Account for available claimable rewards.
+- Checks the User Reward Account for available claimable rewards.
 - Validates the claim request and confirms sufficient reward tokens are available in the Reward Token Reserve Account.
 - Executes the token transfer from the Reward Token Reserve Account directly to the claimant’s designated account.
 
@@ -152,9 +150,6 @@ Every reward-related operation (contribution updates, settlements, and reward cl
 
 - **Fund Reward Account** (Global reward tracking)
 - **User Reward Account** (User-specific reward tracking)
-- **Wrapped Token Holder Reward Account** (DeFi protocol-specific reward tracking)
 - **Reward Token Reserve Account** (Actual reward tokens storage)
 
 This clear separation of responsibilities across dedicated reward accounts ensures high transparency, auditability, and security in reward management.
-
-This comprehensive structure, clearly reflected in the Reward Pool management processes, ensures rewards within FRAG-22 are accurately, transparently, and efficiently distributed according to recorded contributions and asset holdings.
