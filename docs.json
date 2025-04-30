@@ -122,7 +122,8 @@
               
                       "group": "Normalized Token Pool",
                             "pages": [
-                      "/protocol/module/ntp/overview"                   
+                      "/protocol/module/ntp/overview",
+                              "/protocol/module/ntp/normalized-token" 
                               
                                      ]},
     

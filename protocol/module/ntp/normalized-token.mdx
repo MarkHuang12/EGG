@@ -1,0 +1,179 @@
+---
+title: "Normalized Token"
+description: "Description of your new file."
+---
+
+A **Normalized Token** is a unified representation of multiple assets pooled together within FRAG-22. Instead of managing multiple assets separately, yield sources hold normalized tokens, which dynamically adjust their value according to the real-time valuations of the underlying assets. Normalized tokens are exclusively managed by yield source adapters or special authorized entities (e.g., slashers), maintaining controlled, secure operations.
+
+## **Key Features of Normalized Tokens**
+
+- **Dynamic Valuation:**
+
+  Continuously reflects changes in underlying asset values.
+- **Simplified Asset Handling:**
+
+  Yield sources interact only with normalized tokens, reducing complexity.
+- **Controlled Access:**
+
+  Exclusively accessible to authorized entities (yield sources, slashing modules).
+- **Proportional Redemption:**
+
+  Redeemable into underlying assets proportionally, ensuring fairness.
+
+## **User Actions & Token Lifecycle**
+
+### **Asset Allocation & Normalized Token Minting**
+
+**User deposits assets → FRAG-22 allocates to Yield Sources → Mint normalized tokens.**
+
+#### **Process :**
+
+```mermaid
+flowchart TD
+User[User Deposits Assets] --> Reserve[Fund Reserve Account]
+Reserve --> Allocation[Allocation to Yield Sources]
+Allocation --> Valuation[Asset Valuation & Calculation of Mint Amount]
+Valuation --> Mint[Mint Normalized Tokens]
+Mint --> YieldSources[Yield Source Adapter Receives Normalized Tokens]
+
+style User fill:#34A853,color:#fff
+style Reserve fill:#4682B4,color:#fff
+style Allocation fill:#4682B4,color:#fff
+style Valuation fill:#FFC107,color:#000
+style Mint fill:#00AEEF,color:#fff
+style YieldSources fill:#0078D4,color:#fff
+```
+
+- Users deposit underlying assets into the Fund Reserve.
+- The reserve allocates these assets to selected yield sources.
+- The system calculates the minting amount based on current asset valuations (maintaining 1:1 value at the initial minting, dynamically adjusted later).
+- Corresponding normalized tokens are minted and issued to yield source adapters.
+
+### **Yield Source Interaction & Yield Management**
+
+**Yield Sources manage normalized tokens → Generate yield → Harvest & return rewards**
+
+#### **Process :**
+
+```mermaid
+flowchart TD
+YieldSources[Yield Sources Hold Normalized Tokens] 
+YieldSources --> ExternalYield[Generate Yields via External Protocols]
+ExternalYield --> Harvest[Yield Harvesting]
+Harvest --> RewardAccount[Fund Reward Account Receives Yield]
+
+style YieldSources fill:#0078D4,color:#fff
+style ExternalYield fill:#4682B4,color:#fff
+style Harvest fill:#00AEEF,color:#fff
+style RewardAccount fill:#34A853,color:#fff
+```
+
+- Yield sources hold normalized tokens representing pooled assets.
+- Assets generate yield through external DeFi protocols.
+- Yield sources harvest the accumulated yield regularly.
+- Harvested yields are transferred back to the Fund Reward Account, contributing to the overall reward pool.
+
+### **Redemption & Withdrawal of Underlying Assets** 
+
+#### **User-Initiated Withdrawal (Standard Case)**
+
+**User requests withdrawal → Burn normalized tokens → Underlying assets returned**
+
+#### **Process :**
+
+```mermaid
+flowchart TD
+UserRequest[User Requests Withdrawal] --> WithdrawValidation[Withdrawal Validation]
+WithdrawValidation --> NormalizedBurn[Calculate & Burn Normalized Tokens]
+NormalizedBurn --> AssetRedemption[Redeem Proportional Underlying Assets]
+AssetRedemption --> ReserveReturn[Assets Returned to Fund Reserve]
+ReserveReturn --> UserReceive[Assets Transferred to User]
+
+style UserRequest fill:#34A853,color:#fff
+style WithdrawValidation fill:#FFC107,color:#000
+style NormalizedBurn fill:#00AEEF,color:#fff
+style AssetRedemption fill:#6A5ACD,color:#fff
+style ReserveReturn fill:#4682B4,color:#fff
+style UserReceive fill:#0078D4,color:#fff
+```
+
+- Users initiate withdrawal requests.
+- The system validates the request and determines how many normalized tokens must be burned based on current valuations.
+- Corresponding underlying assets are proportionally redeemed and returned to the Fund Reserve.
+- The user receives the redeemed underlying assets.
+
+#### **Special Authorized Redemption (e.g., Slashing)**
+
+**Authorized entity holds normalized tokens → Redeem underlying assets**
+
+#### **Process :**
+
+```mermaid
+flowchart TD
+AuthorizedEntity[Authorized Entity Requests Redemption] --> Validation[Validate Authorization]
+Validation --> TokenBurn[Burn Normalized Tokens]
+TokenBurn --> ProportionalRedemption[Proportional Redemption of Underlying Assets]
+ProportionalRedemption --> AssetRelease[Underlying Assets Released]
+
+style AuthorizedEntity fill:#F7941D,color:#fff
+style Validation fill:#FFC107,color:#000
+style TokenBurn fill:#00AEEF,color:#fff
+style ProportionalRedemption fill:#6A5ACD,color:#fff
+style AssetRelease fill:#34A853,color:#fff
+```
+
+- Special entities (such as slashers) holding normalized tokens can redeem underlying assets.
+- Authorization and token ownership are validated.
+- The normalized tokens are burned, and underlying assets proportionally redeemed.
+- Assets are immediately released, ensuring rapid, secure operations.
+
+## **Exchange Ratios & Pricing Mechanism**
+
+Normalized token exchange ratios dynamically depend on:
+
+- **Total Normalized Token Supply:**
+
+  Reflects collective user positions in the pool.
+- **Underlying Assets Value:**
+
+  Determined by real-time asset valuations using integrated pricing sources.
+- **Proportional Distribution:**
+
+  Underlying assets are redeemed proportionally based on current locked asset valuations within the pool, maintaining fairness and transparency.
+
+## **Normalized Token Pool Structure Diagram**
+
+```mermaid
+flowchart TD
+subgraph Normalized Token Pool
+NormalizedTokenMint["Normalized Token Mint"]
+TokenReserveAccount["Reserve Accounts<br>(per Underlying Asset)"]
+ValuationService["Asset Valuation Service (Pricing Sources)"]
+
+NormalizedTokenMint <-->|Mint / Burn| TokenReserveAccount
+TokenReserveAccount <-->|Valuation Updates| ValuationService
+end
+
+style NormalizedTokenMint fill:#00AEEF,color:#fff
+style TokenReserveAccount fill:#4682B4,color:#fff
+style ValuationService fill:#FFC107,color:#000
+```
+
+- **Normalized Token Mint:** Manages the minting and burning processes.
+- **Token Reserve Accounts:** Store underlying assets individually.
+- **Asset Valuation Service:** Provides dynamic pricing to ensure accurate valuation of underlying assets.
+
+## **Importance of Normalized Tokens**
+
+- **Unified Representation:**
+
+  Enables simplified management of multiple diverse assets through a single token interface.
+- **Accurate Valuation:**
+
+  Continuously ensures fairness by reflecting real-time asset values.
+- **Efficiency & Scalability:**
+
+  Reduces operational overhead and facilitates scalable yield management.
+- **Security & Control:**
+
+  Restricts access to yield sources or authorized entities, ensuring the system’s security and integrity.
