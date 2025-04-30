@@ -101,12 +101,12 @@
                     "/protocol/module/fund/withdraw",
                     "/protocol/module/fund/accounting"
                                      ]
-                        },
+                        },{
               
                       "group": "Reward",
                             "pages": [
                     "/protocol/module/reward/overview"
-                                     ],
+                                     ]},
               "/protocol/module/normalized-token-pool",
               "/protocol/module/operator",
               "/protocol/module/wrap-unwrap"
