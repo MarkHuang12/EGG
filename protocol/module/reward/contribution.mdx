@@ -2,112 +2,153 @@
 title: "Contribution"
 ---
 
+### **Contribution Tracking**
 
-## **FRAG-22: Contribution**
+In the FRAG-22 standard, reward distribution isn’t simply based on the current balance of receipt tokens held by users. Instead, rewards reflect both **the quantity of tokens and the duration they are held**. Accurately tracking this combination of quantity and time—termed **“Contribution”**—ensures rewards are distributed fairly according to users’ actual involvement over time.
 
----
+When a user’s token balance changes, either by deposit, withdrawal, transfer, or wrapping/unwrapping, the system immediately recalculates their contribution to keep reward allocations precise and fair.
 
-### **Overview**
+### **Contribution  Calculation**
 
-In FRAG-22, a **Contribution** measures a user’s proportional participation in the reward pool. This value directly determines the share of rewards each user is eligible to claim. Contribution accumulates continuously, influenced by the user’s receipt token balance and the duration (in seconds) these tokens are held.
+Contribution calculation involves two primary data structures:
 
----
+- **Fund Reward Account**: Maintains global information about total token supply and cumulative contributions across all users.
+- **User Reward Account**: Tracks each user’s token balance, individual contribution, and the timestamp of their last contribution update.
 
-### **Detailed Calculation**
+**The formula for calculating contribution is:**
 
-Each user’s contribution is calculated based on their token balance multiplied by the time (in seconds) they hold that balance:
+$\text{Contribution Increase} = \text{Token Balance at Previous Update} \times \text{Elapsed Time}$
 
-\\text{Contribution Increment} = \\text{Token Amount} \\times \\text{Time Elapsed (seconds)}
+Upon any balance change, FRAG-22 performs two calculations:
 
-Whenever a user’s receipt token balance changes, their contribution rate updates accordingly.
+1. **Global Contribution Update**
+   - Calculates the elapsed time since the last global update.
+   - Increases global contribution by multiplying global token supply with the elapsed time.
+2. **User Contribution Update**
+   - Calculates the elapsed time since the user’s last update.
+   - Increases user’s contribution by multiplying user’s token balance with the elapsed time.
 
----
+This immediate recalculation ensures both global and individual contribution records stay accurate.
 
-### **Example Scenario**
+### **Contribution Calculation Flow**
 
-Let’s examine three users—**Alice**, **Bob**, and **Chuck**—and track how their token balances and contributions change over time.
-
-| **Timestamp** | **Alice’s Tokens** | **Bob’s Tokens** | **Chuck’s Tokens** | **Total Tokens** | **Interval** |
-| :------------ | :----------------- | :--------------- | :----------------- | :--------------- | :----------- |
-| t₀ (0s)       | 500                | 300              | 200                | 1000             | -            |
-| t₁ (300s)     | 800 (\+300)        | 300 (0)          | 400 (\+200)        | 1500 (\+500)     | 300s         |
-| t₂ (480s)     | 600 (-200)         | 500 (\+200)      | 400 (0)            | 1500 (0)         | 180s         |
-| t₃ (600s)     | 600 (0)            | 300 (-200)       | 600 (\+200)        | 1500 (0)         | 120s         |
-
----
-
-### **Contribution Accumulation Table**
-
-| **Interval**   | **Alice’s Contribution**            | **Bob’s Contribution**             | **Chuck’s Contribution**           | **Total Contribution**  |
-| :------------- | :---------------------------------- | :--------------------------------- | :--------------------------------- | :---------------------- |
-| t₀ → t₁ (300s) | 500 × 300 = **150,000**             | 300 × 300 = **90,000**             | 200 × 300 = **60,000**             | **300,000**             |
-| t₁ → t₂ (180s) | 800 × 180 = **144,000** _(294,000)_ | 300 × 180 = **54,000** _(144,000)_ | 400 × 180 = **72,000** _(132,000)_ | **270,000** _(570,000)_ |
-| t₂ → t₃ (120s) | 600 × 120 = **72,000** _(366,000)_  | 500 × 120 = **60,000** _(204,000)_ | 400 × 120 = **48,000** _(180,000)_ | **180,000** _(750,000)_ |
-| **Total**      | **366,000**                         | **204,000**                        | **180,000**                        | **750,000**             |
-
-_(Cumulative totals in parentheses.)_
-
----
-
-### **Contribution Accumulation Visualization (Gantt Chart)**
-
-This chart illustrates each user’s token balance over each time interval, highlighting how contribution accumulates:
-
-```
-gantt
-    title Token Holdings Over Time (seconds)
-    dateFormat  s
-    axisFormat  %ss
-
-    section Alice
-    500 Tokens :active, a1, 0, 300s
-    800 Tokens :active, a2, after a1, 180s
-    600 Tokens :active, a3, after a2, 120s
-    
-    section Bob
-    300 Tokens :active, b1, 0, 300s
-    300 Tokens :active, b2, after b1, 180s
-    500 Tokens :active, b3, after b2, 120s
-
-    section Chuck
-    200 Tokens :active, c1, 0, 300s
-    400 Tokens :active, c2, after c1, 180s
-    400 Tokens :active, c3, after c2, 120s
-```
-
----
-
-### **Contribution Accumulation Flowchart**
-
-This flowchart outlines the process of contribution updates:
-
-```
+```mermaid
 flowchart TD
-  TokenChange["User Token Balance Change"]
-  UpdateContribution["Update User Contribution"]
-  UpdateTotalContribution["Update Total Contribution"]
 
-  TokenChange --> UpdateContribution --> UpdateTotalContribution
+subgraph Contribution Update Cases
+
+%% Case 1: User Balance Change
+UserBalanceChange["User Balance Change (Deposit, Withdraw, Transfer, Wrap/Unwrap)"]
+--> CalculateElapsed_User["Calculate Elapsed Time since Last User Update"]
+
+CalculateElapsed_User --> UpdateUserContribution["Update User Contribution (User Balance × Elapsed Time)"]
+CalculateElapsed_User --> UpdateGlobalContribution_User["Update Global Contribution (Global Supply × Elapsed Time)"]
+
+UpdateUserContribution --> UpdateUserRewardAccount["Record to User Reward Account"]
+UpdateGlobalContribution_User --> UpdateFundRewardAccount_User["Record to Fund Reward Account"]
+
+UpdateUserRewardAccount --> ContributionUpdated["Contribution Updated & Ready for Settlement"]
+UpdateFundRewardAccount_User --> ContributionUpdated
+
+%% Case 2: Reward Settlement
+RewardSettlement["Reward Settlement (Fund-Level Periodic Update)"]
+--> CalculateElapsed_Settlement["Calculate Elapsed Time since Last Global Update"]
+
+CalculateElapsed_Settlement --> UpdateGlobalContribution_Settlement["Update Global Contribution (Global Supply × Elapsed Time)"]
+
+UpdateGlobalContribution_Settlement --> UpdateFundRewardAccount_Settlement["Record to Fund Reward Account"]
+
+UpdateFundRewardAccount_Settlement --> ContributionUpdated
+
+%% Case 3: User Claim Reward
+UserClaimReward["User Claim Reward"]
+--> CalculateElapsed_Claim["Calculate Elapsed Time since Last User Update"]
+
+CalculateElapsed_Claim --> UpdateUserContribution_Claim["Update User Contribution (User Balance × Elapsed Time)"]
+
+CalculateElapsed_Claim --> UpdateGlobalContribution_Claim["Update Global Contribution (Global Supply × Elapsed Time)"]
+
+UpdateUserContribution_Claim --> UpdateUserRewardAccount_Claim["Record to User Reward Account"]
+UpdateGlobalContribution_Claim --> UpdateFundRewardAccount_Claim["Record to Fund Reward Account"]
+
+UpdateUserRewardAccount_Claim --> ContributionUpdated
+UpdateFundRewardAccount_Claim --> ContributionUpdated
+
+end
+
+classDef trigger fill:#0078D4,color:#fff
+classDef calculate fill:#34A853,color:#fff
+classDef update fill:#4682B4,color:#fff
+classDef record fill:#6A5ACD,color:#fff
+classDef ready fill:#00AEEF,color:#fff
+
+class UserBalanceChange,RewardSettlement,UserClaimReward trigger
+class CalculateElapsed_User,CalculateElapsed_Settlement,CalculateElapsed_Claim calculate
+class UpdateUserContribution,UpdateGlobalContribution_User,UpdateGlobalContribution_Settlement,UpdateUserContribution_Claim,UpdateGlobalContribution_Claim update
+class UpdateUserRewardAccount,UpdateFundRewardAccount_User,UpdateFundRewardAccount_Settlement,UpdateUserRewardAccount_Claim,UpdateFundRewardAccount_Claim record
+class ContributionUpdated ready
 ```
 
----
+### **Data Structure of Contribution Records**
 
-### **Key Insights from the Example**
+```mermaid
+classDiagram
+class FundRewardAccount {
+  +GlobalContribution : u128
+  +GlobalTokenSupply : u64
+  +LastUpdatedTimestamp : u64
+}
 
-- **Alice** consistently maintains high token holdings, achieving the highest contribution (**366,000**).
-- **Bob** moderately adjusts his holdings, reaching a contribution of **204,000**.
-- **Chuck** significantly increased his balance midway, accumulating a notable contribution (**180,000**).
+class UserRewardAccount {
+  +UserContribution : u128
+  +UserTokenBalance : u64
+  +LastUpdatedTimestamp : u64
+}
 
-These accumulated contributions directly impact each user’s share of rewards.
+FundRewardAccount "1" --> "*" UserRewardAccount : Maintains
+```
 
----
+**Explanation:**
 
-### **Impact on Reward Distribution**
+- **Fund Reward Account**
+  - **GlobalContribution**: Cumulative contribution of all users.
+  - **GlobalTokenSupply**: Total outstanding token supply at the last update.
+  - **LastUpdatedTimestamp**: Timestamp of the last global contribution update.
+- **User Reward Account**
+  - **UserContribution**: User’s accumulated contribution over time.
+  - **UserTokenBalance**: User’s token balance at the last update.
+  - **LastUpdatedTimestamp**: Timestamp of the last individual update.
 
-Rewards are proportionally allocated based on the accumulated contributions. Each user’s reward share is calculated as follows:
+This structure enables immediate updates on contribution states, facilitating accurate reward calculation and settlement.
 
-\\text{User Reward} = \\frac{\\text{User{\\prime}s Contribution}}{\\text{Total Contribution}} \\times \\text{Total Reward Pool}
+### **Contribution Tracking Example**
 
-Proper contribution tracking ensures equitable and transparent reward distribution within the FRAG-22 ecosystem.
+To clearly illustrate contribution calculations, consider three users—**Alice**, **Bob**, and **Chuck**—and how their contributions evolve:
 
----
+| **Time (seconds)** | **Alice’s Tokens** | **Bob’s Tokens** | **Chuck’s Tokens** | **Total Token Supply** | **Alice’s Contribution** | **Bob’s Contribution** | **Chuck’s Contribution** | **Global Contribution** |
+| :----------------- | :----------------- | :--------------- | :----------------- | :--------------------- | :----------------------- | :--------------------- | :----------------------- | :---------------------- |
+| 0                  | 500                | 300              | 200                | 1000                   | 0                        | 0                      | 0                        | 0                       |
+| 300                | 800 (\+300)        | 300              | 400 (\+200)        | 1500 (\+500)           | 150,000                  | 90,000                 | 60,000                   | 300,000                 |
+| 480                | 600 (-200)         | 500 (\+200)      | 400                | 1500                   | 294,000                  | 144,000                | 132,000                  | 570,000                 |
+| 600                | 600                | 500              | 400                | 1500                   | 366,000                  | 204,000                | 180,000                  | 750,000                 |
+
+**How to read this table:**
+
+- From 0 to 300 seconds:
+  - Alice held 500 tokens for 300 seconds:
+
+    **Alice’s contribution increase**: $500 \times 300 = 150,000$
+  - Total global tokens were 1000 for 300 seconds:
+
+    **Global contribution increase**: $1000 \times 300 = 300,000$
+- Similarly, contributions for Bob and Chuck are calculated at each interval.
+
+### **Contribution Tracking Outcomes**
+
+By employing immediate recalculation upon every balance change:
+
+- **Fairness**: Ensures that rewards match user participation accurately.
+- **Transparency**: Users can verify their contributions and corresponding rewards clearly.
+- **Precision**: Facilitates precise and trustworthy reward distribution aligned to actual token holding duration.
+
+FRAG-22’s structured approach provides a transparent, verifiable, and accurate reward distribution mechanism by effectively managing user contributions in real-time.
