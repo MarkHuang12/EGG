@@ -6,22 +6,31 @@ title: "Deposit Management"
 
 ```mermaid
 flowchart TD
-  subgraph Fund Module
-    direction TB
-    User["User Initiates Deposit"]
-    Validation["Deposit Validation"]
-    Fund_Reserve_Account["Fund Reserve Account\n(Primary Storage of Deposited Assets)"]
-    User_Fund_Account["User Fund Account\n(User-specific Deposit Tracking)"]
-    User_Receipt_Token_Account["User Receipt Token Account\n(Issued Receipt Tokens for Deposits)"]
-    Reward_Account["Reward Account\n(Triggers Reward Mechanism)"]
-  end
+  Start["User Initiates Deposit"]
+  --> Validation["Perform Deposit Validation"]
 
-  User --> Validation
-  Validation -->|Valid| Fund_Reserve_Account
-  Validation -->|Invalid| Reject["Reject & Notify User"]
-  Fund_Reserve_Account --> User_Fund_Account
-  User_Fund_Account --> User_Receipt_Token_Account
-  User_Receipt_Token_Account --> Reward_Account
+  Validation -->|Deposit Enabled & Valid| CapacityCheck["Check Deposit Capacity Limits"]
+  Validation -->|Deposit Disabled or Invalid Metadata| Reject["Reject & Notify User"]
+
+  CapacityCheck -->|Within Limits| Transfer["Transfer Funds to Reserve Account"]
+  CapacityCheck -->|Exceeds Limits| Reject
+
+  Transfer --> UpdateUserFund["Update User Fund Account"]
+  UpdateUserFund --> MintReceipt["Mint Receipt Tokens to User Account"]
+  MintReceipt --> RewardTrigger["Trigger Reward Mechanism"]
+  RewardTrigger --> Completion["Notify User of Successful Deposit"]
+
+  Reject --> Completion
+
+  style Start fill:#a2d2ff,stroke:#333,stroke-width:1px
+  style Validation fill:#fff3b0,stroke:#333,stroke-width:1px
+  style CapacityCheck fill:#bde0fe,stroke:#333,stroke-width:1px
+  style Transfer fill:#caffbf,stroke:#333,stroke-width:1px
+  style UpdateUserFund fill:#ffdac1,stroke:#333,stroke-width:1px
+  style MintReceipt fill:#ffc6ff,stroke:#333,stroke-width:1px
+  style RewardTrigger fill:#fdffb6,stroke:#333,stroke-width:1px
+  style Reject fill:#ffafcc,stroke:#333,stroke-width:1px
+  style Completion fill:#9bf6ff,stroke:#333,stroke-width:1px
 ```
 
 ## Detailed Deposit Procedure
@@ -78,37 +87,6 @@ Below is the precise breakdown of the deposit procedure, derived directly from t
 - After successfully minting receipt tokens, the Reward Account mechanism is triggered.
 - Rewards begin accruing for the user based on their deposited amount and the timing of their deposit.
 - Reward calculations consider proportional contributions, ensuring precise and fair distribution.
-
-## **Deposit Validation  (Detailed)**
-
-```mermaid
-flowchart TD
-  Start["User Initiates Deposit"]
-  --> Validation["Perform Deposit Validation"]
-
-  Validation -->|Deposit Enabled & Valid| CapacityCheck["Check Deposit Capacity Limits"]
-  Validation -->|Deposit Disabled or Invalid Metadata| Reject["Reject & Notify User"]
-
-  CapacityCheck -->|Within Limits| Transfer["Transfer Funds to Reserve Account"]
-  CapacityCheck -->|Exceeds Limits| Reject
-
-  Transfer --> UpdateUserFund["Update User Fund Account"]
-  UpdateUserFund --> MintReceipt["Mint Receipt Tokens to User Account"]
-  MintReceipt --> RewardTrigger["Trigger Reward Mechanism"]
-  RewardTrigger --> Completion["Notify User of Successful Deposit"]
-
-  Reject --> Completion
-
-  style Start fill:#a2d2ff,stroke:#333,stroke-width:1px
-  style Validation fill:#fff3b0,stroke:#333,stroke-width:1px
-  style CapacityCheck fill:#bde0fe,stroke:#333,stroke-width:1px
-  style Transfer fill:#caffbf,stroke:#333,stroke-width:1px
-  style UpdateUserFund fill:#ffdac1,stroke:#333,stroke-width:1px
-  style MintReceipt fill:#ffc6ff,stroke:#333,stroke-width:1px
-  style RewardTrigger fill:#fdffb6,stroke:#333,stroke-width:1px
-  style Reject fill:#ffafcc,stroke:#333,stroke-width:1px
-  style Completion fill:#9bf6ff,stroke:#333,stroke-width:1px
-```
 
 ## **Deposit Information Recorded in User Fund Account:**
 
