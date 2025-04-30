@@ -1,0 +1,100 @@
+---
+title: "Overview"
+---
+
+The **Normalized Token Pool** within the FRAG-22 ecosystem serves as an essential mechanism for efficiently handling multiple asset types in a unified, composable manner. By standardizing different types of deposited tokens into a single, fungible token representation, it significantly simplifies asset management, enhances liquidity efficiency, and optimizes capital utilization across the protocol.
+
+At its core, the Normalized Token Pool aggregates diverse underlying assets deposited by users, assigning normalized values to maintain fair proportionality. This approach ensures seamless integration with various yield strategies, liquidity provisions, and DeFi applications, effectively removing complexity from multi-asset management.
+
+### **Key Functionalities:**
+
+- **Asset Normalization:**
+
+  Translates deposited assets into a common token representation, ensuring consistency in valuation and reward calculation.
+- **Liquidity Optimization:**
+
+  Pools normalized assets to maximize efficiency, enabling simpler and faster reallocation of assets to yield-generating sources.
+- **Simplified Asset Management:**
+
+  Reduces operational overhead for users and developers by abstracting away complexities associated with handling multiple distinct asset types.
+- **Composability and Interoperability:**
+
+  Facilitates effortless integration with external DeFi applications, enabling users to leverage their normalized asset positions across diverse financial protocols seamlessly.
+
+### **Structural Diagram:**
+
+```mermaid
+graph TD
+
+%% User Deposit Flow (via Fund Module)
+subgraph User Deposit Flow
+User["User Assets<br>(Multiple Asset Types)"] --> FundReserve["Fund Reserve Account"]
+FundReserve --> AssetDeposit
+end
+
+%% Normalized Token Pool Module
+subgraph Normalized Token Pool FRAG-22
+direction TB
+AssetDeposit["Asset Deposit Handler<br>(Validate & Deposit)"]
+AssetNormalization["Asset Normalization<br>(Unified Asset Valuation)"]
+NormalizedReserve["Normalized Asset Reserve<br>(Stores Normalized Tokens)"]
+NormalizedTokenMint["Normalized Token Mint/Burn<br>(Yield Sources & Special Cases Only)"]
+AssetWithdrawal["Asset Withdrawal Handler<br>(Redeem Original Assets)"]
+end
+
+%% Yield Source Integration
+subgraph Yield Source Module
+direction TB
+Adaptor1["Yield Source Adaptor #1"]
+AdaptorN["Yield Source Adaptor #N"]
+end
+
+%% Special Cases (Slasher, etc.)
+SpecialCase["Special Entities<br>(e.g., Slasher)"]
+
+%% External Yield Sources
+ExternalYield1["External Yield Source #1"]
+ExternalYieldN["External Yield Source #N"]
+
+%% Flows between Fund and Normalized Pool
+AssetDeposit --> AssetNormalization
+AssetNormalization --> NormalizedReserve
+NormalizedReserve --> NormalizedTokenMint
+
+%% Flows between Normalized Pool and Yield Source Adaptors
+NormalizedTokenMint --> Adaptor1
+NormalizedTokenMint --> AdaptorN
+
+Adaptor1 --> NormalizedReserve
+AdaptorN --> NormalizedReserve
+
+Adaptor1 --> ExternalYield1
+AdaptorN --> ExternalYieldN
+ExternalYield1 --> Adaptor1
+ExternalYieldN --> AdaptorN
+
+%% Special Case Flows
+NormalizedTokenMint --> SpecialCase
+SpecialCase --> AssetWithdrawal
+AssetWithdrawal --> NormalizedReserve
+NormalizedReserve --> AssetWithdrawal
+
+%% Styling
+classDef user fill:#0078D4,color:#fff
+classDef fund fill:#6A5ACD,color:#fff
+classDef internal fill:#34A853,color:#fff
+classDef integration fill:#FFC107,color:#000
+classDef reserve fill:#4682B4,color:#fff
+classDef special fill:#F7941D,color:#fff
+classDef external fill:#00AEEF,color:#fff
+
+class User user
+class FundReserve fund
+class AssetDeposit,AssetNormalization,AssetWithdrawal internal
+class NormalizedReserve,NormalizedTokenMint reserve
+class Adaptor1,AdaptorN integration
+class SpecialCase special
+class ExternalYield1,ExternalYieldN external
+```
+
+The Normalized Token Pool thus forms a robust foundation within FRAG-22, enabling highly efficient, scalable, and simplified asset interactions across decentralized finance.

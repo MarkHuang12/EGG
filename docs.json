@@ -118,9 +118,14 @@
                       "/protocol/module/yield-source/overview",
                               "/protocol/module/yield-source/adapter"                     
                               
+                                     ]},{
+              
+                      "group": "Normalized Token Pool",
+                            "pages": [
+                      "/protocol/module/ntp/overview"                   
+                              
                                      ]},
-              "/protocol/module/normalized-token-pool",
-              "/protocol/module/operator",
+    
               "/protocol/module/wrap-unwrap"
             ]
           }
