@@ -105,7 +105,10 @@
               
                       "group": "Reward",
                             "pages": [
-                    "/protocol/module/reward/overview"
+                      "/protocol/module/reward/overview",
+                      "/protocol/module/reward/reward-pool",
+                      "/protocol/module/reward/contribution"
+                              
                                      ]},
               "/protocol/module/normalized-token-pool",
               "/protocol/module/operator",
