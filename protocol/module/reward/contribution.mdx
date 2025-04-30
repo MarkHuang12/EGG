@@ -19,7 +19,7 @@ Contribution calculation involves two primary data structures:
 
 $\text{Contribution Increase} = \text{Token Balance at Previous Update} \times \text{Elapsed Time}$
 
-Upon any balance change, FRAG-22 performs two calculations:
+**Upon any balance change, FRAG-22 performs two calculations:**
 
 1. **Global Contribution Update**
    - Calculates the elapsed time since the last global update.
@@ -94,18 +94,31 @@ class ContributionUpdated ready
 ```mermaid
 classDiagram
 class FundRewardAccount {
-  +GlobalContribution : u128
-  +GlobalTokenSupply : u64
-  +LastUpdatedTimestamp : u64
+  +rewardPools : RewardPool[]
+}
+
+class RewardPool {
+  +rewardTokenMint : Pubkey
+  +rewardReserveAccount : Pubkey
+  +accumulatedRewardPerContribution : u128
+  +lastAccumulatedRewardAmount : u64
+  +lastUpdatedAt : u64
 }
 
 class UserRewardAccount {
-  +UserContribution : u128
-  +UserTokenBalance : u64
-  +LastUpdatedTimestamp : u64
+  +userPools : UserRewardPool[]
 }
 
-FundRewardAccount "1" --> "*" UserRewardAccount : Maintains
+class UserRewardPool {
+  +rewardTokenMint : Pubkey
+  +claimableRewardAmount : u64
+  +lastAccumulatedRewardPerContribution : u128
+  +userContribution : u128
+}
+
+FundRewardAccount "1" --> "*" RewardPool : contains
+RewardPool "1" --> "*" UserRewardPool : tracks
+UserRewardAccount "1" --> "*" UserRewardPool : maintains
 ```
 
 **Explanation:**
