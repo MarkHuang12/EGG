@@ -1,0 +1,30 @@
+---
+title: "New file"
+---
+
+## **Asset Deposits**
+
+### **Supported Assets and Validation Rules**
+
+The Fund module specifies the assets that users can deposit, verifying eligibility, validating transaction authenticity, and ensuring that only supported tokens are accepted into the Fund reserve.
+
+Upon user deposit initiation, assets are securely transferred to the fund reserve account. The module validates and confirms the transfer, updates internal records on-chain, and subsequently triggers the reward-tracking mechanisms integrated within FRAG-22.
+
+```mermaid
+sequenceDiagram
+    actor User
+    participant FundReserveAccount
+    participant ValidationLogic
+    participant RewardModule
+
+    User->>FundReserveAccount: Initiate Deposit
+    FundReserveAccount->>ValidationLogic: Validate Deposit
+    ValidationLogic-->>FundReserveAccount: Validation Result (Approved/Rejected)
+    alt Deposit Approved
+        FundReserveAccount->>RewardModule: Trigger Reward Calculation
+        RewardModule-->>FundReserveAccount: Confirm Reward Update
+        FundReserveAccount-->>User: Deposit Successful
+    else Deposit Rejected
+        FundReserveAccount-->>User: Deposit Failed
+    end
+```

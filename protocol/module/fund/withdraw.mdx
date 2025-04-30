@@ -1,0 +1,234 @@
+---
+title: "Withdraw Management"
+---
+
+# **Withdrawal Management in Fund Module**
+
+## **Structure of the Fund Module in Withdrawal Context**
+
+```mermaid
+flowchart TD
+  subgraph Fund Module
+    direction TB
+    Withdrawal_Queue["Withdrawal Queue
+    (Collects User Requests)"]
+    Liquidity_Reserve["Liquidity Reserve
+    (Available Assets for Withdrawal)"]
+    Yield_Sources["Yield Sources
+    (Assets deployed for yield)"]
+    Batch_Processor["Batch Processor
+    (Periodically processes requests)"]
+    Asset_Rebalancer["Asset Rebalancer
+    (Reallocates assets to replenish reserves)"]
+  end
+
+  Withdrawal_Queue --> Batch_Processor
+  Batch_Processor --> Liquidity_Reserve
+  Liquidity_Reserve --> Asset_Rebalancer
+  Asset_Rebalancer --> Yield_Sources
+  Yield_Sources --> Liquidity_Reserve
+```
+
+**Withdrawal Queue:**
+
+- A dedicated system that temporarily stores all user withdrawal requests.
+- Each request includes:
+  - User ID
+  - Requested amount and asset type
+  - Timestamp and status
+
+**Withdrawal Batches:**
+
+- Periodically processed groups of queued withdrawal requests.
+- Requests are not immediately settled but grouped and processed at scheduled intervals to maintain liquidity stability and minimize transaction fees.
+
+**Liquidity Reserve:**
+
+- A pool of readily available assets maintained within the Fund to quickly fulfill withdrawal requests.
+- Sized strategically—large enough for average withdrawal demand but not excessive to avoid inefficient capital allocation.
+
+**Yield Sources:**
+
+- Investment strategies where Fund assets are allocated to generate additional returns (e.g., liquidity pools, lending markets).
+- These sources provide returns but may have varying liquidity and withdrawal timeframes, influencing withdrawal speed.
+
+## **Detailed Withdrawal Procedure** 
+
+This section describes the detailed step-by-step procedure of withdrawal management within the architecture context, aiding developers and stakeholders in clearly understanding system behaviors before examining the underlying implementation.
+
+```mermaid
+flowchart TD
+    Start[User Initiates Withdrawal Request] 
+    --> Validate[Validate Withdrawal Request]
+
+    Validate -->|Request Valid| AddToQueue[Add to Withdrawal Queue]
+    Validate -->|Invalid Request| Reject[Reject & Notify User]
+
+    AddToQueue --> CheckBatchTime{Has Batch Threshold Time Passed?}
+
+    CheckBatchTime -->|No| Wait[Wait Until Threshold]
+    Wait --> CheckBatchTime
+
+    CheckBatchTime -->|Yes| LiquidityCheck{Check Fund Liquidity Reserve}
+
+    LiquidityCheck -->|Liquidity Sufficient| ExecuteBatch[Execute Withdrawal Batch]
+    LiquidityCheck -->|Liquidity Insufficient| HoldBatch[Hold Batch & Await Liquidity]
+
+    HoldBatch --> TriggerOperation[Trigger Fund Rebalancing Operation or Await Deposits]
+    TriggerOperation --> LiquidityCheck
+
+    ExecuteBatch --> Finalize[Finalize Withdrawal & Notify Users]
+
+    Finalize --> End[Withdrawal Complete]
+
+    Reject --> End
+
+    %% Styling for clarity
+    style Start fill:#a2d2ff,stroke:#333,stroke-width:1px
+    style Validate fill:#fff3b0,stroke:#333,stroke-width:1px
+    style Reject fill:#ffafcc,stroke:#333,stroke-width:1px
+    style AddToQueue fill:#cdb4db,stroke:#333,stroke-width:1px
+    style CheckBatchTime fill:#bde0fe,stroke:#333,stroke-width:1px
+    style Wait fill:#ffdac1,stroke:#333,stroke-width:1px
+    style LiquidityCheck fill:#caffbf,stroke:#333,stroke-width:1px
+    style HoldBatch fill:#ffc6ff,stroke:#333,stroke-width:1px
+    style TriggerOperation fill:#fdffb6,stroke:#333,stroke-width:1px
+    style ExecuteBatch fill:#8fdca6,stroke:#333,stroke-width:1px
+    style Finalize fill:#9bf6ff,stroke:#333,stroke-width:1px
+```
+
+**Step 1: Withdrawal Request Initiation**
+
+- **User Action:**
+  - The user initiates a withdrawal request specifying the asset and the amount desired.
+- **Fund Module Action:**
+  - Immediately validates the user’s current asset balance.
+  - Upon successful validation, logs the request in the **Withdrawal Queue** with a timestamp, user identifier, asset type, and amount.
+  - Confirms the queuing status back to the user.
+
+**Step 2: Withdrawal Queue and Batch Formation**
+
+- **Accumulation:**
+  - Withdrawal requests accumulate within the Withdrawal Queue until reaching predefined processing criteria:
+    - Scheduled time intervals (e.g., daily batches).
+    - Accumulated request thresholds (total requested amounts).
+- **Batch Creation:**
+
+```mermaid
+flowchart TD
+    subgraph Withdrawal_Queue
+        direction TB
+        Request1["Withdrawal Request #1
+        - User ID
+        - Token Amount
+        - Target Asset
+        - Timestamp
+        - Request ID"] --> Batch1[Batch #1]
+
+        Request2["Withdrawal Request #2
+        - User ID
+        - Token Amount
+        - Target Asset
+        - Timestamp
+        - Request ID"] --> Batch1
+
+        Request3["Withdrawal Request #3
+        - User ID
+        - Token Amount
+        - Target Asset
+        - Timestamp
+        - Request ID"] --> Batch1
+
+        Request4["Withdrawal Request #4
+        - User ID
+        - Token Amount
+        - Target Asset
+        - Timestamp
+        - Request ID"] --> Batch2[Batch #2]
+
+        Request5["Withdrawal Request #5
+        - User ID
+        - Token Amount
+        - Target Asset
+        - Timestamp
+        - Request ID"] --> Batch2
+
+        Request6["Withdrawal Request #6
+        - User ID
+        - Token Amount
+        - Target Asset
+        - Timestamp
+        - Request ID"] --> BatchN[Batch #N]
+
+        RequestN["...Withdrawal Request #N
+        - User ID
+        - Token Amount
+        - Target Asset
+        - Timestamp
+        - Request ID"] --> BatchN
+    end
+
+    Batch1 --> Process1[Process Batch #1]
+    Batch2 --> Process2[Process Batch #2]
+    BatchN --> ProcessN[Process Batch #N]
+
+    style Request1 fill:#a2d2ff,stroke:#333,stroke-width:1px
+    style Request2 fill:#a2d2ff,stroke:#333,stroke-width:1px
+    style Request3 fill:#a2d2ff,stroke:#333,stroke-width:1px
+    style Request4 fill:#a2d2ff,stroke:#333,stroke-width:1px
+    style Request5 fill:#a2d2ff,stroke:#333,stroke-width:1px
+    style Request6 fill:#a2d2ff,stroke:#333,stroke-width:1px
+    style RequestN fill:#a2d2ff,stroke:#333,stroke-width:1px
+
+    style Batch1 fill:#ffe6a1,stroke:#333,stroke-width:1px
+    style Batch2 fill:#ffe6a1,stroke:#333,stroke-width:1px
+    style BatchN fill:#ffe6a1,stroke:#333,stroke-width:1px
+
+    style Process1 fill:#a2f5b8,stroke:#333,stroke-width:1px
+    style Process2 fill:#a2f5b8,stroke:#333,stroke-width:1px
+    style ProcessN fill:#a2f5b8,stroke:#333,stroke-width:1px
+```
+
+- At the trigger point, accumulated requests are grouped into a **Withdrawal Batch**.
+- Batch maintains requests’ original submission order (FIFO – first-in-first-out).
+
+**Step 3: Liquidity Reserve Verification**
+
+- **Liquidity Assessment:**
+  - The Fund Module assesses available liquidity in the internal reserve.
+  - Decision points based on reserve evaluation:
+    - **Immediate Settlement:** Reserve assets are sufficient; funds are disbursed immediately.
+    - **Rebalancing Required:** Insufficient reserve liquidity; additional processes are triggered.
+- **Batch Status Update:**
+  - Updates each request in the batch, marking them either “ready for immediate settlement” or “pending due to rebalancing.”
+
+**Step 4: Asset Rebalancing Procedure (if required)**
+
+- **Asset Retrieval from Yield Sources:**
+  - Initiates withdrawals from external yield sources, prioritized by liquidity availability (shortest withdrawal periods first).
+- **Prioritized Fulfillment:**
+  - Withdrawal requests delayed due to liquidity constraints are prioritized by timestamp within their batch.
+- **Continuous Updates:**
+  - Users are notified regularly about estimated fulfillment timelines and any delays incurred due to asset rebalancing.
+
+**Step 5: Final Batch Settlement**
+
+- **Withdrawal Fulfillment:**
+  - Upon successful rebalancing, the liquidity reserve is replenished.
+  - Requests marked as pending are processed sequentially according to their original queue order.
+- **Settlement Confirmation:**
+  - Funds are transferred to user accounts.
+  - Batch status is updated to “completed,” closing the batch processing cycle.
+- **User Notification:**
+  - Confirmation of successful withdrawal is sent to users.
+
+### **Withdrawal Timing Variations**
+
+Withdrawal processing times can vary based on liquidity status:
+
+- **Immediate Liquidity (Fastest):**
+  - Processed quickly at scheduled batch intervals (minutes to hours).
+- **Short-Term Rebalancing (Moderate Delay):**
+  - Minor liquidity constraints resolved within hours to days through high-liquidity yield sources.
+- **Long-Term Rebalancing (Extended Delay):**
+  - Major liquidity constraints require withdrawal from longer lockup yield sources, potentially delaying settlement from days to weeks.

@@ -93,7 +93,14 @@
           {
             "group": "Protocol Architecture",
             "pages": [
-              "/protocol/module/fund",
+                {
+                            "group": "Fund",
+                            "pages": [
+                    "/protocol/module/fund/overview",
+                    "/protocol/module/fund/deposit",
+                    "/protocol/module/fund/withdraw"
+                                     ]
+                        },
               "/protocol/module/operator",
               "/protocol/module/reward",
               "/protocol/module/normalized-token-pool",
