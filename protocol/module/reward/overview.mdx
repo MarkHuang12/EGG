@@ -1,0 +1,65 @@
+---
+title: "Overview"
+---
+
+## **FRAG-22 : Reward Module**
+
+The Reward module functions as the central mechanism for reward tracking, calculation, and distribution within the FRAG-22 ecosystem. It continuously tracks users’ contributions based on their holdings of receipt tokens, systematically manages reward settlements, and handles the precise distribution of rewards to both individual users and external DeFi protocols. By ensuring accurate and transparent reward management, the Reward module incentivizes user participation and enhances overall system efficiency.
+
+```
+graph TD
+
+%% User interactions
+User[User] -- Update Receipt Token Holdings --> ContributionTracking
+User -- Claim Reward Request --> RewardClaimProcess
+
+subgraph Reward Module
+
+%% Contribution Tracking Flow (Blue Arrows)
+ContributionTracking -->|Update| UserRewardAccount
+ContributionTracking -->|Update| FundRewardAccount
+
+%% Reward Settlement Flow (Green Arrows)
+FundRewardAccount -->|Periodic Settlement| RewardSettlement
+RewardSettlement -->|Allocate Rewards| UserRewardAccount
+RewardSettlement -->|Allocate Rewards to Wrapped Token| WrappedTokenHolderRewardAccount
+
+%% Reward Claim Flow (Purple Arrows)
+UserRewardAccount -->|User Initiates Claim| RewardClaimProcess
+WrappedTokenHolderRewardAccount -->|DeFi Protocol Initiates Claim| RewardClaimProcess
+
+%% Reward Distribution (Actual Reward Token Transfers)
+RewardClaimProcess -->|Transfer Reward Tokens| RewardTokenReserveAccount
+
+end
+
+%% External Entities
+RewardTokenReserveAccount -->|Transfer Rewards| User
+RewardTokenReserveAccount -->|Transfer Rewards| ExternalDeFiProtocol
+
+%% Styling the arrows with distinct colors
+linkStyle 0 stroke:#00AEEF,stroke-width:2px,color:#00AEEF
+linkStyle 1 stroke:#00AEEF,stroke-width:2px,color:#00AEEF
+linkStyle 2 stroke:#34A853,stroke-width:2px,color:#34A853
+linkStyle 3 stroke:#34A853,stroke-width:2px,color:#34A853
+linkStyle 4 stroke:#34A853,stroke-width:2px,color:#34A853
+linkStyle 5 stroke:#7B68EE,stroke-width:2px,color:#7B68EE
+linkStyle 6 stroke:#7B68EE,stroke-width:2px,color:#7B68EE
+linkStyle 7 stroke:#FF8C00,stroke-width:2px,color:#FF8C00
+linkStyle 8 stroke:#FF8C00,stroke-width:2px,color:#FF8C00
+linkStyle 9 stroke:#FF8C00,stroke-width:2px,color:#FF8C00
+
+classDef user fill:#0078D4,color:#ffffff
+classDef internal fill:#34A853,color:#ffffff
+classDef external fill:#FFA500,color:#ffffff
+
+class User,ExternalDeFiProtocol user
+class ContributionTracking,UserRewardAccount,FundRewardAccount,RewardSettlement,WrappedTokenHolderRewardAccount,RewardClaimProcess,RewardTokenReserveAccount internal
+```
+
+### **Core Responsibilities:**
+
+- **Contribution Tracking**: Dynamically tracks users’ and the fund’s contributions, based on changes in receipt token holdings.
+- **Reward Settlement**: Periodically settles and allocates reward amounts to users’ reward accounts based on accurate contribution calculations.
+- **Wrapped Token Reward Distribution**: Manages and allocates rewards intended specifically for wrapped token holders (DeFi protocols), which then distribute these rewards internally.
+- **Transparent Reward Accounting**: Maintains detailed records for every reward calculation, settlement, and distribution event, ensuring complete transparency and auditability.
