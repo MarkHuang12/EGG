@@ -115,8 +115,8 @@
               
                       "group": "Yield Source",
                             "pages": [
-                      "/protocol/module/yield-source/overview"
-                     
+                      "/protocol/module/yield-source/overview",
+                              "/protocol/module/yield-source/adapter"                     
                               
                                      ]},
               "/protocol/module/normalized-token-pool",

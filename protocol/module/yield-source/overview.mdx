@@ -2,7 +2,6 @@
 title: "Overview"
 ---
 
-
 ## **FRAG-22: Yield Source Module**
 
 ### **Overview**
@@ -26,56 +25,61 @@ External yield opportunities, such as staking, restaking, liquidity pools, lendi
 ### **Comprehensive Structure Diagram**
 
 ```mermaid
-flowchart TD
+graph TD
 
-%% FRAG-22 Internal System
-subgraph FRAG-22 System
-  direction TB
-
-  %% Asset Management Layer
-  subgraph Asset Management Layer
-    direction LR
-    ReserveAccount["Reserve Account<br>(Asset Holding & Management)"]
-  end
-
-  %% Operator Layer
-  subgraph Operator Management Layer
-    direction LR
-    Allocation["Asset Allocation"]
-    Rebalancing["Asset Rebalancing"]
-    Harvesting["Yield Harvesting"]
-  end
-
-  %% Accounting Layer
-  subgraph Accounting Layer
-    direction LR
-    FundRewardAccount["Fund Reward Account<br>(Accumulates & Records Yield)"]
-  end
-
+%% External Yield Sources
+subgraph External_Yield_Sources
+    LiquidStaking[Liquid Staking]
+    Restaking[Restaking]
+    CustomYieldSource[Custom Yield Source]
 end
 
-%% External Systems Boundary
-subgraph External Systems
-  direction LR
-  ExternalYieldSources["External Yield Sources<br>(Liquidity Pools, Lending Protocols,<br>Yield Farms, Structured Products)"]
+%% Adapters Layer
+subgraph Adapters_Layer
+    LiquidStakingAdapter[Liquid Staking Adapter]
+    RestakingAdapter[Restaking Adapter]
+    CustomAdapter[Custom Yield Adapter]
 end
 
-%% Asset Flow Connections
-ReserveAccount -->|Assets Allocated| Allocation
-Allocation -->|Deploy Assets| ExternalYieldSources
+%% Logic Layer
+subgraph Logic_Layer
+    YieldHarvester[Yield Harvester]
+    AssetAllocator[Asset Allocator]
+end
 
-ExternalYieldSources -->|Adjust Asset Positions| Rebalancing
-Rebalancing -->|Return Assets| ReserveAccount
-Rebalancing -->|Reallocate Assets| ExternalYieldSources
+%% Internal Accounts Layer
+subgraph Internal_Accounts
+    ReserveAccount[Reserve Account]
+    FundRewardAccount[Fund Reward Account]
+end
 
-ExternalYieldSources -->|Yield Generated| Harvesting
-Harvesting -->|Yield Harvested| FundRewardAccount
+%% External Sources to Adapters
+LiquidStaking --> LiquidStakingAdapter
+Restaking --> RestakingAdapter
+CustomYieldSource --> CustomAdapter
 
-%% Styling for clarity
-style ReserveAccount fill:#4682B4,color:#fff
-style Allocation fill:#FFC107,color:#000
-style Rebalancing fill:#FFC107,color:#000
-style Harvesting fill:#FFC107,color:#000
-style FundRewardAccount fill:#34A853,color:#fff
-style ExternalYieldSources fill:#E06666,color:#fff,stroke:#D00000,stroke-width:2px,stroke-dasharray: 5 5
+%% Adapters to Logic Layer
+LiquidStakingAdapter --> YieldHarvester
+RestakingAdapter --> YieldHarvester
+CustomAdapter --> YieldHarvester
+AssetAllocator --> LiquidStakingAdapter
+AssetAllocator --> RestakingAdapter
+AssetAllocator --> CustomAdapter
+
+%% Logic Layer to Internal Accounts
+YieldHarvester --> FundRewardAccount
+AssetAllocator --> ReserveAccount
+
+%% Internal Accounts Interaction
+FundRewardAccount --> ReserveAccount
+
+classDef external fill:#ADD8E6, stroke:#333,stroke-width:1px
+classDef adapter fill:#FFD580, stroke:#333,stroke-width:1px
+classDef logic fill:#87CEFA, stroke:#333,stroke-width:1px
+classDef internal fill:#90EE90, stroke:#333,stroke-width:1px
+
+class LiquidStaking,Restaking,CustomYieldSource external
+class LiquidStakingAdapter,RestakingAdapter,CustomAdapter adapter
+class YieldHarvester,AssetAllocator logic
+class ReserveAccount,FundRewardAccount internal
 ```
