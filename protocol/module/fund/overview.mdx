@@ -12,103 +12,55 @@ The Fund module serves as the core custody, liquidity management, and accounting
 graph TD
 
 %% User interactions
-User[User] --Deposit Request--> Validation
-User --Withdrawal Request--> Validation
+User[User] -- Deposit Request --> DepositValidation
+User -- Withdrawal Request --> WithdrawalValidation
 
 subgraph Fund Module
 
 %% Deposit Flow (Blue Arrows)
-Validation -->|Deposit Validation| AccountManagement
-AccountManagement -->|Update Account Balances| ReserveManagement
-ReserveManagement -->|Allocate to Yield Sources| YieldManagement
-YieldManagement -->|Record Allocation| InternalLedger
+DepositValidation -->|Validated| AccountManagement
+AccountManagement -->|Update User Balance & Mint Receipt Tokens| ReserveManagement
+ReserveManagement -->|Allocate Assets| YieldManagement
 
 %% Withdrawal Flow (Orange Arrows)
-Validation -->|Withdrawal Validation| LiquidityCheck
-LiquidityCheck -->|Check Liquidity| ReserveManagement
+WithdrawalValidation -->|Validated| WithdrawalQueue
+WithdrawalQueue -->|Batch Processing| LiquidityReserveCheck
+LiquidityReserveCheck -->|Liquidity Sufficient| ReserveManagement
+LiquidityReserveCheck -->|Liquidity Insufficient| AssetRebalancing
+AssetRebalancing -->|Replenish Reserve| ReserveManagement
 ReserveManagement -->|Process Withdrawal| WithdrawalProcessing
-WithdrawalProcessing -->|Update Balances| AccountManagement
-AccountManagement -->|Record Transaction| InternalLedger
+WithdrawalProcessing -->|Update User Balance & Burn Receipt Tokens| AccountManagement
+
+%% On-chain Accounting Records (Tracks all operations)
+AccountManagement --> OnChainAccountingRecords
+ReserveManagement --> OnChainAccountingRecords
+YieldManagement --> OnChainAccountingRecords
+WithdrawalProcessing --> OnChainAccountingRecords
 end
 
 %% Feedback to User
-InternalLedger -->|Confirm Operation| User
+OnChainAccountingRecords -->|Confirm Transaction| User
 
 %% Styling the arrows with distinct colors
 linkStyle 0 stroke:#00AEEF,stroke-width:2px,color:#00AEEF
 linkStyle 1 stroke:#F7941D,stroke-width:2px,color:#F7941D
 linkStyle 2 stroke:#00AEEF,stroke-width:2px,color:#00AEEF
 linkStyle 3 stroke:#00AEEF,stroke-width:2px,color:#00AEEF
-linkStyle 4 stroke:#00AEEF,stroke-width:2px,color:#00AEEF
+linkStyle 4 stroke:#F7941D,stroke-width:2px,color:#F7941D
 linkStyle 5 stroke:#F7941D,stroke-width:2px,color:#F7941D
 linkStyle 6 stroke:#F7941D,stroke-width:2px,color:#F7941D
 linkStyle 7 stroke:#F7941D,stroke-width:2px,color:#F7941D
 linkStyle 8 stroke:#F7941D,stroke-width:2px,color:#F7941D
 linkStyle 9 stroke:#F7941D,stroke-width:2px,color:#F7941D
 linkStyle 10 stroke:#00AEEF,stroke-width:2px,color:#00AEEF
-linkStyle 11 stroke:#F7941D,stroke-width:2px,color:#F7941D
+linkStyle 11 stroke:#00AEEF,stroke-width:2px,color:#00AEEF
+linkStyle 12 stroke:#00AEEF,stroke-width:2px,color:#00AEEF
+linkStyle 13 stroke:#F7941D,stroke-width:2px,color:#F7941D
+linkStyle 14 stroke:#00AEEF,stroke-width:2px,color:#00AEEF
 
 classDef user fill:#0078D4,color:#ffffff
 classDef internal fill:#34A853,color:#ffffff
 
 class User user
-class Validation,AccountManagement,ReserveManagement,YieldManagement,LiquidityCheck,WithdrawalProcessing,InternalLedger internal
+class DepositValidation,WithdrawalValidation,WithdrawalQueue,AccountManagement,ReserveManagement,YieldManagement,LiquidityReserveCheck,WithdrawalProcessing,AssetRebalancing,OnChainAccountingRecords internal
 ```
-
-## **Accounting & Recordkeeping**
-
-### **On-chain Ledger Transparency and Auditability**
-
-The module leverages Solana’s efficient on-chain ledger capabilities to track every deposit, withdrawal, and balance adjustment, providing complete transparency and auditability for all Fund transactions.
-
-**Required diagram**:
-
-- **On-chain Ledger Structure**: Diagram highlighting ledger structures, transaction recording, and data flow for auditability.
-
-### **Real-time Balance Tracking**
-
-Real-time calculations update balances instantly upon any fund activity. Users can verify these balances through the decentralized application, ensuring immediate visibility into their holdings.
-
-**Required diagram**:
-
-- **Real-time Balance Calculation Sequence**: A sequence diagram demonstrating interactions between the Fund module, ledger updates, and user interfaces.
-
----
-
-## **Security & Custody**
-
-### **Secure Fund Custody and Transaction Validations**
-
-The Fund module employs rigorous security measures, including multisig custody accounts, transaction authenticity checks, and risk management protocols to safeguard user assets from potential threats.
-
-**Required diagram**:
-
-- **Custody Security Architecture**: Structural diagram showcasing multisig custody mechanisms and security layers protecting the Fund.
-
-### **Asset Management Best Practices**
-
-Clear guidelines and best practices are enforced within the module, governing all asset movements, minimizing risks, and ensuring compliance with established security protocols.
-
-**Required diagram**:
-
-- **Asset Movement and Management Workflow**: Detailed workflow diagram illustrating enforced asset management rules, approval layers, and best-practice compliance mechanisms.
-
----
-
-## **User Interaction**
-
-### **Deposit and Withdrawal User Flow (UI Perspective)**
-
-From initiating transactions to receiving confirmations, the Fund module provides intuitive user interfaces designed for simplicity and efficiency. Each step is clearly communicated and transparently executed.
-
-**Required diagram**:
-
-- **User Interaction Flowchart**: A detailed flowchart showing the user interaction path through the deposit and withdrawal process from the frontend perspective.
-
-### **Transparency and Auditing Procedures**
-
-User-friendly tools for transparency and self-auditing allow users and third-party auditors to easily verify transaction accuracy, reward calculations, and asset custody details.
-
-**Required diagram**:
-
-- **Transparency & Audit Procedure Sequence**: A sequence diagram detailing the process through which users or auditors can verify Fund module activities and records.

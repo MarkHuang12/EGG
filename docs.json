@@ -98,7 +98,8 @@
                             "pages": [
                     "/protocol/module/fund/overview",
                     "/protocol/module/fund/deposit",
-                    "/protocol/module/fund/withdraw"
+                    "/protocol/module/fund/withdraw",
+                    "/protocol/module/fund/accounting"
                                      ]
                         },
               "/protocol/module/operator",
