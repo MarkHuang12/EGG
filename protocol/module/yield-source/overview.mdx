@@ -1,0 +1,81 @@
+---
+title: "Overview"
+---
+
+
+## **FRAG-22: Yield Source Module**
+
+### **Overview**
+
+The Yield Source Module manages the strategic deployment and optimization of assets within the FRAG-22 system, actively allocating user-deposited funds across various external decentralized yield strategies. This module seamlessly connects internal asset management with external yield-generating protocols, maximizing user returns while maintaining efficient liquidity.
+
+The module distinctly organizes responsibilities across three internal layers and clearly interacts with external yield opportunities:
+
+- **Asset Management :**
+
+  Safely maintains and manages the pool of assets (Reserve Account), readying them for strategic deployment to external yield sources.
+- **Operator Management :**
+
+  Handles critical operations including asset allocation, periodic rebalancing for optimal yields, and yield harvesting—ensuring asset positions remain optimized and responsive to market conditions.
+- **Accounting :**
+
+  Precisely tracks and accumulates the generated yields within the Fund Reward Account, ensuring transparent and accurate reward accounting.
+
+External yield opportunities, such as staking, restaking, liquidity pools, lending protocols, and structured financial products, provide diverse and attractive yield streams. The Yield Source Module strategically integrates these external systems, continuously monitoring and adjusting positions to deliver consistent and optimized returns for users.
+
+### **Comprehensive Structure Diagram**
+
+```mermaid
+flowchart TD
+
+%% FRAG-22 Internal System
+subgraph FRAG-22 System
+  direction TB
+
+  %% Asset Management Layer
+  subgraph Asset Management Layer
+    direction LR
+    ReserveAccount["Reserve Account<br>(Asset Holding & Management)"]
+  end
+
+  %% Operator Layer
+  subgraph Operator Management Layer
+    direction LR
+    Allocation["Asset Allocation"]
+    Rebalancing["Asset Rebalancing"]
+    Harvesting["Yield Harvesting"]
+  end
+
+  %% Accounting Layer
+  subgraph Accounting Layer
+    direction LR
+    FundRewardAccount["Fund Reward Account<br>(Accumulates & Records Yield)"]
+  end
+
+end
+
+%% External Systems Boundary
+subgraph External Systems
+  direction LR
+  ExternalYieldSources["External Yield Sources<br>(Liquidity Pools, Lending Protocols,<br>Yield Farms, Structured Products)"]
+end
+
+%% Asset Flow Connections
+ReserveAccount -->|Assets Allocated| Allocation
+Allocation -->|Deploy Assets| ExternalYieldSources
+
+ExternalYieldSources -->|Adjust Asset Positions| Rebalancing
+Rebalancing -->|Return Assets| ReserveAccount
+Rebalancing -->|Reallocate Assets| ExternalYieldSources
+
+ExternalYieldSources -->|Yield Generated| Harvesting
+Harvesting -->|Yield Harvested| FundRewardAccount
+
+%% Styling for clarity
+style ReserveAccount fill:#4682B4,color:#fff
+style Allocation fill:#FFC107,color:#000
+style Rebalancing fill:#FFC107,color:#000
+style Harvesting fill:#FFC107,color:#000
+style FundRewardAccount fill:#34A853,color:#fff
+style ExternalYieldSources fill:#E06666,color:#fff,stroke:#D00000,stroke-width:2px,stroke-dasharray: 5 5
+```

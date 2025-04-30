@@ -111,6 +111,13 @@
                               "protocol/module/reward/claim",
                                    "protocol/module/reward/defi"
                               
+                                     ]},{
+              
+                      "group": "Yield Source",
+                            "pages": [
+                      "/protocol/module/yield-source/overview"
+                     
+                              
                                      ]},
               "/protocol/module/normalized-token-pool",
               "/protocol/module/operator",
