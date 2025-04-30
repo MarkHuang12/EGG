@@ -1,30 +1,131 @@
 ---
-title: "New file"
+title: "Deposit Management"
 ---
 
-## **Asset Deposits**
+## Structure of the Fund Module in Deposit Context
 
-### **Supported Assets and Validation Rules**
-
-The Fund module specifies the assets that users can deposit, verifying eligibility, validating transaction authenticity, and ensuring that only supported tokens are accepted into the Fund reserve.
-
-Upon user deposit initiation, assets are securely transferred to the fund reserve account. The module validates and confirms the transfer, updates internal records on-chain, and subsequently triggers the reward-tracking mechanisms integrated within FRAG-22.
-
-```mermaid
-sequenceDiagram
-    actor User
-    participant FundReserveAccount
-    participant ValidationLogic
-    participant RewardModule
-
-    User->>FundReserveAccount: Initiate Deposit
-    FundReserveAccount->>ValidationLogic: Validate Deposit
-    ValidationLogic-->>FundReserveAccount: Validation Result (Approved/Rejected)
-    alt Deposit Approved
-        FundReserveAccount->>RewardModule: Trigger Reward Calculation
-        RewardModule-->>FundReserveAccount: Confirm Reward Update
-        FundReserveAccount-->>User: Deposit Successful
-    else Deposit Rejected
-        FundReserveAccount-->>User: Deposit Failed
-    end
 ```
+flowchart TD
+  subgraph Fund Module
+    direction TB
+    User["User Initiates Deposit"]
+    Validation["Deposit Validation"]
+    Fund_Reserve_Account["Fund Reserve Account\n(Primary Storage of Deposited Assets)"]
+    User_Fund_Account["User Fund Account\n(User-specific Deposit Tracking)"]
+    User_Receipt_Token_Account["User Receipt Token Account\n(Issued Receipt Tokens for Deposits)"]
+    Reward_Account["Reward Account\n(Triggers Reward Mechanism)"]
+  end
+
+  User --> Validation
+  Validation -->|Valid| Fund_Reserve_Account
+  Validation -->|Invalid| Reject["Reject & Notify User"]
+  Fund_Reserve_Account --> User_Fund_Account
+  User_Fund_Account --> User_Receipt_Token_Account
+  User_Receipt_Token_Account --> Reward_Account
+```
+
+## Detailed Deposit Procedure
+
+Below is the precise breakdown of the deposit procedure, derived directly from the FRAG-22 implementation logic, ensuring full transparency and correctness.
+
+### **Step 1: Deposit Initiation**
+
+**User Action:**
+
+- User specifies the asset type (e.g., SOL or supported SPL tokens) and amount to deposit.
+
+**Fund Module Action:**
+
+- Immediately initiates a validation process.
+
+### **Step 2: Validation of Deposit Request**
+
+**Validation Procedure:**
+
+- Verify if the deposit functionality for the chosen asset is currently enabled.
+- Confirm that the deposit amount does not exceed the deposit capacity limits defined in the Fund module.
+- Check if the provided metadata (if any) related to the deposit is valid and correctly signed.
+- Ensure that deposit operations comply with the Fund’s configured rules (deposit enabled flag, capacity limits, and other protocol-specific constraints).
+
+**Outcome:**
+
+- **Valid Request:** Move forward to fund transfer.
+- **Invalid Request:** Reject and notify the user immediately, detailing the reason (e.g., capacity exceeded, invalid metadata signature, deposit functionality temporarily disabled).
+
+### **Step 3: Fund Transfer to Reserve**
+
+**Fund Reserve Account:**
+
+- Upon successful validation, the user’s funds are securely transferred directly to the Fund Reserve Account.
+- The Fund Reserve Account serves as the primary custody account, holding all deposited assets securely and transparently.
+
+### **Step 4: User Account Updates & Receipt Tokens**
+
+**User Fund Account:**
+
+- The user’s individual Fund Account is updated to accurately reflect the deposited assets, maintaining a precise record of each user’s cumulative contributions.
+- This user-specific tracking ensures clear auditability and correct calculation of user shares and balances.
+
+**User Receipt Token Account:**
+
+- Corresponding receipt tokens are minted and credited to the user’s Receipt Token Account, representing their share of assets within the Fund.
+- Receipt tokens serve as the claim mechanism for deposited assets and subsequent yield distribution, enabling transparent accounting and asset redemption.
+
+### **Step 5: Reward Mechanism Trigger**
+
+**Reward Account:**
+
+- After successfully minting receipt tokens, the Reward Account mechanism is triggered.
+- Rewards begin accruing for the user based on their deposited amount and the timing of their deposit.
+- Reward calculations consider proportional contributions, ensuring precise and fair distribution.
+
+## **Deposit Validation  (Detailed)**
+
+```
+flowchart TD
+  Start["User Initiates Deposit"]
+  --> Validation["Perform Deposit Validation"]
+
+  Validation -->|Deposit Enabled & Valid| CapacityCheck["Check Deposit Capacity Limits"]
+  Validation -->|Deposit Disabled or Invalid Metadata| Reject["Reject & Notify User"]
+
+  CapacityCheck -->|Within Limits| Transfer["Transfer Funds to Reserve Account"]
+  CapacityCheck -->|Exceeds Limits| Reject
+
+  Transfer --> UpdateUserFund["Update User Fund Account"]
+  UpdateUserFund --> MintReceipt["Mint Receipt Tokens to User Account"]
+  MintReceipt --> RewardTrigger["Trigger Reward Mechanism"]
+  RewardTrigger --> Completion["Notify User of Successful Deposit"]
+
+  Reject --> Completion
+
+  style Start fill:#a2d2ff,stroke:#333,stroke-width:1px
+  style Validation fill:#fff3b0,stroke:#333,stroke-width:1px
+  style CapacityCheck fill:#bde0fe,stroke:#333,stroke-width:1px
+  style Transfer fill:#caffbf,stroke:#333,stroke-width:1px
+  style UpdateUserFund fill:#ffdac1,stroke:#333,stroke-width:1px
+  style MintReceipt fill:#ffc6ff,stroke:#333,stroke-width:1px
+  style RewardTrigger fill:#fdffb6,stroke:#333,stroke-width:1px
+  style Reject fill:#ffafcc,stroke:#333,stroke-width:1px
+  style Completion fill:#9bf6ff,stroke:#333,stroke-width:1px
+```
+
+## **Deposit Information Recorded in User Fund Account:**
+
+- **User ID**
+- **Asset Type (e.g., SOL, SPL tokens)**
+- **Deposited Amount**
+- **Timestamp of Deposit**
+- **Associated Receipt Token Amount**
+
+## **Post-Deposit Asset Management**
+
+- Deposited assets held within the Fund Reserve Account are strategically allocated, either maintained in liquidity reserves to facilitate rapid withdrawals or deployed to various Yield Sources to generate additional returns.
+- The allocation strategy is dynamically managed by operational roles defined within the Fund module, balancing immediate liquidity requirements against long-term capital efficiency.
+
+## **Deposit Processing Timeline**
+
+- **Immediate Validation:** Executed instantly upon user action.
+- **Fund Transfer:** Typically instantaneous, barring network latency.
+- **Receipt Token Minting & User Update:** Immediate after fund custody.
+- **Reward Triggering:** Immediate post token minting.
