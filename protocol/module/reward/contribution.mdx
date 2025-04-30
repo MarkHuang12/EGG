@@ -1,0 +1,113 @@
+---
+title: "Contribution"
+---
+
+
+## **FRAG-22: Contribution**
+
+---
+
+### **Overview**
+
+In FRAG-22, a **Contribution** measures a user’s proportional participation in the reward pool. This value directly determines the share of rewards each user is eligible to claim. Contribution accumulates continuously, influenced by the user’s receipt token balance and the duration (in seconds) these tokens are held.
+
+---
+
+### **Detailed Calculation**
+
+Each user’s contribution is calculated based on their token balance multiplied by the time (in seconds) they hold that balance:
+
+\\text{Contribution Increment} = \\text{Token Amount} \\times \\text{Time Elapsed (seconds)}
+
+Whenever a user’s receipt token balance changes, their contribution rate updates accordingly.
+
+---
+
+### **Example Scenario**
+
+Let’s examine three users—**Alice**, **Bob**, and **Chuck**—and track how their token balances and contributions change over time.
+
+| **Timestamp** | **Alice’s Tokens** | **Bob’s Tokens** | **Chuck’s Tokens** | **Total Tokens** | **Interval** |
+| :------------ | :----------------- | :--------------- | :----------------- | :--------------- | :----------- |
+| t₀ (0s)       | 500                | 300              | 200                | 1000             | -            |
+| t₁ (300s)     | 800 (\+300)        | 300 (0)          | 400 (\+200)        | 1500 (\+500)     | 300s         |
+| t₂ (480s)     | 600 (-200)         | 500 (\+200)      | 400 (0)            | 1500 (0)         | 180s         |
+| t₃ (600s)     | 600 (0)            | 300 (-200)       | 600 (\+200)        | 1500 (0)         | 120s         |
+
+---
+
+### **Contribution Accumulation Table**
+
+| **Interval**   | **Alice’s Contribution**            | **Bob’s Contribution**             | **Chuck’s Contribution**           | **Total Contribution**  |
+| :------------- | :---------------------------------- | :--------------------------------- | :--------------------------------- | :---------------------- |
+| t₀ → t₁ (300s) | 500 × 300 = **150,000**             | 300 × 300 = **90,000**             | 200 × 300 = **60,000**             | **300,000**             |
+| t₁ → t₂ (180s) | 800 × 180 = **144,000** _(294,000)_ | 300 × 180 = **54,000** _(144,000)_ | 400 × 180 = **72,000** _(132,000)_ | **270,000** _(570,000)_ |
+| t₂ → t₃ (120s) | 600 × 120 = **72,000** _(366,000)_  | 500 × 120 = **60,000** _(204,000)_ | 400 × 120 = **48,000** _(180,000)_ | **180,000** _(750,000)_ |
+| **Total**      | **366,000**                         | **204,000**                        | **180,000**                        | **750,000**             |
+
+_(Cumulative totals in parentheses.)_
+
+---
+
+### **Contribution Accumulation Visualization (Gantt Chart)**
+
+This chart illustrates each user’s token balance over each time interval, highlighting how contribution accumulates:
+
+```
+gantt
+    title Token Holdings Over Time (seconds)
+    dateFormat  s
+    axisFormat  %ss
+
+    section Alice
+    500 Tokens :active, a1, 0, 300s
+    800 Tokens :active, a2, after a1, 180s
+    600 Tokens :active, a3, after a2, 120s
+    
+    section Bob
+    300 Tokens :active, b1, 0, 300s
+    300 Tokens :active, b2, after b1, 180s
+    500 Tokens :active, b3, after b2, 120s
+
+    section Chuck
+    200 Tokens :active, c1, 0, 300s
+    400 Tokens :active, c2, after c1, 180s
+    400 Tokens :active, c3, after c2, 120s
+```
+
+---
+
+### **Contribution Accumulation Flowchart**
+
+This flowchart outlines the process of contribution updates:
+
+```
+flowchart TD
+  TokenChange["User Token Balance Change"]
+  UpdateContribution["Update User Contribution"]
+  UpdateTotalContribution["Update Total Contribution"]
+
+  TokenChange --> UpdateContribution --> UpdateTotalContribution
+```
+
+---
+
+### **Key Insights from the Example**
+
+- **Alice** consistently maintains high token holdings, achieving the highest contribution (**366,000**).
+- **Bob** moderately adjusts his holdings, reaching a contribution of **204,000**.
+- **Chuck** significantly increased his balance midway, accumulating a notable contribution (**180,000**).
+
+These accumulated contributions directly impact each user’s share of rewards.
+
+---
+
+### **Impact on Reward Distribution**
+
+Rewards are proportionally allocated based on the accumulated contributions. Each user’s reward share is calculated as follows:
+
+\\text{User Reward} = \\frac{\\text{User{\\prime}s Contribution}}{\\text{Total Contribution}} \\times \\text{Total Reward Pool}
+
+Proper contribution tracking ensures equitable and transparent reward distribution within the FRAG-22 ecosystem.
+
+---
