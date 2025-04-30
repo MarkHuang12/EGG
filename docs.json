@@ -108,7 +108,7 @@
                       "/protocol/module/reward/overview",
                       "/protocol/module/reward/reward-pool",
                       "/protocol/module/reward/contribution",
-                              "protocol/module/reward/claim.mdx"
+                              "protocol/module/reward/claim"
                               
                                      ]},
               "/protocol/module/normalized-token-pool",
