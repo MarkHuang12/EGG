@@ -1,5 +1,33 @@
 ---
 title: 'Overview'
-description: 'DeFi Integration for fragSOL/fragJTO'
+description: 'DeFi Integration for wfragAsset'
 ---
 
+This documentation provides integration guidelines for DeFi protocols connecting to the Fragmetric ecosystem. Fragmetric supports a wide range of strategy types including **liquidity, looping, yield trading, lending, and bridging**.
+
+Each integrated DeFi pool is characterized by:
+- a pool address — uniquely identifying the DeFi strategy instance,
+- a receipt token mint — fragSOL, fragJTO, or fragBTC, denoting the underlying asset class being restaked,
+- and (for liquidity protocols) a paired token used within the DeFi pool.
+
+DeFi integrations revolve around **wfragSOL, wfragJTO, wfragBTC**, etc.
+These are wrapped versions of Fragmetric's restaking receipt tokens.
+Since fragSOL, fragJTO, and fragBTC are Token-2022 tokens (offering features like transfer hooks and metadata), they are not natively compatible with many existing DeFi protocols.
+To solve this, Fragmetric provides legacy SPL-compatible wrapped tokens under the legacy token program. These wfragAsset tokens mirror the balance and behavior of their token2022 counterparts but offer seamless composability across standard SPL DeFi systems.
+
+
+## Table of Contents
+### 1. Integration Status
+A list of supported DeFi pools, including their pool address, receipt token category, and integration progress.
+
+### 2. FPoint Snapshot
+Explains how DeFi participants become eligible for FPoints, how partners should integrate snapshot logic, and how to surface user accruals in their app.
+
+### 3. Metadata Integration
+Instructions for exposing APY, TVL, and other pool metrics via REST API for Fragmetric frontend consumption.
+
+### 4. Rewards Distribution
+Describes the reward claiming model where DeFi pool admins receive and redistribute aggregated rewards on behalf of their participants.
+
+### 5. Caution for Deposit Instruction
+Technical notes for protocols that integrate Fragmetric’s deposit instruction into their custom transactions. This includes guidance on resolving non-IDL pricing source accounts, which are required for accurate pricing and may change dynamically if the fund updates supported tokens.

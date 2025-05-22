@@ -1,0 +1,40 @@
+---
+title: '2. F Point Snapshot'
+description: 'DeFi Integration for wfragAsset'
+---
+
+**F Point** is a unified point system used to measure user contributions across DeFi integrations and Fragmetric platform. It is used to determine future eligibility for the `FRAG` token airdrop.
+To support this, Fragmetric takes periodic snapshots of `wfragAsset` balances held within integrated DeFi protocols. Each DeFi partner is responsible for implementing a snapshot module that emits per-user balance data in a standardized format.
+
+## Integration Requirements
+You must implement a `SourceStreamFactory` that produces `{ owner, baseTokenBalance }` entries for all users in your protocol's pool.
+
+- Create your snapshot source module under:
+  https://github.com/fragmetric-labs/fragmetric-snapshot/tree/main/src/commands/snapshot/source
+- Implement the snapshot logic:
+  - Validate arguments.
+  - Call `produceSnapshot(...)` for each user.
+  - Call `close(...)` at the end or on error.
+- Register your source in `sources.ts`.
+- Implement a smoke test file for the actual pool with your source.
+- Submit a pull request.
+
+
+## Snapshot Rules
+1. TVL Must Match
+The total of all baseTokenBalance values must exactly equal the pool’s actual `wfragAsset` TVL. This guarantees snapshot integrity and fair accounting.
+
+2. Liquidity Category Exception
+For protocols in the **LIQUIDITY** category, You may convert the full LP token value into synthetic `wfragAsset` terms (e.g., `fragSOL + JitoSOL → wfragSOL`).
+This is allowed to compensate liquidity providers for impermanent loss and to incentivize liquidity depth in DeFi integrations.
+
+
+## To Display User F Point Accrual from Your Pool
+
+To show users their current F Point accruals from your DeFi pool, utilize the following public API:
+
+https://api.fragmetric.xyz/v1/#/operations/GetUserFPointEstimationsByDeFiPool
+
+You can pass the user's wallet address and your pool address as parameters. The response provides real-time accrual data, which can be rendered in your frontend to reflect live F Point estimates.
+Use this API to integrate user-facing F Point display into your app or dashboard.
+

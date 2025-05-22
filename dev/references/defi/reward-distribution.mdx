@@ -1,5 +1,136 @@
 ---
-title: 'Distribution of Rewards'
-description: 'DeFi Integration for fragSOL/fragJTO'
+title: '4. Rewards Distribution'
+description: 'DeFi Integration for wfragAsset'
 ---
+
+<Warning>
+    We've been testing various models for distribution of rewards to DeFi pools. This policy is still under discussion and may change without notice until finalized.
+</Warning>
+
+Be noted that holding pure `fragAsset` ensures that the owner can claim rewards directly by executing a transaction.
+This guide is for handling rewards accrued from `wfragAsset`.
+
+## Process
+By design, Fragmetric's restaking protocol tracks fragAsset (Token-2022) balances fully and accurately on-chain to account for each user's portion of rewards.
+However, `wfragAsset` is a legacy SPL token and does not support the same tracking capabilities.
+
+Fragmetric uses the following approach for tracking `wfragAsset` contributions:
+
+### 1. Register Token Account
+Register specific `wfragAsset` **token accounts** to be tracked on-chain. A dedicated **reward account** is created per registered token account.
+- **wfragAsset Holder**: An alias for token accounts owned by a DeFi protocol that hold user `wfragAsset` deposits.
+
+### 2. Delegate Reward Account
+Initially, the created reward accounts belong to the Fragmetric Fund Manager (governance).
+The **authority to claim rewards** will be transferred to the appropriate governance address of the DeFi protocol.
+
+### 3. Track Token Accounts
+Fund operations — which are executed regularly for each fund (`fragSOL`, `fragJTO`, `fragBTC`) — will track registered token accounts and update their contribution share in the reward system.
+
+### 4. Claim and Distribute Rewards
+Once delegated, the DeFi protocol’s representative can claim settled rewards using a dedicated on-chain instruction or via SDK/CLI tools.
+Claimed rewards can then be redistributed to users according to the protocol’s internal emission policy.
+
+In brief, this process emulates `fragAsset`-based reward tracking with **reduced accuracy and flexibility**, tailored for protocols using `wfragAsset`.
+It is activated and maintained through consensus between Fragmetric governance and the participating DeFi protocol.
+
+
+## Claim Instruction
+You can call the `user_claim_reward` instruction of the `restaking program` either on-chain or off-chain.
+The Anchor IDL is embedded in the [@fragmetric-labs/sdk](https://www.npmjs.com/package/@fragmetric-labs/sdk) package.
+Alternatively, you can download the latest IDL from the [restaking program account](https://explorer.solana.com/address/fragnAis7Bp6FTsMoa6YcH8UffhEw43Ph79qAiK3iF3/anchor-program?cluster=mainnet) on Solana Explorer.
+
+
+## Claim via SDK
+The following CLI session demonstrates reward resolution and claiming.
+<Note>
+    The CLI and TypeScript SDK interfaces are functionally equivalent. For building an unsigned transaction, you can omit keypairs. Also, for multisig transaction building, you can manually configure the nonce account via the SDK (this is not available via CLI).
+</Note>
+
+```shell
+# Connect with your keypair
+$ pnpx @fragmetric-labs/sdk@latest connect --url devnet --keypairs ./keypairs/wallet.json
+
+# Initialize user context for your wfragAsset token account
+> user = restaking.fragSOL.user('YOUR_WFRAG_ASSET_TOKEN_ACCOUNT_ADDRESS')
+
+# Resolve current reward state
+> user.reward.resolve()
+{
+  user: '91zBeWL8kHBaMtaVrHwWsck1UacDKvje82QQ3HE2k8mJ',
+  delegate: null,
+  receiptTokenMint: 'FRAGSEthVFL7fdqM8hxfxkfCZzUvmg21cqPJVvC1qdbo',
+  basePool: {
+    contribution: 82_615_701_067_571_732_800n,
+    updatedSlot: 380_567_800n,
+    tokenAllocatedAmount: {
+      totalAmount: 9_280_215_900n,
+      records: [ { amount: 9_280_215_900n, contributionAccrualRate: 1 } ]
+    },
+    settlements: [
+      {
+        reward: {
+          id: 1,
+          name: 'SWTCH',
+          description: 'Switchboard Token',
+          claimable: false,
+          mint: 'FSWSBMV5EB7J8JdafNBLZpfSCLiFwpMCqod2RpkU4RNn',
+          program: 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA',
+          decimals: 9
+        },
+        settledSlot: 374_372_372n,
+        settledContribution: 76_940_980_900_143_937_700n,
+        settledAmount: 1_909_701_124_839_547_123n,
+        claimedAmount: 0n
+      }
+    ]
+  },
+  ...
+}
+
+# Sync reward pool state (optional, it updates by fund operation)
+> user.reward.updatePools.execute()
+◐ Signed     4foCqwkzk5ePJWBCdVx3dXQHXw7HFbYeurjj4UJDmToDFCGFtWaqjrRHN7ySQhB7eCvL6q9JSSZatxyycTwiYi1P
+✔ Confirmed  manually triggers contribution synchronization for the user reward pools {
+  succeeded: true,
+  slot: 380_773_521n,
+  args: null,
+  events: {
+    unknown: [],
+    userUpdatedRewardPool: {
+      receiptTokenMint: 'FRAGSEthVFL7fdqM8hxfxkfCZzUvmg21cqPJVvC1qdbo',
+      updatedUserRewardAccounts: [ 'CCmAQhBS1FxU5TEbtmMCXZez1skdtZ2RfW5KR7xUjDFE' ]
+    }
+  }
+}
+
+# Claim a reward
+> user.reward.claim.execute({ mint: 'REWARD_MINT_ADDRESS', recipient: 'RECIPIENT_ADDRESS (NOT TOKEN ACCOUNT)', amount: 1n })
+◐ Signed     4B1k14d3aabmbGcJ7w4U9J5JQVa98c51DFsKMpZAbnqdn5m4UZVwtjHnVZygadXJ1Wm9AwHuvmsiWsp5XM2RsvCj
+✔ Confirmed  claim rewards {
+  succeeded: true,
+  slot: 339_924_620n,
+  args: {
+    delegate: null,
+    isBonus: false,
+    mint: 'ZEUS1aR7aX8DFFJf5QjWj2ftDDdNTroMNGo8YoQm3Gq',
+    amount: 1n,
+    recipient: 'D5zDEBSiA497dge26i4vwHsLk75exUghMoFDc8mBeJDu'
+  },
+  events: {
+    unknown: [],
+    userClaimedReward: {
+      receiptTokenMint: 'FRAGB4KZGLMy3wH1nBajP3Q17MHnecEvTPT6wb4pX5MB',
+      user: '91zBeWL8kHBaMtaVrHwWsck1UacDKvje82QQ3HE2k8mJ',
+      rewardTokenMint: 'ZEUS1aR7aX8DFFJf5QjWj2ftDDdNTroMNGo8YoQm3Gq',
+      destinationRewardTokenAccount: 'CGLyDs5DzqyB3WW2Nj9rD9Lp1Po5fLjetXW5RKTbaWTA',
+      destinationRewardTokenAccountOwner: 'D5zDEBSiA497dge26i4vwHsLk75exUghMoFDc8mBeJDu',
+      updatedRewardAccount: '2tfQHwAKpj7h6tEVbbWysKVMY9pCAaLpGcnozFFLng8Y',
+      updatedUserRewardAccount: '3VwayPkYSkPM7qHcExiLJ59xp5S19UcyLXcDxRVmC7Tp',
+      claimedRewardTokenAmount: 1n,
+      totalClaimedRewardTokenAmount: 380_073n
+    }
+  }
+}
+```
 

@@ -1,0 +1,56 @@
+---
+title: '5. Caution for Deposit Instruction'
+description: 'DeFi Integration for wfragAsset'
+---
+
+If your protocol integrates Fragmetric’s deposit logic by manually constructing and including an instruction either:
+- `user_deposit_sol`
+- `user_deposit_supported_token`
+
+..you must ensure that **all required pricing source accounts** are included in the transaction.
+These accounts are **not declared in the IDL** and must be resolved explicitly — either manually, via SDK, or through a dedicated ALT (Address Lookup Table).
+
+<Warning>
+    Do not hardcode account lists.
+    Do not assume the current set of accounts will remain valid after governance updates (e.g. adding supported tokens or vaults).
+</Warning>
+
+## What Are Pricing Source Accounts?
+These accounts are used to price deposits and determine how much fragAsset should be minted.
+They are derived from the **dynamic configuration of the fund**, and may vary over time or between assets (e.g., `fragSOL`, `fragJTO`, `fragBTC`).
+
+### Ground Rules for Required Accounts
+For every `fragAsset` fund, you must include accounts of:
+- `fund.supported_tokens[0:fund.num_supported_tokens].pricing_source.address`
+- `fund.restaking_vaults[0:fund.num_restaking_vaults].pricing_source.address`
+- `fund.normalized_token.pricing_source.address` — only if `fund.normalized_token.enabled == 1`
+
+<Note>
+    Some accounts may appear multiple times (especially in `fragBTC`, which consists of pegged assets).
+    You can manually deduplicate these accounts when building your transaction.
+</Note>
+
+## How to Include These Accounts
+You can derive this list by reading the on-chain fund account data for each `fragAsset`, following the rules above.
+Also there are two safe, forward-compatible options to resolve these accounts:
+
+- **Use the SDK**: The `@fragmetric-labs/sdk` will resolve all required pricing source accounts for you based on the latest fund state.
+
+- **Use a dedicated Address Lookup Table (ALT)**: Each fund has a dedicated ALT, which includes only all required pricing source addresses.
+Use this ALT to avoid manually deriving the accounts in your transaction. Fragmetric will update this ALT ahead of an instruction of new support tokens.
+
+### 1. Use the SDK to build an instruction
+You can build a full deposit transaction. And if you need unsigned transaction or just a part of the instructions. you can just build a blueprint transaction without serialize it.
+Check [Tools > Fragmetric SDK (offchain) > Deposit](/dev/tools/sdk/offchain/quickstart#3-deposit) for details.
+
+### 2. Read the addresses from the fund account
+You can read addresses directly from the fund account before build a deposit instruction to include all required pricing sources.
+There are below fields containing pricing source account information in the **fund account** data like below:
+
+```rust
+/// ... starts from data offset: 0x9000
+num_pricing_source_addresses: u8,
+pricing_source_addresses: [Pubkey; 33],
+```
+
+Check [Developers > Solana Programs](/dev/solana-programs#fragmetric-liquid-restaking-program) for the address of fund accounts.

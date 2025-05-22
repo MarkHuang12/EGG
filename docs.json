@@ -102,7 +102,7 @@
                     "/protocol/module/fund/accounting"
                                      ]
                         },{
-              
+
                       "group": "Reward",
                             "pages": [
                       "/protocol/module/reward/overview",
@@ -110,23 +110,23 @@
                       "/protocol/module/reward/contribution",
                               "protocol/module/reward/claim",
                                    "protocol/module/reward/defi"
-                              
+
                                      ]},{
-              
+
                       "group": "Yield Source",
                             "pages": [
                       "/protocol/module/yield-source/overview",
-                              "/protocol/module/yield-source/adapter"                     
-                              
+                              "/protocol/module/yield-source/adapter"
+
                                      ]},{
-              
+
                       "group": "Normalized Token Pool",
                             "pages": [
                       "/protocol/module/ntp/overview",
-                              "/protocol/module/ntp/normalized-token" 
-                              
+                              "/protocol/module/ntp/normalized-token"
+
                                      ]},
-    
+
               "/protocol/module/wrap-unwrap"
             ]
           }
@@ -184,10 +184,11 @@
                 "group": "DeFi Integration",
                 "pages": [
                   "/dev/references/defi/overview",
-                  "/dev/references/defi/status",
+                  "/dev/references/defi/integration-status",
+                  "/dev/references/defi/fpoint-snapshot",
+                  "/dev/references/defi/defi-metadata",
                   "/dev/references/defi/reward-distribution",
-                  "/dev/references/defi/snapshot",
-                  "/dev/references/defi/metadata"
+                  "/dev/references/defi/deposit-instruction"
                 ]
               }
             ]

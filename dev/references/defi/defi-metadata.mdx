@@ -1,0 +1,29 @@
+---
+title: '3. DeFi Metadata'
+description: 'DeFi Integration for wfragAsset'
+---
+
+To provide visibility into your pool’s status within the Fragmetric platform, you must supply metadata about your DeFi pool, including **TVL** and **APY**. This data will be shown on the Fragmetric app alongside F Point information to give users a clear view of where their funds are deployed and how they’re performing.
+
+## Integration Requirements
+```json
+{
+  "apy": 0.4655,
+  "tvl": "1234000000000"
+}
+```
+- `apy`: Annual percentage yield, as a decimal. (e.g., 0.4655 = 46.55%)
+- `tvl`: Total value locked in the pool. The unit can be: USD, SOL or the relevant wfragAsset. (e.g., wfragSOL, wfragBTC, etc.)
+
+## Options for Integration
+
+### 1. Provide a Custom API Endpoint
+You may expose a minimal REST API returning the structure above. We'll consume this endpoint periodically and associate it with your pool based on a consistent `pool address`.
+
+### 2. Provide an Integration Guide
+If you already publish TVL and APY via your own analytics API or frontend, simply share:
+- The public URL or API.
+- How to derive tvl and apy values for your pool.
+- How to match your internal pool identifier with the pool address used in our system.
+
+We do not require you to build a new API. We only need a **reliable way to extract the data**, aligned with the same `pool address` used for F Point snapshotting.
