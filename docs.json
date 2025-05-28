@@ -23,10 +23,7 @@
         "groups": [
           {
             "group": "Get Started",
-            "pages": [
-              "/home/get-started/welcome",
-              "/home/get-started/sang"
-            ]
+            "pages": ["/home/get-started/welcome", "/home/get-started/sang"]
           },
           {
             "group": "Guides",
@@ -35,14 +32,11 @@
               "/home/guides/wrap-unwrap",
               "/home/guides/buy-sell",
               "/home/guides/using-in-defi"
-                      ]
+            ]
           },
           {
             "group": "Security",
-            "pages": [
-              "/home/security/overview",
-              "/home/security/audits"
-            ]
+            "pages": ["/home/security/overview", "/home/security/audits"]
           },
           {
             "group": "Resources",
@@ -50,31 +44,31 @@
               "/home/resources/faq",
               "/home/resources/brand-kit",
               "/home/resources/key-terms",
-                        {
-                            "group": "Legal",
-                            "pages": [
-                    "/home/resources/legal/terms-of-use",
-                    "/home/resources/legal/privacy-policy"
-                                     ]
-                        }
+              {
+                "group": "Legal",
+                "pages": [
+                  "/home/resources/legal/terms-of-use",
+                  "/home/resources/legal/privacy-policy"
+                ]
+              }
             ]
           },
           {
             "group": "Community",
             "pages": [
-                        {
-                          "group": "LF(ra)G Campaign",
-                          "pages": [
-                                      {
-                                    "group": "Season 1",
-                                    "pages": [
-                                    "/home/community/season1/overview",
-                                    "/home/community/season1/phase1",
-                                    "/home/community/season1/phase2"
-                                              ]
-          }
-                                    ]
-          }
+              {
+                "group": "LF(ra)G Campaign",
+                "pages": [
+                  {
+                    "group": "Season 1",
+                    "pages": [
+                      "/home/community/season1/overview",
+                      "/home/community/season1/phase1",
+                      "/home/community/season1/phase2"
+                    ]
+                  }
+                ]
+              }
             ]
           }
         ]
@@ -93,41 +87,59 @@
           {
             "group": "Protocol Architecture",
             "pages": [
-                {
-                            "group": "Fund",
-                            "pages": [
-                    "/protocol/module/fund/overview",
-                    "/protocol/module/fund/deposit",
-                    "/protocol/module/fund/withdraw",
-                    "/protocol/module/fund/accounting"
-                                     ]
-                        },{
-
-                      "group": "Reward",
-                            "pages": [
-                      "/protocol/module/reward/overview",
-                      "/protocol/module/reward/reward-pool",
-                      "/protocol/module/reward/contribution",
-                              "protocol/module/reward/claim",
-                                   "protocol/module/reward/defi"
-
-                                     ]},{
-
-                      "group": "Yield Source",
-                            "pages": [
-                      "/protocol/module/yield-source/overview",
-                              "/protocol/module/yield-source/adapter"
-
-                                     ]},{
-
-                      "group": "Normalized Token Pool",
-                            "pages": [
-                      "/protocol/module/ntp/overview",
-                              "/protocol/module/ntp/normalized-token"
-
-                                     ]},
-
-              "/protocol/module/wrap-unwrap"
+              {
+                "group": "Fund",
+                "pages": [
+                  "/protocol/module/fund/overview",
+                  "/protocol/module/fund/deposit",
+                  "/protocol/module/fund/withdraw",
+                  "/protocol/module/fund/accounting"
+                ]
+              },
+              {
+                "group": "Reward",
+                "pages": [
+                  "/protocol/module/reward/overview",
+                  "/protocol/module/reward/reward-pool",
+                  "/protocol/module/reward/contribution",
+                  "protocol/module/reward/claim",
+                  "protocol/module/reward/defi"
+                ]
+              },
+              {
+                "group": "Yield Source",
+                "pages": [
+                  "/protocol/module/yield-source/overview",
+                  "/protocol/module/yield-source/adapter"
+                ]
+              },
+              {
+                "group": "Normalized Token Pool",
+                "pages": [
+                  "/protocol/module/ntp/overview",
+                  "/protocol/module/ntp/normalized-token"
+                ]
+              },
+              {
+                "group": "Operator",
+                "pages": [
+                  "/protocol/module/operator/overview",
+                  "/protocol/module/operator/roles",
+                  "/protocol/module/operator/permissions",
+                  "/protocol/module/operator/fund-admin",
+                  "/protocol/module/operator/reward-admin",
+                  "/protocol/module/operator/yield-operator",
+                  "/protocol/module/operator/pricing-operator"
+                ]
+              },
+              {
+                "group": "Wrap",
+                "pages": [
+                  "/protocol/module/wrap/overview",
+                  "/protocol/module/wrap/wrap",
+                  "/protocol/module/wrap/unwrap"
+                ]
+              }
             ]
           }
         ]
@@ -137,11 +149,7 @@
         "groups": [
           {
             "group": "fragAsset",
-            "pages": [
-              "/assets/fragsol",
-              "/assets/fragjto",
-              "/assets/fragbtc"
-            ]
+            "pages": ["/assets/fragsol", "/assets/fragjto", "/assets/fragbtc"]
           },
           {
             "group": "Wrapped fragAsset",
@@ -153,9 +161,7 @@
           },
           {
             "group": "Resources",
-            "pages": [
-              "/assets/contracts"
-            ]
+            "pages": ["/assets/contracts"]
           }
         ]
       },
@@ -207,9 +213,7 @@
               },
               {
                 "group": "Fragmetric SDK (onchain)",
-                "pages": [
-                  "/dev/tools/sdk/onchain/quickstart"
-                ]
+                "pages": ["/dev/tools/sdk/onchain/quickstart"]
               },
               "/dev/tools/api"
             ]
