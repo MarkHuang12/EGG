@@ -1,0 +1,72 @@
+---
+title: "Overview"
+---
+
+The **Wrap Module** in FRAG-22 provides an essential functionality enabling external DeFi protocols to seamlessly integrate and interact with the FRAG-22 asset ecosystem. Wrapping transforms native FRAG assets into SPL tokens (**wFRAG tokens**) that can be freely utilized within broader DeFi applications.
+
+## Why Wrap Assets?
+
+### Interoperability with DeFi
+
+Wrapping FRAG assets into SPL tokens enhances compatibility with a wide range of external DeFi applications, significantly expanding utility and accessibility for users and protocols.
+
+### Broadened Asset Utilization
+
+By wrapping assets, users can leverage their FRAG positions across multiple platforms, maximizing capital efficiency, liquidity, and yield generation opportunities.
+
+### Simplified Integration
+
+External DeFi protocols gain straightforward integration capability without changing their code to support Token 2022 transfer hook.
+
+### Controlled Reward Distribution
+
+The Wrap Module facilitates controlled and accurate reward distribution to external protocols, allowing DeFi applications to internally distribute rewards proportionally among their users.
+
+## Core Functionalities of the Wrap Module
+
+- **Asset Transformation:**
+  Converts native FRAG assets into standardized wrapped tokens (wFRAG).
+
+- **Reward Management:**
+  Precisely accumulates and tracks rewards for wrapped tokens, ensuring fair and accurate distribution.
+
+- **Seamless External Interaction:**
+  Provides simple entry and exit points between FRAG-22 and external DeFi ecosystems.
+
+- **Enhanced Security:**
+  Maintains tight control and transparency throughout wrapping, reward accumulation, and redemption processes.
+
+## High-Level Interaction Overview
+
+```mermaid
+flowchart TD
+  subgraph FRAG-22 System
+    direction TB
+    User[User Holding FRAG Asset] -->|Deposit FRAG| ReserveAccount["Reserve Account (holds FRAG)"]
+    ReserveAccount -->|Mint wFRAG| WrappedTokenMint["wFRAG Token Mint"]
+    WrappedTokenMint -->|Issue Tokens| UserWrappedAccount["User's Wrapped Token Account (wFRAG)"]
+    UserWrappedAccount -->|Transfer Tokens| ExternalDeFiVault["External DeFi Protocol Vault (wFRAG)"]
+
+    ExternalDeFiVault -->|Accumulate Contribution & Rewards| WrappedTokenHolderAccount["Wrapped Token Holder Account<br>(Tracks Contribution & Rewards)"]
+
+    WrappedTokenHolderAccount -->|Claim Rewards| RewardPool["Reward Pool"]
+    RewardPool -->|Transfer Reward Tokens| ExternalDeFiRewardAccount["External DeFi Protocol Reward Account"]
+  end
+
+  subgraph External DeFi Protocol
+    ExternalDeFiVault -->|Internal Distribution| DeFiUsers["DeFi Protocol Users"]
+    ExternalDeFiRewardAccount -->|Internal Reward Distribution| DeFiUsers
+  end
+
+  style User fill:#34A853,color:#fff
+  style ReserveAccount fill:#4682B4,color:#fff
+  style WrappedTokenMint fill:#00AEEF,color:#fff
+  style UserWrappedAccount fill:#0078D4,color:#fff
+  style ExternalDeFiVault fill:#FFC107,color:#000
+  style WrappedTokenHolderAccount fill:#6A5ACD,color:#fff
+  style RewardPool fill:#4682B4,color:#fff
+  style ExternalDeFiRewardAccount fill:#FFC107,color:#000
+  style DeFiUsers fill:#34A853,color:#fff
+```
+
+The Wrap Module positions FRAG-22 assets for broader decentralized use, combining security, simplicity, and interoperability to extend asset functionality far beyond the native FRAG-22 ecosystem.

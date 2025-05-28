@@ -1,6 +1,5 @@
 ---
 title: "Normalized Token"
-description: "Description of your new file."
 ---
 
 A **Normalized Token** is a unified representation of multiple assets pooled together within FRAG-22. Instead of managing multiple assets separately, yield sources hold normalized tokens, which dynamically adjust their value according to the real-time valuations of the underlying assets. Normalized tokens are exclusively managed by yield source adapters or special authorized entities (e.g., slashers), maintaining controlled, secure operations.
@@ -10,12 +9,15 @@ A **Normalized Token** is a unified representation of multiple assets pooled tog
 - **Dynamic Valuation:**
 
   Continuously reflects changes in underlying asset values.
+
 - **Simplified Asset Handling:**
 
   Yield sources interact only with normalized tokens, reducing complexity.
+
 - **Controlled Access:**
 
   Exclusively accessible to authorized entities (yield sources, slashing modules).
+
 - **Proportional Redemption:**
 
   Redeemable into underlying assets proportionally, ensuring fairness.
@@ -57,7 +59,7 @@ style YieldSources fill:#0078D4,color:#fff
 
 ```mermaid
 flowchart TD
-YieldSources[Yield Sources Hold Normalized Tokens] 
+YieldSources[Yield Sources Hold Normalized Tokens]
 YieldSources --> ExternalYield[Generate Yields via External Protocols]
 ExternalYield --> Harvest[Yield Harvesting]
 Harvest --> RewardAccount[Fund Reward Account Receives Yield]
@@ -73,7 +75,7 @@ style RewardAccount fill:#34A853,color:#fff
 - Yield sources harvest the accumulated yield regularly.
 - Harvested yields are transferred back to the Fund Reward Account, contributing to the overall reward pool.
 
-### **Redemption & Withdrawal of Underlying Assets** 
+### **Redemption & Withdrawal of Underlying Assets**
 
 #### **User-Initiated Withdrawal (Standard Case)**
 
@@ -134,9 +136,11 @@ Normalized token exchange ratios dynamically depend on:
 - **Total Normalized Token Supply:**
 
   Reflects collective user positions in the pool.
+
 - **Underlying Assets Value:**
 
   Determined by real-time asset valuations using integrated pricing sources.
+
 - **Proportional Distribution:**
 
   Underlying assets are redeemed proportionally based on current locked asset valuations within the pool, maintaining fairness and transparency.
@@ -168,12 +172,15 @@ style ValuationService fill:#FFC107,color:#000
 - **Unified Representation:**
 
   Enables simplified management of multiple diverse assets through a single token interface.
+
 - **Accurate Valuation:**
 
   Continuously ensures fairness by reflecting real-time asset values.
+
 - **Efficiency & Scalability:**
 
   Reduces operational overhead and facilitates scalable yield management.
+
 - **Security & Control:**
 
   Restricts access to yield sources or authorized entities, ensuring the system’s security and integrity.

@@ -1,0 +1,106 @@
+---
+title: "Pricing Operator"
+---
+
+## Overview
+
+The **Pricing Operator** plays a critical role in the FRAG-22 ecosystem by ensuring accurate, reliable, and timely updates of asset valuations. Accurate pricing directly impacts normalized token valuation, redemption fairness, and overall asset management within the system.
+
+## Responsibilities and Operations
+
+### 1. Asset Valuation Updates
+
+The Pricing Operator periodically updates the valuation of underlying assets within the Normalized Token Pool using integrated pricing sources.
+
+**Core Functions:**
+
+- **Trigger Valuation Updates:** Regularly initiate asset valuation procedures.
+- **Integrate Pricing Sources:** Use predefined external pricing sources to ensure precise asset valuations.
+
+**Process Overview:**
+
+```mermaid
+flowchart TD
+PricingOperator["Pricing Operator"]
+TriggerUpdate["Trigger Asset Valuation Update"]
+TriggerUpdate --> PricingInterface["Pricing Interface"]
+PricingInterface --> ExternalSources["External Pricing Sources"]
+ExternalSources --> UpdatedValuation["Updated Asset Valuations"]
+UpdatedValuation --> NormalizedTokenPool["Normalized Token Pool"]
+
+style PricingOperator fill:#00AEEF,color:#fff
+style TriggerUpdate fill:#FFC107,color:#000
+style PricingInterface fill:#34A853,color:#fff
+style ExternalSources fill:#4682B4,color:#fff
+style UpdatedValuation fill:#6A5ACD,color:#fff
+style NormalizedTokenPool fill:#F7941D,color:#fff
+```
+
+### 2. Maintaining Exchange Ratios
+
+The Pricing Operator maintains accurate exchange ratios between normalized tokens and underlying assets, ensuring fair and transparent redemption processes.
+
+**Core Functions:**
+
+- **Calculate Exchange Ratios:** Dynamically calculate normalized token valuations based on the updated asset prices.
+- **Adjust Valuations:** Continuously monitor and adjust valuations to reflect market conditions accurately.
+
+**Process Overview:**
+
+```mermaid
+flowchart TD
+PricingOperator["Pricing Operator"]
+CalculateRatio["Calculate Exchange Ratios"]
+CalculateRatio --> PricingData["Current Pricing Data"]
+PricingData --> NormalizedToken["Normalized Token Mint"]
+NormalizedToken --> AdjustRatio["Adjust Exchange Ratios"]
+
+style PricingOperator fill:#00AEEF,color:#fff
+style CalculateRatio fill:#FFC107,color:#000
+style PricingData fill:#34A853,color:#fff
+style NormalizedToken fill:#4682B4,color:#fff
+style AdjustRatio fill:#6A5ACD,color:#fff
+```
+
+### 3. Pricing Data Integrity
+
+Ensures data integrity and consistency across the FRAG-22 system by verifying and validating pricing sources regularly.
+
+**Core Functions:**
+
+- **Data Verification:** Regularly verify pricing data from multiple integrated sources.
+- **Ensure Consistency:** Maintain consistency and transparency in reported valuations.
+
+**Process Overview:**
+
+```mermaid
+flowchart TD
+PricingOperator["Pricing Operator"]
+ValidateData["Validate Pricing Data"]
+ValidateData --> ExternalPricing["External Pricing Sources"]
+ExternalPricing --> DataIntegrity["Ensure Data Integrity"]
+DataIntegrity --> ConfirmConsistency["Confirm Pricing Consistency"]
+
+style PricingOperator fill:#00AEEF,color:#fff
+style ValidateData fill:#FFC107,color:#000
+style ExternalPricing fill:#34A853,color:#fff
+style DataIntegrity fill:#4682B4,color:#fff
+style ConfirmConsistency fill:#6A5ACD,color:#fff
+```
+
+## Permissions and Access
+
+Pricing Operators have the following clearly defined authorities:
+
+- **Valuation Update Authority**:
+
+  - Explicitly authorized to initiate asset valuation updates via integrated pricing sources.
+
+- **Implicit Exchange Ratio Adjustment**:
+  - Indirectly influences exchange ratios by updating underlying asset valuations. Exchange ratio adjustments are automatically computed by the system.
+
+**Note:** Pricing data integrity checks are automatically managed by the system internally and do not require explicit operator oversight.
+
+## Importance in FRAG-22
+
+The Pricing Operator ensures critical valuation accuracy, directly influencing normalized token fairness, reward calculations, and system trustworthiness, which are essential to the reliability and overall success of the FRAG-22 ecosystem.
