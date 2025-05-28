@@ -1,0 +1,60 @@
+---
+title: "Staking"
+---
+
+## Staking
+
+```mermaid
+
+graph TD
+    User[User]
+    ValidatorNetwork[Solana Validator Network]
+    Yield[Solana Staking Yield]
+
+    User -->|1: Stake SOL| ValidatorNetwork
+    ValidatorNetwork -->|2: Generates Yield| Yield
+    ValidatorNetwork -->|3: Unstake SOL & Yield| User
+
+    classDef user fill:#00BCD4,color:#fff,stroke:#0097A7,stroke-width:2px
+    classDef validator fill:#00ACC1,color:#fff,stroke:#007C91,stroke-width:2px
+    classDef yield fill:#8BC34A,color:#fff,stroke:#689F38,stroke-width:2px
+
+    class User user
+    class ValidatorNetwork validator
+    class Yield yield
+
+
+```
+
+Staking on Solana involves locking up SOL tokens with validators to support network security and decentralization. Validators are responsible for processing transactions, maintaining blockchain integrity, and are rewarded in SOL tokens. Users who delegate their SOL to validators earn staking yields, incentivizing active participation in securing the network.
+
+## Liquid Staking Token (LST)
+
+```mermaid
+graph TD
+    User[User]
+    LSTProtocol[LST Minting Protocol]
+    ValidatorNetwork[Solana Validator Network]
+    Yield[Solana Staking Yield]
+
+    User -->|1: Stake SOL| LSTProtocol
+    LSTProtocol -->|3: Stake SOL| ValidatorNetwork
+    ValidatorNetwork -->|Generates Yield| Yield
+    ValidatorNetwork -->|4: Return SOL & Yield| LSTProtocol
+    LSTProtocol -->|2: Mint LST to User| User
+    User -->|5: Redeem LST| LSTProtocol
+    LSTProtocol -->|6: Return SOL & Yield| User
+
+    classDef user fill:#00BCD4,color:#fff,stroke:#0097A7,stroke-width:2px
+    classDef protocol fill:#FFC107,color:#000,stroke:#FFA000,stroke-width:2px
+    classDef validator fill:#00ACC1,color:#fff,stroke:#007C91,stroke-width:2px
+    classDef yield fill:#8BC34A,color:#fff,stroke:#689F38,stroke-width:2px
+
+    class User user
+    class LSTProtocol protocol
+    class ValidatorNetwork validator
+    class Yield yield
+
+```
+
+A **Liquid Staking Token (LST)** represents SOL staked through liquid staking protocols such as Marinade (mSOL) or Jito (jitoSOL). LSTs enable holders to maintain liquidity while earning staking rewards, effectively combining the benefits of staking with DeFi flexibility. Users can freely trade or use these tokens in DeFi applications, maximizing their capital efficiency.

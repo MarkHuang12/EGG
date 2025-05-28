@@ -1,26 +1,118 @@
 ---
-title: "Fragmetric’s Process (Needs revision)"
+title: "Fragmetric’s Core Processes"
 ---
 
 ## Overview
 
-<Frame>
-  ![](/images/fragmetric_protocol_3.png)
-</Frame>
+Fragmetric's FRAG-22 protocol streamlines asset management on Solana through four core processes: Deposit and Minting, Reward Tracking and Claiming, Yield Optimization, and Unstake and Withdraw. Users deposit supported tokens and receive corresponding fragAssets. Rewards are precisely tracked and distributed, and assets are automatically optimized across yield sources. Withdrawals seamlessly redeem underlying assets, ensuring transparency, efficiency, and maximal returns for all participants.
 
-- **Deposits -** When a user deposits SOL, LSTs, or other SPL Tokens into Fragmetric, they receive an equivalent amount of fragAsset (e.g., fragSOL).
-- **Normalized Token Program -** Developed by Fragmetric, this program maintains precise conversion ratios between deposited assets and minted fragAsset. Users’ combined deposits (SOL, LSTs, and other tokens) form a unified basket that Fragmetric allocates across various restaking protocols and NCN/AVS.
-- **Rewards Distribution -**  Assets are delegated to partner validators who secure NCN/AVS networks. The earnings from these delegations are distributed to fragAsset holders. Fragmetric serves as both a portfolio manager and a liquidity layer between users and restaking protocols.
+---
 
-## How Are fragAsset Holders Rewarded
+## **1. Deposit and Minting**
 
-<Frame>
-  ![](/images/fragmetric_protocol_4.png)
-</Frame>
+Users deposit supported Liquid Staking Tokens (e.g., JitoSOL) into Fragmetric. Fragmetric’s Normalized Token Pool evaluates the deposited asset's real-time value and mints an equivalent amount of fragAssets (e.g., fragSOL), ensuring accurate asset representation.
 
-- **Underlying Yields -** fragAsset inherits the yield from any deposited asset that naturally accrues rewards—such as LSTs (Liquid Staking Tokens) that generate staking and MEV returns. When a user unstakes, they can receive more SOL (or other underlying tokens) than initially deposited, reflecting the average APR of all yield-bearing assets in the basket. Conversely, if a deposited asset does not produce any yield on its own, that portion of the deposit will not generate yield for the corresponding fragAsset tokens.
-- **NCN/AVS Rewards -** Besides standard yields, NCN/AVS protocols can distribute rewards in SOL, native tokens, or other assets. Fragmetric leverages transfer hook functionality (unique to Solana) to accurately track and allocate these additional rewards. Each fragAsset transfer updates the user’s eligibility for NCN/AVS revenue, which can be claimed anytime.
+- **Deposit:** User deposits supported assets into the Fragmetric Reserve.
+- **Asset Valuation:** Normalized Token Pool calculates the current value based on integrated pricing sources.
+- **Minting:** Users receive fragAssets proportional to their deposits.
 
-<Info>
-  fragAsset is an OPOS (Only Possible on Solana) LRT; its advanced reward distribution mechanism relies on Solana-specific capabilities not available on Ethereum.
-</Info>
+```mermaid
+flowchart LR
+  User[User] -->|1: Deposit \n e.g. JitoSOL| Reserve[Fund Reserve Account]
+  Reserve -->|2: Valuation & Pricing| NormalizedPool[Normalized Token Pool]
+  NormalizedPool -->|3: Mint fragAsset \n e.g. fragSOL| User
+
+  classDef user fill:#34A853,color:#fff
+  classDef reserve fill:#4682B4,color:#fff
+  classDef pool fill:#00AEEF,color:#fff
+
+  class User user
+  class Reserve reserve
+  class NormalizedPool pool
+```
+
+---
+
+## **2. Reward Tracking and Reward Claim**
+
+Rewards (staking yields, NCN/AVS rewards) are continuously tracked by the FRAG-22 Reward Module. Contributions are calculated dynamically using Solana's transfer-hook functionality. Users can claim their accrued rewards at any time.
+
+- **Reward Accumulation:** Rewards accrue proportional to user contributions (balance × time held).
+- **Transfer Tracking:** Contribution recalculates upon any token transfer (transfer-hook).
+- **Claiming Rewards:** Users initiate claims, and rewards transfer from the Reward Reserve.
+
+```mermaid
+flowchart LR
+  User[fragAsset Holder] -->|Initiate Claim| RewardClaim[Reward Claim Process]
+  RewardClaim -->|Validate & Calculate Rewards| RewardAccount[User Reward Account]
+  RewardAccount -->|Release Rewards| RewardReserve[Reward Reserve Account]
+  RewardReserve -->|Distribute to User| User
+
+  classDef user fill:#34A853,color:#fff
+  classDef reward fill:#4682B4,color:#fff
+  classDef account fill:#00AEEF,color:#fff
+  classDef reserve fill:#FFC107,color:#000
+
+  class User user
+  class RewardClaim reward
+  class RewardAccount account
+  class RewardReserve reserve
+
+```
+
+---
+
+## **3. Yield Optimization**
+
+Fragmetric automatically optimizes yields by strategically allocating deposited assets across yield sources (such as restaking protocols for NCN/AVS networks). Yield Source Adapters regularly harvest these yields, ensuring optimized returns.
+
+- **Allocation:** Assets automatically allocated to highest-yielding sources.
+- **Yield Generation:** Assets accrue additional yield through external protocols (NCN/AVS).
+- **Yield Harvesting:** Periodically collected and stored in the Reward Pool.
+
+```mermaid
+flowchart LR
+  Reserve[Fund Reserve Account] -->|Allocate Assets| YieldAdapters[Yield Source Adapters]
+  YieldAdapters -->|Deploy Assets| ExternalProtocols[External Yield Protocols - NCN/AVS]
+  ExternalProtocols -->|Generate Yield| YieldAdapters
+  YieldAdapters -->|Harvest Yield| RewardPool[Fund Reward Pool]
+
+  classDef reserve fill:#4682B4,color:#fff
+  classDef adapters fill:#00AEEF,color:#fff
+  classDef protocols fill:#FFC107,color:#000
+  classDef reward fill:#34A853,color:#fff
+
+  class Reserve reserve
+  class YieldAdapters adapters
+  class ExternalProtocols protocols
+  class RewardPool reward
+
+```
+
+---
+
+## **4. Unstake and Withdraw**
+
+Upon withdrawal request, Fragmetric processes unstaking via the Normalized Token Pool. fragAssets are burned proportionally, redeeming underlying assets back to users based on current valuations.
+
+- **Withdrawal Request:** User initiates unstake and withdrawal.
+- **Burn Tokens:** fragAssets burned to redeem underlying assets.
+- **Asset Redemption:** Underlying assets proportionally released to the user.
+
+```mermaid
+flowchart LR
+  User[User] -->|Request Withdrawal| WithdrawalProcess[Withdrawal Process]
+  WithdrawalProcess -->|Burn fragAssets| NormalizedPool[Normalized Token Pool]
+  NormalizedPool -->|Redeem Underlying Assets| Reserve[Fund Reserve Account]
+  Reserve -->|Transfer Assets| User
+
+  classDef user fill:#34A853,color:#fff
+  classDef withdraw fill:#00AEEF,color:#fff
+  classDef pool fill:#4682B4,color:#fff
+  classDef reserve fill:#FFC107,color:#000
+
+  class User user
+  class WithdrawalProcess withdraw
+  class NormalizedPool pool
+
+```
