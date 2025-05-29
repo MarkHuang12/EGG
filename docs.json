@@ -30,7 +30,14 @@
             "pages": [
               "/home/restaking/overview",
               "/home/restaking/staking",
-              "/home/restaking/restaking"
+              "/home/restaking/restaking",
+              {
+                "group": "NCN",
+                "pages": [
+                  "/home/restaking/ncn/overview",
+                  "/home/restaking/ncn/partners"
+                ]
+              }
             ]
           },
           {
