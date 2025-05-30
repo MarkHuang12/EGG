@@ -3,3 +3,103 @@ title: 'Fragmetric CLI'
 description: 'Explore Fragmetric protocol and execute transactions'
 ---
 
+Fragmetric SDK is the official TypeScript/JavaScript client for interacting with Fragmetric Solana programs.
+It supports browser apps, Node.js environments, and includes a CLI for operational workflow and hardware wallet support.
+
+### Requirements
+- node >= 20
+
+### Quick Start
+```shell
+$ pnpx @fragmetric-labs/sdk@latest connect --help
+
+Usage: fragmetric connect [options]
+
+Create a REPL to interact with programs.
+
+Options:
+  -e, --eval <EXPRESSION>       Evaluate an expression and quit.
+  -h, --help                    display help for command
+
+Global Options:
+  -V, --version                 output the version number
+  -u, --url <URL_OR_MONIKER>    RPC URL or shorthand: [mainnet, devnet, testnet, local] (default: "mainnet")
+  --ws <URL>                    Custom WebSocket RPC URL (overrides derived one)
+  -c, --cluster <CLUSTER>       Program environment when using custom RPC URL (overrides derived one): [mainnet, devnet, testnet, local]
+  -k, --keypairs <KEYPAIRS...>  One or more keypairs to automatically use as signers for transactions. First keypair will be used as feePayer. Accepts: JSON file
+                                path, directory of keypairs, base58/JSON literal, or literal for hardware wallets: [ledger].
+  --format <FORMAT>             Set output format for evaluation: [pretty, json] (default: "pretty")
+  --inspection <BOOL>           Set verbose logs in default transaction hooks: [true, false] (default: cluster != "mainnet")
+```
+
+The CLI has exactly same interface with the offchain SDK. Refer to [the SDK guide](/dev/tools/sdk/offchain/quickstart) for details.
+
+#### Deposit Example
+```shell
+$ pnpx @fragmetric-labs/sdk@latest connect -u m --keypairs ../fragmetric-contracts/keypairs/wallet.json
+
+...
+
+> mainnet  https://mainnet.helius-rpc.com/?a.. > restaking.fragSOL.payer
+(this)                               RestakingUserAccount address=91zBeWL8kHBaMtaVrHwWsck1UacDKvje82QQ3HE2k8mJ, lamports=16755194762
+├── fund                             RestakingUserFundAccount address=2UPk3mvAbXy2EuV45syf7u7EdybPYcPFECz2jpVk54Q9
+│   └── initializeOrUpdateAccount    TransactionTemplate args=null, events=userCreatedOrUpdatedFundAccount, description=initialize or update user fund account
+├── reward                           RestakingUserRewardAccount address=A3jDdB1HU4EYEab9qVcpMDxxV1BHVPNj42cQD58WqgsV
+│   ├── updatePools                  TransactionTemplate args=null, events=userUpdatedRewardPool, description=manually triggers contribution synchronization for the
+│   ├── initializeOrUpdateAccount    TransactionTemplate args=null, events=userCreatedOrUpdatedRewardAccount, description=initialize or update user reward account
+│   ├── claim                        TransactionTemplate args=delegate,isBonus,mint,amount,recipient, events=userClaimedReward, description=claim rewards
+│   ├── delegate                     TransactionTemplate args=delegate,newDelegate, events=userDelegatedRewardAccount, description=delegate user reward account
+│   └── resetDelegate                TransactionTemplate args=null, events=userDelegatedRewardAccount, description=reset delegate of reward account (in case of eith
+├── receiptToken                     TokenAccount address=BQ2F6kmvoabdahJJKnwsDY91E8d6AskC7vEszeCfaVTG, amount=312404102, mint=FRAGSEthVFL7fdqM8hxfxkfCZzUvmg21cqPJV
+├── wrappedToken                     TokenAccount address=DZakSEViAb4WXtYMFqKpVna9NH264zZxvEK4vaL9QkPx, amount=87260017, mint=WFRGSWjaz8tbAxsJitmbfRuFV2mSNwy7BMWcCw
+├── supportedTokens                  IterativeAccount length=4, types=TokenAccount
+│   ├── 0                            TokenAccount address=Ba72jMBQ7NtL2RowTgc7wVnuYkk7zYYCmWhm2UpAvNDV, amount=8213713, mint=J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7
+│   ├── 1                            TokenAccount address=85pNC6fJYZ9eQkcWwQU1hnqYK7esSaUSzhd3eFvsDVDh, amount=72229515, mint=mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqc
+│   ├── 2                            TokenAccount address=6sN9A5HW6khUGaku4TBPmVfiQP8hQywFrQFztoEz6s7C, amount=47731233, mint=BNso1VUJnh4zcfpZa6986Ea66P6TCp59hvtNJ8
+│   └── 3                            TokenAccount address=5pU4fqhPJ179UiFaE7agdPojPwe2CxkLWys6AQYSwu25, amount=22289000, mint=Bybit2vBJGhPF52GBdNaQfUJ6ZpThSgHBobjWZ
+├── deposit                          TransactionTemplate args=assetMint,assetAmount,metadata,applyPresetComputeUnitLimit, events=userDepositedToFund,userCreatedOrUp
+├── requestWithdrawal                TransactionTemplate args=assetMint,receiptTokenAmount, events=userRequestedWithdrawalFromFund,userCreatedOrUpdatedFundAccount,u
+├── cancelWithdrawalRequest          TransactionTemplate args=assetMint,requestId, events=userCanceledWithdrawalRequestFromFund,userCreatedOrUpdatedFundAccount,user
+├── withdraw                         TransactionTemplate args=assetMint,requestId, events=userWithdrewFromFund,userCreatedOrUpdatedFundAccount,userCreatedOrUpdatedR
+├── wrap                             TransactionTemplate args=receiptTokenAmount,receiptTokenAmountAsTargetBalance, events=userWrappedReceiptToken, description=conv
+├── unwrap                           TransactionTemplate args=wrappedTokenAmount, events=userUnwrappedReceiptToken, description=convert wrapped tokens back into rec
+├── transfer                         TransactionTemplate args=receiptTokenAmount,recipient, events=userTransferredReceiptToken, description=transfer receipt token
+└── parent                           RestakingReceiptTokenMintAccount address=FRAGSEthVFL7fdqM8hxfxkfCZzUvmg21cqPJVvC1qdbo, supply=1147822960147460, decimals=9
+
+> mainnet  https://mainnet.helius-rpc.com/?a.. > restaking.fragSOL.payer.deposit
+(this)        TransactionTemplate args=assetMint,assetAmount,metadata,applyPresetComputeUnitLimit, events=userDepositedToFund,userCreatedOrUpdatedFundAccount,userCr
+│             eatedOrUpdatedRewardAccount, description=deposit supported assets to mint receipt token
+└── parent    RestakingUserAccount address=91zBeWL8kHBaMtaVrHwWsck1UacDKvje82QQ3HE2k8mJ, lamports=16755194762
+
+> mainnet  https://mainnet.helius-rpc.com/?a.. > restaking.fragSOL.payer.deposit.execute({assetMint: null, assetAmount: 100n});
+◐ Signed     3HqvBoUvn4s3bnjkaCrxUjsat7ZBFxm55CncZMW66PdfLx93VVBd8Wr6XKwz1RLuT9HKVhUacucBH7dTbAe1EpEM
+✔ Confirmed  deposit supported assets to mint receipt token {
+  succeeded: true,
+  slot: 343_413_444n,
+  args: {
+    assetMint: null,
+    assetAmount: 100n,
+    metadata: null,
+    applyPresetComputeUnitLimit: true
+  },
+  events: {
+    unknown: [],
+    userDepositedToFund: {
+      receiptTokenMint: 'FRAGSEthVFL7fdqM8hxfxkfCZzUvmg21cqPJVvC1qdbo',
+      fundAccount: '3TK9fNePM4qdKC4dwvDe8Bamv14prDqdVfuANxPeiryb',
+      supportedTokenMint: { __option: 'None' },
+      updatedUserRewardAccounts: [ 'A3jDdB1HU4EYEab9qVcpMDxxV1BHVPNj42cQD58WqgsV' ],
+      user: '91zBeWL8kHBaMtaVrHwWsck1UacDKvje82QQ3HE2k8mJ',
+      userReceiptTokenAccount: 'BQ2F6kmvoabdahJJKnwsDY91E8d6AskC7vEszeCfaVTG',
+      userFundAccount: '2UPk3mvAbXy2EuV45syf7u7EdybPYcPFECz2jpVk54Q9',
+      userSupportedTokenAccount: { __option: 'None' },
+      walletProvider: { __option: 'None' },
+      contributionAccrualRate: { __option: 'None' },
+      depositedAmount: 100n,
+      mintedReceiptTokenAmount: 94n
+    }
+  }
+}
+(this)        TransactionResult signature=3HqvBoUvn4s3bnjkaCrxUjsat7ZBFxm55CncZMW66PdfLx93VVBd8Wr6XKwz1RLuT9HKVhUacucBH7dTbAe1EpEM, succeeded=true, slot=343413444
+└── parent    TransactionTemplate args=assetMint,assetAmount,metadata,applyPresetComputeUnitLimit, events=userDepositedToFund,userCreatedOrUpdatedFundAccount,userCr
+```

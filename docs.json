@@ -182,7 +182,6 @@
           {
             "group": "Developers",
             "pages": [
-              "/dev/introduction",
               "/dev/solana-programs",
               "/dev/release-notes"
             ]
@@ -190,13 +189,6 @@
           {
             "group": "References",
             "pages": [
-              {
-                "group": "Normalized Token Pool",
-                "pages": [
-                  "/dev/references/ntp/overview",
-                  "/dev/references/ntp/status"
-                ]
-              },
               {
                 "group": "DeFi Integration",
                 "pages": [
@@ -217,14 +209,8 @@
               {
                 "group": "Fragmetric SDK (offchain)",
                 "pages": [
-                  "/dev/tools/sdk/offchain/quickstart",
-                  "/dev/tools/sdk/offchain/configuration",
-                  "/dev/tools/sdk/offchain/contribution"
+                  "/dev/tools/sdk/offchain/quickstart"
                 ]
-              },
-              {
-                "group": "Fragmetric SDK (onchain)",
-                "pages": ["/dev/tools/sdk/onchain/quickstart"]
               },
               "/dev/tools/api"
             ]
