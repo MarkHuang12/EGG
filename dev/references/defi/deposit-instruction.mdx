@@ -8,7 +8,7 @@ If your protocol integrates Fragmetric’s deposit logic by manually constructin
 - `user_deposit_supported_token`
 
 ..you must ensure that **all required pricing source accounts** are included in the transaction.
-These accounts are **not declared in the IDL** and must be resolved explicitly — either manually, via SDK, or through a dedicated ALT (Address Lookup Table).
+These accounts are **not declared in the IDL** and must be resolved explicitly — either manually, via SDK, or by reading the fund account data.
 
 <Warning>
     Do not hardcode account lists.
@@ -36,8 +36,8 @@ Also there are two safe, forward-compatible options to resolve these accounts:
 
 - **Use the SDK**: The `@fragmetric-labs/sdk` will resolve all required pricing source accounts for you based on the latest fund state.
 
-- **Use a dedicated Address Lookup Table (ALT)**: Each fund has a dedicated ALT, which includes only all required pricing source addresses.
-Use this ALT to avoid manually deriving the accounts in your transaction. Fragmetric will update this ALT ahead of an instruction of new support tokens.
+- **Read the fund account**: Each fund account data includes the list of pricing source addresses.
+Use this list to avoid manually deriving the accounts in your transaction.
 
 ### 1. Use the SDK to build an instruction
 You can build a full deposit transaction. And if you need unsigned transaction or just a part of the instructions. you can just build a blueprint transaction without serialize it.
@@ -48,7 +48,7 @@ You can read addresses directly from the fund account before build a deposit ins
 There are below fields containing pricing source account information in the **fund account** data like below:
 
 ```rust
-/// ... starts from data offset: 0x9000
+/// ... starts from data offset: 0x9000 (36864)
 num_pricing_source_addresses: u8,
 pricing_source_addresses: [Pubkey; 33],
 ```
