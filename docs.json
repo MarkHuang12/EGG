@@ -56,6 +56,13 @@
           {
             "group": "Resources",
             "pages": [
+              {
+                "group": "FRAG",
+                "pages": [
+                  "/home/resources/FRAG/tokenomics",
+                  "/home/resources/FRAG/FRAG2"
+                ]
+              },
               "/home/resources/faq",
               "/home/resources/brand-kit",
               "/home/resources/key-terms",
