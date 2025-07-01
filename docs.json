@@ -56,6 +56,13 @@
           {
             "group": "Resources",
             "pages": [
+              {
+                "group": "FRAG",
+                "pages": [
+                  "/home/resources/FRAG/tokenomics",
+                  "/home/resources/FRAG/FRAG2"
+                ]
+              },
               "/home/resources/faq",
               "/home/resources/brand-kit",
               "/home/resources/key-terms",
@@ -80,6 +87,13 @@
                       "/home/community/season1/overview",
                       "/home/community/season1/phase1",
                       "/home/community/season1/phase2"
+                    ]
+                  },
+                  {
+                    "group": "Season 2",
+                    "pages": [
+                      "/home/community/season2/overview"
+               
                     ]
                   }
                 ]
