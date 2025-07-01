@@ -88,6 +88,13 @@
                       "/home/community/season1/phase1",
                       "/home/community/season1/phase2"
                     ]
+                  },
+                  {
+                    "group": "Season 2",
+                    "pages": [
+                      "/home/community/season2/overview"
+               
+                    ]
                   }
                 ]
               }
