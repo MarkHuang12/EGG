@@ -93,7 +93,7 @@
                     "group": "Season 2",
                     "pages": [
                       "/home/community/season2/overview"
-               
+
                     ]
                   }
                 ]
@@ -174,7 +174,7 @@
         "groups": [
           {
             "group": "fragAsset",
-            "pages": ["/assets/fragsol", "/assets/fragjto", "/assets/fragbtc"]
+            "pages": ["/assets/fragsol", "/assets/fragjto", "/assets/fragbtc", "/assets/frag2"]
           },
           {
             "group": "Wrapped fragAsset",
