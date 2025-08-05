@@ -33,7 +33,7 @@
       "og:title": "Fragmetric Docs",
       "og:type": "website",
       "og:url": "https://docs.fragmetric.xyz",
-      "og:image": "src/assets/images/og.png",
+      "og:image": "/images/og.png",
       "og:description": "Stake Twice, Earn more",
       "og:site_name": "Fragmetric Docs",
       "og:locale": "en_US",
@@ -42,7 +42,7 @@
       "twitter:creator": "@fragmetric",
       "twitter:title": "Fragmetric Docs",
       "twitter:description": "Stake Twice, Earn more",
-      "twitter:image": "src/assets/images/og.png",
+      "twitter:image": "/images/og.png",
       "twitter:image:alt": "Fragmetric Docs"
     }
   },
@@ -67,22 +67,19 @@
         "groups": [
           {
             "group": "Get Started",
-            "pages": [
-              "src/pages/home/get-started/welcome",
-              "src/pages/home/get-started/sang"
-            ]
+            "pages": ["/home/get-started/welcome", "/home/get-started/sang"]
           },
           {
             "group": "(re)staking",
             "pages": [
-              "src/pages/home/restaking/overview",
-              "src/pages/home/restaking/staking",
-              "src/pages/home/restaking/restaking",
+              "/home/restaking/overview",
+              "/home/restaking/staking",
+              "/home/restaking/restaking",
               {
                 "group": "NCN",
                 "pages": [
-                  "src/pages/home/restaking/ncn/overview",
-                  "src/pages/home/restaking/ncn/partners"
+                  "/home/restaking/ncn/overview",
+                  "/home/restaking/ncn/partners"
                 ]
               }
             ]
@@ -90,18 +87,15 @@
           {
             "group": "Guides",
             "pages": [
-              "src/pages/home/guides/restake-unstake",
-              "src/pages/home/guides/wrap-unwrap",
-              "src/pages/home/guides/buy-sell",
-              "src/pages/home/guides/using-in-defi"
+              "/home/guides/restake-unstake",
+              "/home/guides/wrap-unwrap",
+              "/home/guides/buy-sell",
+              "/home/guides/using-in-defi"
             ]
           },
           {
             "group": "Security",
-            "pages": [
-              "src/pages/home/security/overview",
-              "src/pages/home/security/audits"
-            ]
+            "pages": ["/home/security/overview", "/home/security/audits"]
           },
           {
             "group": "Resources",
@@ -109,18 +103,18 @@
               {
                 "group": "FRAG",
                 "pages": [
-                  "src/pages/home/resources/FRAG/tokenomics",
-                  "src/pages/home/resources/FRAG/FRAG2"
+                  "/home/resources/FRAG/tokenomics",
+                  "/home/resources/FRAG/FRAG2"
                 ]
               },
-              "src/pages/home/resources/faq",
-              "src/pages/home/resources/brand-kit",
-              "src/pages/home/resources/key-terms",
+              "/home/resources/faq",
+              "/home/resources/brand-kit",
+              "/home/resources/key-terms",
               {
                 "group": "Legal",
                 "pages": [
-                  "src/pages/home/resources/legal/terms-of-use",
-                  "src/pages/home/resources/legal/privacy-policy"
+                  "/home/resources/legal/terms-of-use",
+                  "/home/resources/legal/privacy-policy"
                 ]
               }
             ]
@@ -134,14 +128,14 @@
                   {
                     "group": "Season 1",
                     "pages": [
-                      "src/pages/home/community/season1/overview",
-                      "src/pages/home/community/season1/phase1",
-                      "src/pages/home/community/season1/phase2"
+                      "/home/community/season1/overview",
+                      "/home/community/season1/phase1",
+                      "/home/community/season1/phase2"
                     ]
                   },
                   {
                     "group": "Season 2",
-                    "pages": ["src/pages/home/community/season2/overview"]
+                    "pages": ["/home/community/season2/overview"]
                   }
                 ]
               }
@@ -154,10 +148,7 @@
         "groups": [
           {
             "group": "FRAG-22",
-            "pages": [
-              "src/pages/protocol/overview",
-              "src/pages/protocol/fragmetric"
-            ]
+            "pages": ["/protocol/overview", "/protocol/fragmetric"]
           },
           {
             "group": "Protocol Architecture",
@@ -165,54 +156,54 @@
               {
                 "group": "Fund",
                 "pages": [
-                  "src/pages/protocol/module/fund/overview",
-                  "src/pages/protocol/module/fund/deposit",
-                  "src/pages/protocol/module/fund/withdraw",
-                  "src/pages/protocol/module/fund/accounting"
+                  "/protocol/module/fund/overview",
+                  "/protocol/module/fund/deposit",
+                  "/protocol/module/fund/withdraw",
+                  "/protocol/module/fund/accounting"
                 ]
               },
               {
                 "group": "Reward",
                 "pages": [
-                  "src/pages/protocol/module/reward/overview",
-                  "src/pages/protocol/module/reward/reward-pool",
-                  "src/pages/protocol/module/reward/contribution",
-                  "src/pages/protocol/module/reward/claim",
-                  "src/pages/protocol/module/reward/defi"
+                  "/protocol/module/reward/overview",
+                  "/protocol/module/reward/reward-pool",
+                  "/protocol/module/reward/contribution",
+                  "protocol/module/reward/claim",
+                  "protocol/module/reward/defi"
                 ]
               },
               {
                 "group": "Yield Source",
                 "pages": [
-                  "src/pages/protocol/module/yield-source/overview",
-                  "src/pages/protocol/module/yield-source/adapter"
+                  "/protocol/module/yield-source/overview",
+                  "/protocol/module/yield-source/adapter"
                 ]
               },
               {
                 "group": "Normalized Token Pool",
                 "pages": [
-                  "src/pages/protocol/module/ntp/overview",
-                  "src/pages/protocol/module/ntp/normalized-token"
+                  "/protocol/module/ntp/overview",
+                  "/protocol/module/ntp/normalized-token"
                 ]
               },
               {
                 "group": "Operator",
                 "pages": [
-                  "src/pages/protocol/module/operator/overview",
-                  "src/pages/protocol/module/operator/roles",
-                  "src/pages/protocol/module/operator/permissions",
-                  "src/pages/protocol/module/operator/fund-admin",
-                  "src/pages/protocol/module/operator/reward-admin",
-                  "src/pages/protocol/module/operator/yield-operator",
-                  "src/pages/protocol/module/operator/pricing-operator"
+                  "/protocol/module/operator/overview",
+                  "/protocol/module/operator/roles",
+                  "/protocol/module/operator/permissions",
+                  "/protocol/module/operator/fund-admin",
+                  "/protocol/module/operator/reward-admin",
+                  "/protocol/module/operator/yield-operator",
+                  "/protocol/module/operator/pricing-operator"
                 ]
               },
               {
                 "group": "Wrap",
                 "pages": [
-                  "src/pages/protocol/module/wrap/overview",
-                  "src/pages/protocol/module/wrap/wrap",
-                  "src/pages/protocol/module/wrap/unwrap"
+                  "/protocol/module/wrap/overview",
+                  "/protocol/module/wrap/wrap",
+                  "/protocol/module/wrap/unwrap"
                 ]
               }
             ]
@@ -225,23 +216,23 @@
           {
             "group": "fragAsset",
             "pages": [
-              "src/pages/fragAsset/fragsol",
-              "src/pages/fragAsset/fragjto",
-              "src/pages/fragAsset/fragbtc",
-              "src/pages/fragAsset/frag2"
+              "/assets/fragsol",
+              "/assets/fragjto",
+              "/assets/fragbtc",
+              "/assets/frag2"
             ]
           },
           {
             "group": "Wrapped fragAsset",
             "pages": [
-              "src/pages/fragAsset/wfragsol",
-              "src/pages/fragAsset/wfragjto",
-              "src/pages/fragAsset/wfragbtc"
+              "/assets/wfragsol",
+              "/assets/wfragjto",
+              "/assets/wfragbtc"
             ]
           },
           {
             "group": "Resources",
-            "pages": ["src/pages/fragAsset/contracts"]
+            "pages": ["/assets/contracts"]
           }
         ]
       },
@@ -250,10 +241,7 @@
         "groups": [
           {
             "group": "Developers",
-            "pages": [
-              "src/pages/developers/solana-programs",
-              "src/pages/developers/release-notes"
-            ]
+            "pages": ["/dev/solana-programs", "/dev/release-notes"]
           },
           {
             "group": "References",
@@ -261,12 +249,12 @@
               {
                 "group": "DeFi Integration",
                 "pages": [
-                  "src/pages/developers/references/defi/overview",
-                  "src/pages/developers/references/defi/integration-status",
-                  "src/pages/developers/references/defi/fpoint-snapshot",
-                  "src/pages/developers/references/defi/defi-metadata",
-                  "src/pages/developers/references/defi/reward-distribution",
-                  "src/pages/developers/references/defi/deposit-instruction"
+                  "/dev/references/defi/overview",
+                  "/dev/references/defi/integration-status",
+                  "/dev/references/defi/fpoint-snapshot",
+                  "/dev/references/defi/defi-metadata",
+                  "/dev/references/defi/reward-distribution",
+                  "/dev/references/defi/deposit-instruction"
                 ]
               }
             ]
@@ -274,12 +262,12 @@
           {
             "group": "Tools",
             "pages": [
-              "src/pages/developers/tools/cli",
+              "/dev/tools/cli",
               {
                 "group": "Fragmetric SDK (offchain)",
-                "pages": ["src/pages/developers/tools/sdk/offchain/quickstart"]
+                "pages": ["/dev/tools/sdk/offchain/quickstart"]
               },
-              "src/pages/developers/tools/api"
+              "/dev/tools/api"
             ]
           }
         ]
@@ -311,8 +299,8 @@
     }
   },
   "logo": {
-    "light": "/src/assets/logo/docs_title_light_2.svg",
-    "dark": "/src/assets/logo/docs_title_dark_2.svg"
+    "light": "/logo/docs_title_light_2.svg",
+    "dark": "/logo/docs_title_dark_2.svg"
   },
   "navbar": {
     "links": [
