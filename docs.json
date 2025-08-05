@@ -2,6 +2,50 @@
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
   "name": "Fragmetric Docs",
+  "seo": {
+    "indexing": "all",
+    "metatags": {
+      "charset": "UTF-8",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "description": "Stake Twice, Earn more",
+      "keywords": "Fragmetric, Solana, Staking, Rewards, DeFi, Restaking, Liquid Restaking, NCN, AVS, SANG, STEM, Stake",
+      "author": "Fragmetric",
+      "robots": "index, follow",
+      "googlebot": "index, follow",
+      "google": "notranslate",
+      "google-site-verification": "verification_token",
+      "generator": "Mintlify",
+      "theme-color": "#000000",
+      "color-scheme": "light dark",
+      "format-detection": "telephone=no",
+      "referrer": "origin",
+      "refresh": "30",
+      "rating": "general",
+      "revisit-after": "7 days",
+      "language": "en",
+      "copyright": "Copyright 2025",
+      "distribution": "global",
+      "coverage": "Worldwide",
+      "category": "Technology",
+      "target": "all",
+      "HandheldFriendly": "True",
+      "MobileOptimized": "320",
+      "og:title": "Fragmetric Docs",
+      "og:type": "website",
+      "og:url": "https://docs.fragmetric.xyz",
+      "og:image": "/images/og.png",
+      "og:description": "Stake Twice, Earn more",
+      "og:site_name": "Fragmetric Docs",
+      "og:locale": "en_US",
+      "twitter:card": "summary",
+      "twitter:site": "@fragmetric",
+      "twitter:creator": "@fragmetric",
+      "twitter:title": "Fragmetric Docs",
+      "twitter:description": "Stake Twice, Earn more",
+      "twitter:image": "/images/og.png",
+      "twitter:image:alt": "Fragmetric Docs"
+    }
+  },
   "colors": {
     "primary": "#0BD5BC",
     "light": "#0BD5BC",
@@ -91,10 +135,7 @@
                   },
                   {
                     "group": "Season 2",
-                    "pages": [
-                      "/home/community/season2/overview"
-
-                    ]
+                    "pages": ["/home/community/season2/overview"]
                   }
                 ]
               }
@@ -174,7 +215,12 @@
         "groups": [
           {
             "group": "fragAsset",
-            "pages": ["/assets/fragsol", "/assets/fragjto", "/assets/fragbtc", "/assets/frag2"]
+            "pages": [
+              "/assets/fragsol",
+              "/assets/fragjto",
+              "/assets/fragbtc",
+              "/assets/frag2"
+            ]
           },
           {
             "group": "Wrapped fragAsset",
@@ -195,10 +241,7 @@
         "groups": [
           {
             "group": "Developers",
-            "pages": [
-              "/dev/solana-programs",
-              "/dev/release-notes"
-            ]
+            "pages": ["/dev/solana-programs", "/dev/release-notes"]
           },
           {
             "group": "References",
@@ -222,9 +265,7 @@
               "/dev/tools/cli",
               {
                 "group": "Fragmetric SDK (offchain)",
-                "pages": [
-                  "/dev/tools/sdk/offchain/quickstart"
-                ]
+                "pages": ["/dev/tools/sdk/offchain/quickstart"]
               },
               "/dev/tools/api"
             ]
