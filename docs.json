@@ -300,7 +300,7 @@
     }
   },
   "logo": {
-    "light": "/logo/docstitle_light_2.png",
+    "light": "/logo/docs_title_light_2.svg",
     "dark": "/logo/docs_title_dark_2.svg"
   },
   "navbar": {
