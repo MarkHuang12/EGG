@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Fragmetric Docs",
+  "name": "EGG Docs",
   "seo": {
     "indexing": "all",
     "metatags": {
@@ -300,8 +300,8 @@
     }
   },
   "logo": {
-    "light": "/logo/docs_title_light_2.svg",
-    "dark": "/logo/docs_title_dark_2.svg"
+    "light": "/logo/docstitle_dark_2.png",
+    "dark": "/logo/docstitle_dark_2.png"
   },
   "navbar": {
     "links": [
