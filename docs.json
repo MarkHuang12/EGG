@@ -300,8 +300,8 @@
     }
   },
   "logo": {
-    "light": "/logo/docstitle_dark_2.png",
-    "dark": "/logo/docstitle_dark_2.png"
+    "light": "/logo/docstitle_light_2.png",
+    "dark": "/logo/docs_title_dark_2.svg"
   },
   "navbar": {
     "links": [
